@@ -2,10 +2,7 @@
 
 global using Base.Core.Contracts.Data.Commands;
 global using Base.Core.Domains.Entities;
-global using Base.Core.Domains.Toolkits.ValueObjects;
-global using Base.Core.Domains.ValueObjects;
 global using Base.Infra.Data.Sql.Commands.Extensions;
-global using Base.Infra.Data.Sql.Commands.ValueConversions;
 global using Base.Utility.Extensions;
 
 global using Microsoft.EntityFrameworkCore;

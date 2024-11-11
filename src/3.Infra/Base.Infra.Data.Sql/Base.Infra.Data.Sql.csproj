@@ -9,8 +9,6 @@
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<RepositoryUrl>https://github.com/MassoudKargar/Base</RepositoryUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<PackageReadmeFile>../../README.md</PackageReadmeFile>
-		<PackageIcon>../../base.png</PackageIcon>
 	</PropertyGroup>
 
 	<ItemGroup>

@@ -1,9 +1,7 @@
 // Global using directives
 
 global using Base.Core.Contracts.ApplicationServices.Commands;
-global using Base.Core.Contracts.ApplicationServices.Events;
 global using Base.Core.Contracts.ApplicationServices.Queries;
-global using Base.Core.Domains.Events;
 global using Base.Core.Domains.Exceptions;
 global using Base.Core.RequestResponse.Commands;
 global using Base.Core.RequestResponse.Common;

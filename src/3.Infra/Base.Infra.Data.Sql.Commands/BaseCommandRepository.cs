@@ -1,7 +1,7 @@
 ﻿namespace Base.Infra.Data.Sql.Commands;
 public class BaseCommandRepository<TEntity, TDbContext, TId>(TDbContext dbContext)
     : ICommandRepository<TEntity, TId>, IUnitOfWork
-    where TEntity : AggregateRoot<TId>
+    where TEntity : Entity<TId>
     where TDbContext : BaseCommandDbContext
     where TId : struct,
     IComparable,
@@ -51,20 +51,11 @@ public class BaseCommandRepository<TEntity, TDbContext, TId>(TDbContext dbContex
         return _dbContext.Set<TEntity>().Find(id);
     }
 
-    public TEntity Get(BusinessId businessId)
-    {
-        return _dbContext.Set<TEntity>().FirstOrDefault(c => c.BusinessId == businessId);
-    }
-
     public async Task<TEntity> GetAsync(TId id)
     {
         return await _dbContext.Set<TEntity>().FindAsync(id);
     }
 
-    public async Task<TEntity> GetAsync(BusinessId businessId)
-    {
-        return await _dbContext.Set<TEntity>().FirstOrDefaultAsync(c => c.BusinessId == businessId);
-    }
     #endregion
 
     #region Get single item with graph
@@ -80,17 +71,6 @@ public class BaseCommandRepository<TEntity, TDbContext, TId>(TDbContext dbContex
         return query.FirstOrDefault(c => c.Id.Equals(id));
     }
 
-    public TEntity GetGraph(BusinessId businessId)
-    {
-        var graphPath = _dbContext.GetIncludePaths(typeof(TEntity));
-        IQueryable<TEntity> query = _dbContext.Set<TEntity>().AsQueryable();
-        var temp = graphPath.ToList();
-        foreach (var item in graphPath)
-        {
-            query = query.Include(item);
-        }
-        return query.FirstOrDefault(c => c.BusinessId == businessId);
-    }
 
     public async Task<TEntity> GetGraphAsync(TId id)
     {
@@ -103,16 +83,6 @@ public class BaseCommandRepository<TEntity, TDbContext, TId>(TDbContext dbContex
         return await query.FirstOrDefaultAsync(c => c.Id.Equals(id));
     }
 
-    public async Task<TEntity> GetGraphAsync(BusinessId businessId)
-    {
-        var graphPath = _dbContext.GetIncludePaths(typeof(TEntity));
-        IQueryable<TEntity> query = _dbContext.Set<TEntity>().AsQueryable();
-        foreach (var item in graphPath)
-        {
-            query = query.Include(item);
-        }
-        return await query.FirstOrDefaultAsync(c => c.BusinessId == businessId);
-    }
     #endregion
 
     #region Exists
@@ -156,5 +126,5 @@ public class BaseCommandRepository<TEntity, TDbContext, TId>(TDbContext dbContex
 
 public class BaseCommandRepository<TEntity, TDbContext>(TDbContext dbContext)
     : BaseCommandRepository<TEntity, TDbContext, long>(dbContext)
-    where TEntity : AggregateRoot
+    where TEntity : Entity
     where TDbContext : BaseCommandDbContext;

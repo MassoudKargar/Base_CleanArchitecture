@@ -8,8 +8,6 @@
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<RepositoryUrl>https://github.com/MassoudKargar/Base</RepositoryUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<PackageReadmeFile>../../README.md</PackageReadmeFile>
-		<PackageIcon>../../base.png</PackageIcon>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
@@ -19,7 +17,7 @@
 		<PackageReference Include="Base.Extensions.Logger.Abstractions" Version="8.0.0" />
 		<PackageReference Include="Base.Extensions.ObjectMappers.Abstractions" Version="8.0.0" />
 		<PackageReference Include="Base.Extensions.Serializers.Abstractions" Version="8.0.0" />
-		<!--<PackageReference Include="Base.Extensions.Translations.Abstractions" Version="8.0.0" />-->
+		<PackageReference Include="Base.Extensions.Translations.Abstractions" Version="8.0.0" />
 		<PackageReference Include="Base.Extensions.UsersManagement.Abstractions" Version="8.0.0" />
 	</ItemGroup>
 </Project>

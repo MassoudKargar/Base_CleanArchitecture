@@ -54,17 +54,7 @@ public abstract class BaseCommandDbContext : DbContext
         base.OnModelCreating(builder);
         builder.AddAuditableShadowProperties();
     }
-    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
-    {
-        base.ConfigureConventions(configurationBuilder);
-        configurationBuilder.Properties<Description>().HaveConversion<DescriptionConversion>();
-        configurationBuilder.Properties<Title>().HaveConversion<TitleConversion>();
-        configurationBuilder.Properties<BusinessId>().HaveConversion<BusinessIdConversion>();
-        configurationBuilder.Properties<LegalNationalId>().HaveConversion<LegalNationalId>();
-        configurationBuilder.Properties<NationalCode>().HaveConversion<NationalCodeConversion>();
-
-    }
-
+  
     public IEnumerable<string> GetIncludePaths(Type clrEntityType)
     {
         var entityType = Model.FindEntityType(clrEntityType);

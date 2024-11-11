@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base.Infra.Data.Sql.Command
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base.Infra.Data.Sql.Queries", "src\3.Infra\Base.Infra.Data.Sql.Queries\Base.Infra.Data.Sql.Queries.csproj", "{3AEE06E1-DE41-46D3-93D3-BE8A2FC7301C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base.EndPoints.Web", "src\4.EndPoints\Base.EndPoints.Web\Base.EndPoints.Web.csproj", "{6AE8EB5D-28CF-41E5-9742-58AB33473586}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{3AEE06E1-DE41-46D3-93D3-BE8A2FC7301C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3AEE06E1-DE41-46D3-93D3-BE8A2FC7301C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3AEE06E1-DE41-46D3-93D3-BE8A2FC7301C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AE8EB5D-28CF-41E5-9742-58AB33473586}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AE8EB5D-28CF-41E5-9742-58AB33473586}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AE8EB5D-28CF-41E5-9742-58AB33473586}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AE8EB5D-28CF-41E5-9742-58AB33473586}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,6 +93,7 @@ Global
 		{0D35A092-D54C-4BE2-89AD-B4F0A26C285C} = {61C6C818-9EE5-4BC0-8A89-A839F82C378E}
 		{933ED98C-DE41-47A1-9448-A164D449C06C} = {61C6C818-9EE5-4BC0-8A89-A839F82C378E}
 		{3AEE06E1-DE41-46D3-93D3-BE8A2FC7301C} = {61C6C818-9EE5-4BC0-8A89-A839F82C378E}
+		{6AE8EB5D-28CF-41E5-9742-58AB33473586} = {8E3B2C3D-B619-4466-A1EC-C417A7F35AD7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1D5D58CA-317E-4A1C-BD21-D8E928B9B245}

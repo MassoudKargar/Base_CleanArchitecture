@@ -6,7 +6,7 @@
 /// <typeparam name="TEntity">کلاسی که جهت ذخیره سازی انتخاب می‌شود</typeparam>
 /// <typeparam name="TId"></typeparam>
 public interface ICommandRepository<TEntity, in TId> : IUnitOfWork
-    where TEntity : AggregateRoot<TId>
+    where TEntity : Entity<TId>
      where TId : struct,
           IComparable,
           IComparable<TId>,
@@ -51,12 +51,8 @@ public interface ICommandRepository<TEntity, in TId> : IUnitOfWork
     /// <returns>نمونه ساخته شده از شی</returns>
     TEntity Get(TId id);
     Task<TEntity> GetAsync(TId id);
-    TEntity Get(BusinessId businessId);
-    Task<TEntity> GetAsync(BusinessId businessId);
     TEntity GetGraph(TId id);
     Task<TEntity> GetGraphAsync(TId id);
-    TEntity GetGraph(BusinessId businessId);
-    Task<TEntity> GetGraphAsync(BusinessId businessId);
     bool Exists(Expression<Func<TEntity, bool>> expression);
     Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> expression);
 }
