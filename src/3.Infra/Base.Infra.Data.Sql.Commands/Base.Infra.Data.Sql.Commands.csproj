@@ -14,7 +14,14 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\1.Utilities\Base.Utility\Base.Utility.csproj" />
+		<PackageReference Include="Dapper" Version="2.1.35" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.7" />
+		<PackageReference Include="Base.Extensions.Serializers.Abstractions" Version="8.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\2.Core\Base.Core.Domains\Base.Core.Domains.csproj" />
+	  <ProjectReference Include="..\Base.Infra.Data.Sql\Base.Infra.Data.Sql.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -14,7 +14,15 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\1.Utilities\Base.Utility\Base.Utility.csproj" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.7" />
+		<PackageReference Include="Base.Extensions.ChangeDataLog.Abstractions" Version="8.0.1" />
+		<PackageReference Include="Base.Extensions.UsersManagement.Abstractions" Version="8.0.0" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\2.Core\Base.Core.Contracts\Base.Core.Contracts.csproj" />
+	  <ProjectReference Include="..\..\2.Core\Base.Core.Domains\Base.Core.Domains.csproj" />
+	</ItemGroup>
+
 
 </Project>
