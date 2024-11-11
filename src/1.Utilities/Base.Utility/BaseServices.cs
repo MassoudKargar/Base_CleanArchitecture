@@ -6,7 +6,6 @@ public class BaseServices(
     IUserInfoService userInfoService,
     IMapperAdapter mapperFacade)
 {
-
     public readonly IMapperAdapter MapperFacade = mapperFacade;
     public readonly ILoggerFactory LoggerFactory = loggerFactory;
     public readonly IJsonSerializer Serializer = serializer;
