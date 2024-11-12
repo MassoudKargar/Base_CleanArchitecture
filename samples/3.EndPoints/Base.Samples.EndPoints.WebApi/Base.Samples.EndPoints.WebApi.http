@@ -1,11 +1,10 @@
-@Base.Samples.EndPoints.WebApi_HostAddress = http://localhost:5019
+@Base.Samples.EndPoints.WebApi_HostAddress = https://localhost:7081
 
-GET {{Base.Samples.EndPoints.WebApi_HostAddress}}/api/People/CheckValueObject?firstName=masoud
+get {{Base.Samples.EndPoints.WebApi_HostAddress}}/api/People/GetAll
 Accept: application/json
-
 ###
 
-GET {{Base.Samples.EndPoints.WebApi_HostAddress}}/api/People/ExceptionCheck
+GET {{Base.Samples.EndPoints.WebApi_HostAddress}}/api/People/GetById/1
 Accept: application/json
 
 ###
