@@ -6,7 +6,6 @@ global using Base.EndPoints.Web.Middlewares.ApiExceptionHandler;
 global using Base.EndPoints.Web.ModelBinding;
 global using Base.Extensions.DependencyInjection.Abstractions;
 global using Base.Extensions.Serializers.Abstractions;
-global using Base.Extensions.Translations.Abstractions;
 global using Base.Utility;
 
 global using FluentValidation;

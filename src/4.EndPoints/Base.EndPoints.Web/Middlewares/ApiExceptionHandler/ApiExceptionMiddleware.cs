@@ -6,17 +6,14 @@ public class ApiExceptionMiddleware
     private readonly ILogger<ApiExceptionMiddleware> _logger;
     private readonly ApiExceptionOptions _options;
     private readonly IJsonSerializer _serializer;
-    private readonly ITranslator _translator;
 
     public ApiExceptionMiddleware(ApiExceptionOptions options, RequestDelegate next,
-        ILogger<ApiExceptionMiddleware> logger, IJsonSerializer serializer, ITranslator translator
-    )
+        ILogger<ApiExceptionMiddleware> logger, IJsonSerializer serializer)
     {
         _next = next;
         _logger = logger;
         _options = options;
         _serializer = serializer;
-        _translator = translator;
     }
 
     public async Task Invoke(HttpContext context)
@@ -37,7 +34,7 @@ public class ApiExceptionMiddleware
         {
             Id = Guid.NewGuid().ToString(),
             Status = (short)HttpStatusCode.InternalServerError,
-            Title = _translator["SOME_KIND_OF_ERROR_OCCURRED_IN_THE_API"]
+            Title = string.Empty
         };
 
         _options.AddResponseDetails?.Invoke(context, exception, error);

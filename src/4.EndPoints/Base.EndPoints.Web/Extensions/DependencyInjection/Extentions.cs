@@ -8,6 +8,7 @@ public static class Extensions
     {
 
         var assemblies = GetAssemblies(assemblyNamesForSearch);
+
         services.AddBaseApplicationServices(assemblies).AddBaseDataAccess(assemblies).AddBaseUtilityServices().AddCustomDependencies(assemblies);
         return services;
     }

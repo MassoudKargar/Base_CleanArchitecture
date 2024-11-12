@@ -8,7 +8,7 @@ public abstract class BaseEntity<TId> where TId : struct
     /// Entities numerical ID
     /// Be used only for saving in the database and simplicity of work.
     /// </summary>
-    public TId Id { get; protected set; }
+    public TId Id { get; set; }
 
     /// <summary>
     /// The default constructor is defined as Protected.

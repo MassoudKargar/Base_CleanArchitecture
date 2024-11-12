@@ -11,15 +11,19 @@ public interface IGenericRepository<TEntity, in TId> : IUnitOfWork
     /// <param name="id">شناسه شی مورد نیاز</param>
     /// <returns>نمونه ساخته شده از شی</returns>
     TEntity Get(TId id);
-    Task<TEntity> GetAsync(TId id);
+    Task<TEntity> GetAsync(TId id, CancellationToken cancellationToken);
     #endregion
 
     #region Exists
+    Task<bool> ExistAsync(Guid id, CancellationToken cancellationToken);
+    Task<bool> ExistAsync<TId>(TId id, CancellationToken cancellationToken);
+    Task<bool> ExistAsync(long id, CancellationToken cancellationToken);
+    Task<bool> ExistAsync(int id, CancellationToken cancellationToken);
     bool Exists(Expression<Func<TEntity, bool>> expression);
-    Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> expression);
+    Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken);
     #endregion
 
-
+    Task<IReadOnlyList<TEntity>> GetAllAsync(CancellationToken cancellationToken);
     #region Insert
     /// <summary>
     /// داده‌های جدید را به دیتابیس اضافه می‌کند
@@ -31,7 +35,7 @@ public interface IGenericRepository<TEntity, in TId> : IUnitOfWork
     /// داده‌های جدید را به دیتابیس اضافه می‌کند
     /// </summary>
     /// <param name="entity">نمونه داده‌ای که باید به دیتابیس اضافه شود.</param>
-    Task InsertAsync(TEntity entity);
+    Task InsertAsync(TEntity entity, CancellationToken cancellationToken);
     #endregion
 
     #region Update
