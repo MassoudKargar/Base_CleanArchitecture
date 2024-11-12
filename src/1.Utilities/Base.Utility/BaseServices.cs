@@ -6,7 +6,7 @@ public class BaseServices(
     ILoggerFactory loggerFactory,
     IJsonSerializer serializer,
     IUserInfoService userInfoService,
-     ITranslator translator,
+    ITranslator translator,
     IMapperAdapter mapperFacade)
 {
     public readonly ITranslator Translator = translator;
@@ -14,4 +14,5 @@ public class BaseServices(
     public readonly ILoggerFactory LoggerFactory = loggerFactory;
     public readonly IJsonSerializer Serializer = serializer;
     public readonly IUserInfoService UserInfoService = userInfoService;
+
 }

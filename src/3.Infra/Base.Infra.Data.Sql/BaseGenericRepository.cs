@@ -1,59 +1,52 @@
-﻿namespace Base.Infra.Data.Sql.Commands;
-public class BaseCommandRepository<TEntity, TDbContext, TId>(TDbContext dbContext)
-    : ICommandRepository<TEntity, TId>, IUnitOfWork
-    where TEntity : Entity<TId>
-    where TDbContext : BaseCommandDbContext
-    where TId : struct,
-    IComparable,
-    IComparable<TId>,
-    IConvertible,
-    IEquatable<TId>,
-    IFormattable
+﻿namespace Base.Infra.Data.Sql;
+
+class BaseGenericRepository<TEntity, TId>(BaseDbContext dbContext)
+    : IGenericRepository<TEntity, TId>, IUnitOfWork
+    where TEntity : BaseEntity<TId>
+    where TId : struct
 {
-
-    protected readonly TDbContext _dbContext = dbContext;
-
-
+    protected readonly BaseDbContext _dbContext = dbContext;
+    private readonly DbSet<TEntity> _entity = dbContext.Set<TEntity>();
     public void Delete(TId id)
     {
-        var entity = _dbContext.Set<TEntity>().Find(id);
-        _dbContext.Set<TEntity>().Remove(entity);
+        var entity = _entity.Find(id);
+        _entity.Remove(entity);
     }
 
     public void Delete(TEntity entity)
     {
-        _dbContext.Set<TEntity>().Remove(entity);
+        _entity.Remove(entity);
     }
 
     public void DeleteGraph(TId id)
     {
         var entity = GetGraph(id);
         if (entity is not null && !entity.Id.Equals(default))
-            _dbContext.Set<TEntity>().Remove(entity);
+            _entity.Remove(entity);
     }
 
     #region insert
 
     public void Insert(TEntity entity)
     {
-        _dbContext.Set<TEntity>().Add(entity);
+        _entity.Add(entity);
     }
 
     public async Task InsertAsync(TEntity entity)
     {
-        await _dbContext.Set<TEntity>().AddAsync(entity);
+        await _entity.AddAsync(entity);
     }
     #endregion
 
     #region Get Single Item
     public TEntity Get(TId id)
     {
-        return _dbContext.Set<TEntity>().Find(id);
+        return _entity.Find(id);
     }
 
     public async Task<TEntity> GetAsync(TId id)
     {
-        return await _dbContext.Set<TEntity>().FindAsync(id);
+        return await _entity.FindAsync(id);
     }
 
     #endregion
@@ -62,7 +55,7 @@ public class BaseCommandRepository<TEntity, TDbContext, TId>(TDbContext dbContex
     public TEntity GetGraph(TId id)
     {
         var graphPath = _dbContext.GetIncludePaths(typeof(TEntity));
-        IQueryable<TEntity> query = _dbContext.Set<TEntity>().AsQueryable();
+        IQueryable<TEntity> query = _entity.AsQueryable();
         var temp = graphPath.ToList();
         foreach (var item in graphPath)
         {
@@ -75,7 +68,7 @@ public class BaseCommandRepository<TEntity, TDbContext, TId>(TDbContext dbContex
     public async Task<TEntity> GetGraphAsync(TId id)
     {
         var graphPath = _dbContext.GetIncludePaths(typeof(TEntity));
-        IQueryable<TEntity> query = _dbContext.Set<TEntity>().AsQueryable();
+        IQueryable<TEntity> query = _entity.AsQueryable();
         foreach (var item in graphPath)
         {
             query = query.Include(item);
@@ -88,12 +81,12 @@ public class BaseCommandRepository<TEntity, TDbContext, TId>(TDbContext dbContex
     #region Exists
     public bool Exists(Expression<Func<TEntity, bool>> expression)
     {
-        return _dbContext.Set<TEntity>().Any(expression);
+        return _entity.Any(expression);
     }
 
     public async Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> expression)
     {
-        return await _dbContext.Set<TEntity>().AnyAsync(expression);
+        return await _entity.AnyAsync(expression);
     }
     #endregion
 
@@ -120,11 +113,16 @@ public class BaseCommandRepository<TEntity, TDbContext, TId>(TDbContext dbContex
     {
         _dbContext.RollbackTransaction();
     }
+
     #endregion
+
+    #region Update
+
+    public void Update(TEntity entity)
+    {
+        _dbContext.Entry(entity).State = EntityState.Modified;
+    }
+
+    #endregion
+
 }
-
-
-public class BaseCommandRepository<TEntity, TDbContext>(TDbContext dbContext)
-    : BaseCommandRepository<TEntity, TDbContext, long>(dbContext)
-    where TEntity : Entity
-    where TDbContext : BaseCommandDbContext;

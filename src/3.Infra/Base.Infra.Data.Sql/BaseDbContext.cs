@@ -1,18 +1,12 @@
-﻿namespace Base.Infra.Data.Sql.Commands;
-public abstract class BaseCommandDbContext : DbContext
+﻿namespace Base.Infra.Data.Sql;
+
+public class BaseDbContext : DbContext
 {
     protected IDbContextTransaction _transaction;
-
-    public BaseCommandDbContext(DbContextOptions options) : base(options)
+    public BaseDbContext(DbContextOptions options) : base(options)
     {
 
     }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder.UseSqlServer("Server=.;Database=MiniBlogDb;User Id=masoud;Password=M@$$0ud1001;MultipleActiveResultSets=true;Encrypt=false");
-    }
-
     public void BeginTransaction()
     {
         _transaction = Database.BeginTransaction();
@@ -35,26 +29,6 @@ public abstract class BaseCommandDbContext : DbContext
         }
         _transaction.Commit();
     }
-
-    public T GetShadowPropertyValue<T>(object entity, string propertyName) where T : IConvertible
-    {
-        var value = Entry(entity).Property(propertyName).CurrentValue;
-        return value != null
-            ? (T)Convert.ChangeType(value, typeof(T), CultureInfo.InvariantCulture)
-            : default;
-    }
-
-    public object GetShadowPropertyValue(object entity, string propertyName)
-    {
-        return Entry(entity).Property(propertyName).CurrentValue;
-    }
-
-    protected override void OnModelCreating(ModelBuilder builder)
-    {
-        base.OnModelCreating(builder);
-        builder.AddAuditableShadowProperties();
-    }
-  
     public IEnumerable<string> GetIncludePaths(Type clrEntityType)
     {
         var entityType = Model.FindEntityType(clrEntityType);

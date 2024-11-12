@@ -6,6 +6,5 @@ public sealed class NonValidatingValidator : IObjectModelValidator
     {
         foreach (var entry in actionContext.ModelState.Values)
             entry.ValidationState = ModelValidationState.Skipped;
-
     }
 }

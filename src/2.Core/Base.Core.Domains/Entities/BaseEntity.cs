@@ -2,13 +2,7 @@
 /// <summary>
 /// Base class for all entities in the system
 /// </summary>
-public abstract class Entity<TId> : IAuditableEntity
-          where TId : struct,
-          IComparable,
-          IComparable<TId>,
-          IConvertible,
-          IEquatable<TId>,
-          IFormattable
+public abstract class BaseEntity<TId> where TId : struct
 {
     /// <summary>
     /// Entities numerical ID
@@ -22,16 +16,16 @@ public abstract class Entity<TId> : IAuditableEntity
     /// To prevent this, all Entities must have constructors defined that have an input value.
     /// In order to be able to use these entities for the process of storing and retrieving from the database with the help of ORMs, it is necessary to create a default constructor with a high access level such as Protected or Private.
     /// </summary>
-    protected Entity() { }
+    protected BaseEntity() { }
 
 
     #region Equality Check
-    public bool Equals(Entity<TId>? other) => this == other;
+    public bool Equals(BaseEntity<TId>? other) => this == other;
     public override bool Equals(object? obj) =>
-         obj is Entity<TId> otherObject && Id.Equals(otherObject.Id);
+         obj is BaseEntity<TId> otherObject && Id.Equals(otherObject.Id);
 
     public override int GetHashCode() => Id.GetHashCode();
-    public static bool operator ==(Entity<TId>? left, Entity<TId>? right)
+    public static bool operator ==(BaseEntity<TId>? left, BaseEntity<TId>? right)
     {
         if (left is null && right is null)
             return true;
@@ -41,14 +35,8 @@ public abstract class Entity<TId> : IAuditableEntity
         return left.Equals(right);
     }
 
-    public static bool operator !=(Entity<TId> left, Entity<TId> right)
+    public static bool operator !=(BaseEntity<TId> left, BaseEntity<TId> right)
         => !(right == left);
 
     #endregion
-}
-
-
-public abstract class Entity : Entity<long>
-{
-
 }
