@@ -1,7 +1,7 @@
 ﻿using Base.Extensions.DependencyInjection;
-using Base.Infra.Data.Sql;
+using Base.Infrastructure;
 using Base.Samples.EndPoints.WebApi.Extensions.DependencyInjection.IdentityServer.Extensions;
-using Base.Samples.Infra.Data.Sql.Commands.Common;
+using Base.Samples.Infrastructure.Common;
 
 using Serilog;
 

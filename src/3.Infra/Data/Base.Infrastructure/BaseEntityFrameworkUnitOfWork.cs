@@ -1,4 +1,4 @@
-﻿namespace Base.Infra.Data.Sql.Commands;
+﻿namespace Base.Infrastructure;
 public abstract class BaseEntityFrameworkUnitOfWork<TDbContext>(TDbContext dbContext) : IUnitOfWork
     where TDbContext : BaseDbContext
 {

@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\src\3.Infra\Base.Infra.Data.Sql\Base.Infra.Data.Sql.csproj" />
+    <ProjectReference Include="..\..\..\..\src\3.Infra\Data\Base.Infrastructure\Base.Infrastructure.csproj" />
     <ProjectReference Include="..\..\..\1.Core\Base.Samples.Core.Contracts\Base.Samples.Core.Contracts.csproj" />
     <ProjectReference Include="..\..\..\1.Core\Base.Samples.Core.Domain\Base.Samples.Core.Domain.csproj" />
   </ItemGroup>

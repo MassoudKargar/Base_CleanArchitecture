@@ -1,4 +1,4 @@
-﻿namespace Base.Infra.Data.Sql;
+﻿namespace Base.Infrastructure;
 
 public class BaseDbContext : DbContext
 {

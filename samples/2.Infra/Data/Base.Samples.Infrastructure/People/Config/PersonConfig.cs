@@ -1,4 +1,4 @@
-﻿namespace Base.Samples.Infra.Data.Sql.People.Config;
+﻿namespace Base.Samples.Infrastructure.People.Config;
 
 public class PersonConfig : IEntityTypeConfiguration<Person>
 {

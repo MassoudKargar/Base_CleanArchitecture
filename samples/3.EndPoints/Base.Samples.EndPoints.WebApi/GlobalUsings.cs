@@ -9,7 +9,7 @@ global using Base.Samples.EndPoints.WebApi.Extensions.DependencyInjection.Identi
 global using Base.Samples.EndPoints.WebApi.Extensions.DependencyInjection.Swaggers.Extensions;
 global using Base.Samples.EndPoints.WebApi.Extensions.DependencyInjection.Swaggers.Filters;
 global using Base.Samples.EndPoints.WebApi.Extensions.DependencyInjection.Swaggers.Options;
-global using Base.Samples.Infra.Data.Sql;
+global using Base.Samples.Infrastructure;
 
 global using Microsoft.AspNetCore.Cors.Infrastructure;
 global using Microsoft.AspNetCore.Mvc;

@@ -1,6 +1,6 @@
 ﻿using Base.Extensions.DependencyInjection.Abstractions;
 
-namespace Base.Infra.Data.Sql;
+namespace Base.Infrastructure;
 
 public class BaseEntityFrameworkRepository<TEntity, TDbContext, TId> : IGenericRepository<TEntity, TId>, IUnitOfWork, ITransientLifetime
     where TDbContext : BaseDbContext
