@@ -25,33 +25,40 @@ public interface IGenericRepository<TEntity,in TId> : IUnitOfWork
 
     IQueryable<TEntity> GetAllAsync(bool addAsNoTracking = true, CancellationToken cancellationToken = default);
     #region Insert
+
     /// <summary>
     /// داده‌های جدید را به دیتابیس اضافه می‌کند
     /// </summary>
     /// <param name="entity">نمونه داده‌ای که باید به دیتابیس اضافه شود.</param>
+    /// <param name="isCommit">صدا زده شود یا نه  SaveChange مشخص میکند که آیا متود</param>
     void Insert(TEntity entity, bool isCommit = true);
 
     /// <summary>
     /// داده‌های جدید را به دیتابیس اضافه می‌کند
     /// </summary>
     /// <param name="entity">نمونه داده‌ای که باید به دیتابیس اضافه شود.</param>
+    /// <param name="isCommit">صدا زده شود یا نه  SaveChange مشخص میکند که آیا متود</param>
     Task InsertAsync(TEntity entity, bool isCommit = true, CancellationToken cancellationToken = default);
     #endregion
 
     #region Update
+
     /// <summary>
     /// داده‌ را در دیتابیس تغیر میدهد 
     /// </summary>
     /// <param name="entity">نمونه داده‌ای که باید در دیتابیس تغیر کند.</param>
+    /// <param name="isCommit">صدا زده شود یا نه  SaveChange مشخص میکند که آیا متود</param>
     void Update(TEntity entity, bool isCommit = true);
 
     #endregion
 
     #region Delete
+
     /// <summary>
     /// یک شی را با شناسه حذف می کند
     /// </summary>
     /// <param name="id">شناسه</param>
+    /// <param name="isCommit">صدا زده شود یا نه  SaveChange مشخص میکند که آیا متود</param>
     void Delete(TId id, bool isCommit = true);
 
     ///// <summary>
@@ -63,7 +70,8 @@ public interface IGenericRepository<TEntity,in TId> : IUnitOfWork
     /// <summary>
     /// یک شی را دریافت کرده و از دیتابیس حذف می‌کند
     /// </summary>
-    /// <param name="entity"></param>
+    /// <param name="entity">نمونه داده‌ای که باید از دیتابیس حذف شود.</param>
+    /// <param name="isCommit">صدا زده شود یا نه  SaveChange مشخص میکند که آیا متود</param>
     void Delete(TEntity entity, bool isCommit = true);
     #endregion
 }

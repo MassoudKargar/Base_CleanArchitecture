@@ -1,6 +1,4 @@
-﻿using FluentValidation;
-
-namespace Base.Samples.Core.Contracts.People.ViewModels;
+﻿namespace Base.Samples.Core.Contracts.People.ViewModels;
 
 public class PersonUpdateViewModel
 {

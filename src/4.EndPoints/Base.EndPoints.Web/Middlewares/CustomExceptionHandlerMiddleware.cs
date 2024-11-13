@@ -1,4 +1,6 @@
-﻿namespace Base.EndPoints.Web.Middlewares;
+﻿using Base.Core.RequestResponse.Endpoints;
+
+namespace Base.EndPoints.Web.Middlewares;
 
 public static class CustomExceptionHandlerMiddlewareExtensions
 {

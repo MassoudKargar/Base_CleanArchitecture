@@ -1,3 +1,3 @@
 // Global using directives
 
-global using Base.Core.RequestResponse.Common;
+global using Base.Utility.Base;

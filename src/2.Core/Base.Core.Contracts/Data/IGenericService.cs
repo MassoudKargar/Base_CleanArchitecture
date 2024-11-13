@@ -1,6 +1,4 @@
-﻿using System.Threading;
-
-namespace Base.Core.Contracts.Data;
+﻿namespace Base.Core.Contracts.Data;
 
 public interface IGenericService<TEntity, in TId>
     where TEntity : BaseEntity<TId>, new()

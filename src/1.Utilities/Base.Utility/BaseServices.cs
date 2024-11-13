@@ -1,6 +1,4 @@
-﻿
-
-namespace Base.Utility;
+﻿namespace Base.Utility;
 
 public class BaseServices(
     ILoggerFactory loggerFactory,

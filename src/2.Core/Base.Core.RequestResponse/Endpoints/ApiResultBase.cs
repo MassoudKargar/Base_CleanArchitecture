@@ -1,4 +1,4 @@
-﻿namespace Base.Utility.Base;
+﻿namespace Base.Core.RequestResponse.Endpoints;
 
 public class ApiResultBase(bool isSuccess, ApiResultStatusCode statusCode, string? message = null)
 {

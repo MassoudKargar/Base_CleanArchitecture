@@ -12,4 +12,8 @@
 		<PackageReference Include="FluentValidation" Version="11.10.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\..\1.Utilities\Base.Utility\Base.Utility.csproj" />
+	</ItemGroup>
+
 </Project>

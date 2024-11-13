@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-
-namespace Base.Samples.EndPoints.WebApi.Moduls;
+﻿namespace Base.Samples.EndPoints.WebApi.Models;
 
 public class AutoMapperProfile : Profile
 {

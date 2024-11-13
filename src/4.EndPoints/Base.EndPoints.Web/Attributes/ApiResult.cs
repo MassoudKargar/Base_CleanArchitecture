@@ -1,4 +1,6 @@
-﻿namespace Base.EndPoints.Web.Attributes;
+﻿using Base.Core.RequestResponse.Endpoints;
+
+namespace Base.EndPoints.Web.Attributes;
 
 public class ApiResult : ApiResultBase
 {
