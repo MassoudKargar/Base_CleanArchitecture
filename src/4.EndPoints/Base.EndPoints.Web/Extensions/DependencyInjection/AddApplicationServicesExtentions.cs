@@ -4,8 +4,7 @@ public static class AddApplicationServicesExtensions
 {
     public static IServiceCollection AddBaseApplicationServices(this IServiceCollection services,
                                                                  IEnumerable<Assembly> assembliesForSearch)
-        => services
-                   .AddFluentValidators(assembliesForSearch);
+        => services.AddFluentValidators(assembliesForSearch);
 
     //private static IServiceCollection AddDispatcherDecorators(this IServiceCollection services)
     //{

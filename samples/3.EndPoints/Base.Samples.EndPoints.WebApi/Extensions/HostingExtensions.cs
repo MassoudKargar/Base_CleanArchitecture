@@ -7,15 +7,10 @@ public static class HostingExtensions
         IConfiguration configuration = builder.Configuration;
 
         builder.Services.AddBaseApiCore("Base");
-
         builder.Services.AddEndpointsApiExplorer();
-
         builder.Services.AddBaseWebUserInfoService(configuration, "WebUserInfo", true);
-
         builder.Services.AddNonValidatingValidator();
-
         builder.Services.AddBaseMicrosoftSerializer();
-
         builder.Services.AddBaseAutoMapperProfiles(option =>
         {
             option.AssemblyNamesForLoadProfiles = "Base";

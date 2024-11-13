@@ -1,4 +1,4 @@
-﻿using ValidationException = FluentValidation.ValidationException;
+﻿using ValidationException = System.ComponentModel.DataAnnotations.ValidationException;
 
 namespace Base.EndPoints.Web.Controllers;
 
@@ -27,10 +27,6 @@ public class GenericController<TEntity, TId, TListViewModel, TUpdateViewModel, T
     {
         logger.LogInformation($"Get {typeof(TEntity).Assembly.GetName().Name} => Id :{id}");
         var baseResult = await service.GetAsync(id, cancellationToken);
-        if (baseResult == null)
-        {
-            throw new NullReferenceException($"NotFound any object type {typeof(TEntity).FullName}");
-        }
         var result = BaseServices.MapperFacade.Map<TEntity, TSelectViewModel>(baseResult);
         return result;
     }
@@ -70,7 +66,7 @@ public class GenericController<TEntity, TId, TListViewModel, TUpdateViewModel, T
         var validationResult = await validator.ValidateAsync(abstractValidator, cancellationToken);
         if (validationResult.IsValid is false)
         {
-            throw new ValidationException("");
+            throw new SampleValidationException(validationResult);
         }
         #endregion
     }

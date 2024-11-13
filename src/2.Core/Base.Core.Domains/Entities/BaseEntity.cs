@@ -2,7 +2,7 @@
 /// <summary>
 /// Base class for all entities in the system
 /// </summary>
-public abstract class BaseEntity<TId> where TId : struct
+public class BaseEntity<TId> where TId : struct
 {
     /// <summary>
     /// Entities numerical ID
@@ -16,7 +16,7 @@ public abstract class BaseEntity<TId> where TId : struct
     /// To prevent this, all Entities must have constructors defined that have an input value.
     /// In order to be able to use these entities for the process of storing and retrieving from the database with the help of ORMs, it is necessary to create a default constructor with a high access level such as Protected or Private.
     /// </summary>
-    protected BaseEntity() { }
+    protected BaseEntity() { }  
 
 
     #region Equality Check

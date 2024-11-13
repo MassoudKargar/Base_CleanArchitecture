@@ -1,6 +1,4 @@
-﻿using Base.Core.RequestResponse.Endpoints;
-
-namespace Base.EndPoints.Web.Middlewares;
+﻿namespace Base.EndPoints.Web.Middlewares;
 
 public static class CustomExceptionHandlerMiddlewareExtensions
 {
@@ -10,20 +8,14 @@ public static class CustomExceptionHandlerMiddlewareExtensions
     }
 }
 
-public class CustomExceptionHandlerMiddleware
+public class CustomExceptionHandlerMiddleware(
+    RequestDelegate next,
+    IWebHostEnvironment env,
+    ILogger<CustomExceptionHandlerMiddleware> logger)
 {
-    private RequestDelegate Next { get; }
-    private IWebHostEnvironment Env { get; }
-    private ILogger<CustomExceptionHandlerMiddleware> Logger { get; }
-
-    public CustomExceptionHandlerMiddleware(RequestDelegate next,
-        IWebHostEnvironment env,
-        ILogger<CustomExceptionHandlerMiddleware> logger)
-    {
-        Next = next;
-        Env = env;
-        Logger = logger;
-    }
+    private RequestDelegate Next { get; } = next;
+    private IWebHostEnvironment Env { get; } = env;
+    private ILogger<CustomExceptionHandlerMiddleware> Logger { get; } = logger;
 
     public async Task Invoke(HttpContext context)
     {
@@ -65,15 +57,6 @@ public class CustomExceptionHandlerMiddleware
             SetResponse(exception, exception.HttpStatusCode, exception.ApiStatusCode);
             await WriteToResponseAsync();
         }
-        catch (ValidationException exception)
-        {
-            message = string.Join(",", exception.Errors);
-            if (string.IsNullOrWhiteSpace(message))
-            {
-                message = exception.Message;
-            }
-            await WriteToResponseAsync();
-        }
         catch (BadRequestException exception)
         {
             SetResponse(exception, HttpStatusCode.BadRequest, ApiResultStatusCode.BadRequest);
@@ -109,33 +92,42 @@ public class CustomExceptionHandlerMiddleware
             SetResponse(exception, exception.HttpStatusCode, exception.ApiStatusCode);
             await WriteToResponseAsync();
         }
-        catch (AppException exception)
-        {
-            SetResponse(exception, exception.HttpStatusCode, exception.ApiStatusCode);
-            await WriteToResponseAsync();
-        }
         catch (SecurityTokenException exception)
         {
             SetResponse(exception, HttpStatusCode.Unauthorized, ApiResultStatusCode.Unauthorized);
             await WriteToResponseAsync();
         }
-
         catch (DuplicateNameException exception)
         {
             SetResponse(exception, HttpStatusCode.Unauthorized, ApiResultStatusCode.Unauthorized);
             await WriteToResponseAsync();
         }
-
+        catch (SampleValidationException exception)
+        {
+            message = string.Join(",", exception.Errors);
+            if (string.IsNullOrWhiteSpace(message))
+            {
+                message = exception.Message;
+            }
+            SetResponse(exception, exception.HttpStatusCode, exception.ApiStatusCode);
+            await WriteToResponseAsync();
+        }
+        catch (AppException exception)
+        {
+            SetResponse(exception, exception.HttpStatusCode, exception.ApiStatusCode);
+            await WriteToResponseAsync();
+        }
         catch (Exception exception)
         {
-#if DEBUG
-            Dictionary<string, string> dic = new()
-            {
-                ["Exception"] = exception.Message,
-                ["StackTrace"] = exception.StackTrace,
-            };
-            message = ServiceSerialize.JsonSerialize(dic);
-#endif
+            //full error
+            //#if DEBUG
+            //            Dictionary<string, string> dic = new()
+            //            {
+            //                ["Exception"] = exception.Message,
+            //                ["StackTrace"] = exception.StackTrace,
+            //            };
+            //            message = JsonSerializer.Serialize(dic);
+            //#endif
 
             SetResponse(exception, HttpStatusCode.InternalServerError, ApiResultStatusCode.InternalServerError);
             await WriteToResponseAsync();
@@ -152,22 +144,30 @@ public class CustomExceptionHandlerMiddleware
             {
                 message = apiStatusCode.ToDisplay();
             }
+            var data = new ApiResult(false, apiStatusCode, message);
+            await context.Response.WriteAsync(JsonSerializer.Serialize(data));
         }
 
         void SetResponse(Exception exception, HttpStatusCode httpStatus, ApiResultStatusCode apiResultStatus)
         {
             httpStatusCode = httpStatus;
             apiStatusCode = apiResultStatus;
-#if DEBUG
-            if (Env.IsDevelopment())
-            {
-                var dic = new Dictionary<string, string>
-                {
-                    ["Exception"] = exception.Message,
-                    ["StackTrace"] = exception.StackTrace
-                };
-            }
-#endif
+
+            //full error
+            //#if DEBUG
+            //            if (Env.IsDevelopment())
+            //            {
+            //                var dic = new Dictionary<string, string>
+            //                {
+            //                    ["Exception"] = exception.Message,
+            //                    ["StackTrace"] = exception.StackTrace
+            //                };
+            //                if (exception is SecurityTokenExpiredException tokenException)
+            //                    dic.Add("Expires", tokenException.Expires.ToString());
+
+            //                message = JsonSerializer.Serialize(dic);
+            //            }
+            //#endif
         }
     }
 }
