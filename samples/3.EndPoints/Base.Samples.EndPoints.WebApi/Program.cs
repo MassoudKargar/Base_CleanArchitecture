@@ -1,4 +1,3 @@
-using Base.Extensions.DependencyInjection;
 using Base.Utilities.SerilogRegistration.Extensions;
 
 SerilogExtensions.RunWithSerilogExceptionHandling(() =>

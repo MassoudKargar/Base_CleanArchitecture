@@ -8,3 +8,6 @@ global using Microsoft.EntityFrameworkCore.Metadata;
 global using Microsoft.EntityFrameworkCore.Storage;
 
 global using System.Linq.Expressions;
+global using Base.Extensions.DependencyInjection.Abstractions;
+global using Base.Utility;
+global using Microsoft.Extensions.Logging;

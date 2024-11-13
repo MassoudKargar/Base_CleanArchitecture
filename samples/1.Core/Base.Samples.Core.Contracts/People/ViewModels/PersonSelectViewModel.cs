@@ -1,6 +1,6 @@
-﻿namespace Base.Samples.Core.Contracts.People;
+﻿namespace Base.Samples.Core.Contracts.People.ViewModels;
 
-public class PersonDto
+public class PersonSelectViewModel
 {
     public string FirstName { get; set; } = string.Empty;
     public string LastName { get; set; } = string.Empty;

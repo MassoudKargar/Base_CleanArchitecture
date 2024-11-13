@@ -7,6 +7,7 @@ public class BaseDbContext : DbContext
     {
 
     }
+
     public void BeginTransaction()
     {
         _transaction = Database.BeginTransaction();

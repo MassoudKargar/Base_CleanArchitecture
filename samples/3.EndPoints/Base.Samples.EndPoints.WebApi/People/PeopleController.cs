@@ -1,18 +1,6 @@
-﻿using Base.Core.Contracts.Data;
-using Base.Samples.Core.ApplicationServices.People;
-using Base.Samples.Core.Contracts.People;
-using Base.Samples.Core.Domain.People.Entities;
+﻿namespace Base.Samples.EndPoints.WebApi.People;
 
-namespace Base.Samples.EndPoints.WebApi.People;
-
-public class PeopleController : BaseGenericController<Person, long, PersonDto>
-{
-    public PeopleController
-        (IGenericRepository<Person, long> repository,
-        ILogger<PeopleController> logger, 
-        PersonValidator validationRules)
-        : base(validationRules, logger, repository)
-    {
-    }
-
-}
+public class PeopleController
+    (IGenericService<Person, long> personRepository, ILogger<PeopleController> logger)
+    : GenericController<Person, long, PersonListViewModel, PersonUpdateViewModel, PersonUpdateValidator, PersonInsertViewModel, PersonInsertValidator, PersonSelectViewModel>
+        (personRepository, logger);

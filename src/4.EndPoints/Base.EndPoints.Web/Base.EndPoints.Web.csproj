@@ -26,6 +26,7 @@
 	  <ProjectReference Include="..\..\2.Core\Base.Core.Contracts\Base.Core.Contracts.csproj" />
 	  <ProjectReference Include="..\..\2.Core\Base.Core.Domains\Base.Core.Domains.csproj" />
 	  <ProjectReference Include="..\..\2.Core\Base.Core.RequestResponse\Base.Core.RequestResponse.csproj" />
+	  <ProjectReference Include="..\..\3.Infra\Data\Base.Infrastructure\Base.Infrastructure.csproj" />
 	</ItemGroup>
 
 	

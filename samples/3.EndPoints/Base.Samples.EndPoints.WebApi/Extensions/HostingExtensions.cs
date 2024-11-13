@@ -1,11 +1,4 @@
-﻿using Base.Extensions.DependencyInjection;
-using Base.Infrastructure;
-using Base.Samples.EndPoints.WebApi.Extensions.DependencyInjection.IdentityServer.Extensions;
-using Base.Samples.Infrastructure.Common;
-
-using Serilog;
-
-namespace Base.Samples.EndPoints.WebApi.Extensions;
+﻿namespace Base.Samples.EndPoints.WebApi.Extensions;
 
 public static class HostingExtensions
 {
@@ -27,9 +20,8 @@ public static class HostingExtensions
         {
             option.AssemblyNamesForLoadProfiles = "Base";
         });
-
-        builder.Services.AddDbContext<SampleDbContext>(
-            c => c.UseSqlServer(configuration.GetConnectionString("BaseConnectionString"),options =>
+        builder.Services.AddDbContext<BaseDbContext, SampleDbContext>(
+            c => c.UseSqlServer(configuration.GetConnectionString("BaseConnectionString"), options =>
             {
                 options.MigrationsAssembly(typeof(SampleDbContext).Assembly.GetName().Name);
             }));
@@ -42,16 +34,10 @@ public static class HostingExtensions
 
     public static WebApplication ConfigurePipeline(this WebApplication app)
     {
-        //base
-        app.UseBaseApiExceptionHandler();
-
-        //Serilog
+        app.UseCustomExceptionHandler();
         app.UseSerilogRequestLogging();
-
         app.UseSwaggerUI("Swagger");
-
         app.UseStatusCodePages();
-
         app.UseCors(delegate (CorsPolicyBuilder builder)
         {
             builder.AllowAnyOrigin();

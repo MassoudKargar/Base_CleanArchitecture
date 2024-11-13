@@ -1,6 +1,6 @@
 ﻿namespace Base.Core.Contracts.Data;
 
-public interface IGenericRepository<TEntity, in TId> : IUnitOfWork
+public interface IGenericRepository<TEntity,in TId> : IUnitOfWork
     where TEntity : BaseEntity<TId>
     where TId : struct
 {
@@ -23,19 +23,19 @@ public interface IGenericRepository<TEntity, in TId> : IUnitOfWork
     Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken);
     #endregion
 
-    Task<IReadOnlyList<TEntity>> GetAllAsync(CancellationToken cancellationToken);
+    IQueryable<TEntity> GetAllAsync(bool addAsNoTracking = true, CancellationToken cancellationToken = default);
     #region Insert
     /// <summary>
     /// داده‌های جدید را به دیتابیس اضافه می‌کند
     /// </summary>
     /// <param name="entity">نمونه داده‌ای که باید به دیتابیس اضافه شود.</param>
-    void Insert(TEntity entity);
+    void Insert(TEntity entity, bool isCommit = true);
 
     /// <summary>
     /// داده‌های جدید را به دیتابیس اضافه می‌کند
     /// </summary>
     /// <param name="entity">نمونه داده‌ای که باید به دیتابیس اضافه شود.</param>
-    Task InsertAsync(TEntity entity, CancellationToken cancellationToken);
+    Task InsertAsync(TEntity entity, bool isCommit = true, CancellationToken cancellationToken = default);
     #endregion
 
     #region Update
@@ -43,7 +43,7 @@ public interface IGenericRepository<TEntity, in TId> : IUnitOfWork
     /// داده‌ را در دیتابیس تغیر میدهد 
     /// </summary>
     /// <param name="entity">نمونه داده‌ای که باید در دیتابیس تغیر کند.</param>
-    void Update(TEntity entity);
+    void Update(TEntity entity, bool isCommit = true);
 
     #endregion
 
@@ -52,18 +52,18 @@ public interface IGenericRepository<TEntity, in TId> : IUnitOfWork
     /// یک شی را با شناسه حذف می کند
     /// </summary>
     /// <param name="id">شناسه</param>
-    void Delete(TId id);
+    void Delete(TId id, bool isCommit = true);
 
-    /// <summary>
-    /// حذف یک شی به همراه تمامی فرزندان آن را انجام می دهد
-    /// </summary>
-    /// <param name="id">شناسه</param>
-    void DeleteGraph(TId id);
+    ///// <summary>
+    ///// حذف یک شی به همراه تمامی فرزندان آن را انجام می دهد
+    ///// </summary>
+    ///// <param name="id">شناسه</param>
+    //void DeleteGraph(TId id, bool isCommit = true);
 
     /// <summary>
     /// یک شی را دریافت کرده و از دیتابیس حذف می‌کند
     /// </summary>
     /// <param name="entity"></param>
-    void Delete(TEntity entity);
+    void Delete(TEntity entity, bool isCommit = true);
     #endregion
 }

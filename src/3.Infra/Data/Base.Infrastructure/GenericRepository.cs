@@ -1,66 +1,110 @@
-﻿using Base.Extensions.DependencyInjection.Abstractions;
+﻿namespace Base.Infrastructure;
 
-namespace Base.Infrastructure;
-
-public class BaseEntityFrameworkRepository<TEntity, TDbContext, TId> : IGenericRepository<TEntity, TId>, IUnitOfWork, ITransientLifetime
-    where TDbContext : BaseDbContext
+public class GenericRepository<TEntity, TId>
+    : IGenericRepository<TEntity, TId>, IUnitOfWork, ITransientLifetime
     where TEntity : BaseEntity<TId>
     where TId : struct
 {
-    public BaseEntityFrameworkRepository(TDbContext dbContext)
+    public GenericRepository(BaseDbContext dbContext)
     {
-
         Context = dbContext;
         Entities = Context.Set<TEntity>();
+        
     }
 
-    private TDbContext Context { get; }
+    private BaseDbContext Context { get; }
     private DbSet<TEntity> Entities { get; }
-    public virtual IQueryable<TEntity> Table => Entities;
-    public virtual IQueryable<TEntity> TableNoTracking => Entities.AsNoTracking();
 
-    public void Delete(TId id)
+
+
+    #region insert
+
+    public virtual void Insert(TEntity entity, bool isCommit)
+    {
+        Entities.Add(entity);
+        if (isCommit)
+        {
+            Commit();
+        }
+    }
+
+    public virtual async Task InsertAsync(TEntity entity, bool isCommit = true, CancellationToken cancellationToken = default)
+    {
+        await Entities.AddAsync(entity, cancellationToken);
+        if (isCommit)
+        {
+            await CommitAsync();
+        }
+    }
+    #endregion
+
+    #region Update
+
+    public virtual void Update(TEntity entity, bool isCommit = true)
+    {
+        Context.Entry(entity).State = EntityState.Modified;
+        if (isCommit)
+        {
+            Commit();
+        }
+    }
+
+    #endregion
+
+    #region Delete
+
+    public virtual void Delete(TId id, bool isCommit = true)
     {
         var entity = Entities.Find(id);
         Entities.Remove(entity);
+        if (isCommit)
+        {
+            Commit();
+        }
     }
 
-    public void Delete(TEntity entity)
+    public virtual void Delete(TEntity entity, bool isCommit = true)
     {
         Entities.Remove(entity);
+        if (isCommit)
+        {
+            Commit();
+        }
     }
 
-    public void DeleteGraph(TId id)
+    public virtual void DeleteGraph(TId id, bool isCommit = true)
     {
         var entity = GetGraph(id);
         if (entity is not null && !entity.Id.Equals(default))
             Entities.Remove(entity);
+        if (isCommit)
+        {
+            Commit();
+        }
     }
 
-    #region insert
 
-    public void Insert(TEntity entity)
-    {
-        Entities.Add(entity);
-    }
-
-    public async Task InsertAsync(TEntity entity, CancellationToken cancellationToken)
-    {
-        await Entities.AddAsync(entity, cancellationToken);
-    }
     #endregion
 
-    public async Task<IReadOnlyList<TEntity>> GetAllAsync(CancellationToken cancellationToken)
+    #region Get Item
+
+    public virtual IQueryable<TEntity> GetAllAsync(bool addAsNoTracking = true, CancellationToken cancellationToken = default)
     {
-        return await TableNoTracking.ToListAsync(cancellationToken);
+        if (addAsNoTracking)
+        {
+            return Entities.AsNoTracking().AsQueryable();
+        }
+        else
+        {
+            return Entities.AsQueryable();
+        }
     }
-    #region Get Single Item
-    public TEntity Get(TId id)
+    public virtual TEntity Get(TId id)
     {
         return Entities.Find(id);
     }
 
-    public async Task<TEntity> GetAsync(TId id, CancellationToken cancellationToken)
+    public virtual async Task<TEntity> GetAsync(TId id, CancellationToken cancellationToken)
     {
         return await Entities.FindAsync(new object?[] { id }, cancellationToken: cancellationToken);
     }
@@ -68,7 +112,7 @@ public class BaseEntityFrameworkRepository<TEntity, TDbContext, TId> : IGenericR
     #endregion
 
     #region Get single item with graph
-    public TEntity GetGraph(TId id)
+    public virtual TEntity GetGraph(TId id)
     {
         var graphPath = Context.GetIncludePaths(typeof(TEntity));
         IQueryable<TEntity> query = Entities.AsQueryable();
@@ -81,7 +125,7 @@ public class BaseEntityFrameworkRepository<TEntity, TDbContext, TId> : IGenericR
     }
 
 
-    public async Task<TEntity> GetGraphAsync(TId id, CancellationToken cancellationToken)
+    public virtual async Task<TEntity> GetGraphAsync(TId id, CancellationToken cancellationToken)
     {
         var graphPath = Context.GetIncludePaths(typeof(TEntity));
         IQueryable<TEntity> query = Entities.AsQueryable();
@@ -97,39 +141,39 @@ public class BaseEntityFrameworkRepository<TEntity, TDbContext, TId> : IGenericR
     #region Exists
 
 
-    public async Task<bool> ExistAsync(int id, CancellationToken cancellationToken)
+    public virtual async Task<bool> ExistAsync(int id, CancellationToken cancellationToken)
     {
         var entity = await Entities.FindAsync(id, cancellationToken);
         Entities.Entry(entity).State = EntityState.Detached;
         return entity != null;
     }
 
-    public async Task<bool> ExistAsync(long id, CancellationToken cancellationToken)
+    public virtual async Task<bool> ExistAsync(long id, CancellationToken cancellationToken)
     {
         var entity = await Entities.FindAsync(id, cancellationToken);
         Entities.Entry(entity).State = EntityState.Detached;
         return entity != null;
     }
 
-    public async Task<bool> ExistAsync(Guid id, CancellationToken cancellationToken)
+    public virtual async Task<bool> ExistAsync(Guid id, CancellationToken cancellationToken)
     {
         var entity = await Entities.FindAsync(id, cancellationToken);
         Entities.Entry(entity).State = EntityState.Detached;
         return entity != null;
     }
-    public async Task<bool> ExistAsync<TId>(TId id, CancellationToken cancellationToken)
+    public virtual async Task<bool> ExistAsync<TId>(TId id, CancellationToken cancellationToken)
     {
         var entity = await Entities.FindAsync(id, cancellationToken);
         Entities.Entry(entity).State = EntityState.Detached;
         return entity != null;
     }
 
-    public bool Exists(Expression<Func<TEntity, bool>> expression)
+    public virtual bool Exists(Expression<Func<TEntity, bool>> expression)
     {
         return Entities.Any(expression);
     }
 
-    public async Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken)
+    public virtual async Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken)
     {
         return await Entities.AnyAsync(expression, cancellationToken);
     }
@@ -161,13 +205,5 @@ public class BaseEntityFrameworkRepository<TEntity, TDbContext, TId> : IGenericR
 
     #endregion
 
-    #region Update
-
-    public void Update(TEntity entity)
-    {
-        Context.Entry(entity).State = EntityState.Modified;
-    }
-
-    #endregion
 
 }
