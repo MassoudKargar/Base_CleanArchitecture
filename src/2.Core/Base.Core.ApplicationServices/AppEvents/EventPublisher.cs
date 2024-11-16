@@ -1,11 +1,9 @@
-﻿using System.Security.Cryptography;
-
-namespace Base.Core.ApplicationServices.AppEvents;
+﻿namespace Base.Core.ApplicationServices.AppEvents;
 
 /// <summary>
 /// Represents the event publisher implementation
 /// </summary>
-public partial class EventPublisher(ILogger<EventPublisher> logger, IServiceProvider serviceProvider) : IEventPublisher
+public partial class EventPublisher(ILogger<EventPublisher> logger, IServiceProvider serviceProvider) : IEventPublisher, ITransientLifetime
 {
     private ILogger<EventPublisher> Logger { get; } = logger;
     private IServiceProvider ServiceProvider { get; } = serviceProvider;
