@@ -1,4 +1,6 @@
-﻿namespace Base.Infrastructure;
+﻿using Base.Infrastructure.SqlContext;
+
+namespace Base.Infrastructure.EfRepositories;
 
 public class GenericRepository<TEntity, TId>
     : IGenericRepository<TEntity, TId>, IUnitOfWork, ITransientLifetime
@@ -9,7 +11,7 @@ public class GenericRepository<TEntity, TId>
     {
         Context = dbContext;
         Entities = Context.Set<TEntity>();
-        
+
     }
 
     private BaseDbContext Context { get; }

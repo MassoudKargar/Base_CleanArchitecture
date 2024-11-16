@@ -1,7 +1,8 @@
 ﻿using System.Reflection;
+
 using Pluralize.NET;
 
-namespace Base.Infrastructure;
+namespace Base.Infrastructure.SqlContext;
 
 public static class ModelBuilderExtensions
 {

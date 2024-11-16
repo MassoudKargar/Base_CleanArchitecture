@@ -1,4 +1,4 @@
-﻿namespace Base.Infrastructure;
+﻿namespace Base.Infrastructure.EfRepositories;
 
 public class GenericService<TEntity, TId>(IGenericRepository<TEntity, TId> repository)
     : IGenericService<TEntity, TId>, ITransientLifetime
@@ -37,7 +37,7 @@ public class GenericService<TEntity, TId>(IGenericRepository<TEntity, TId> repos
 
     public virtual async Task DeleteAsync(TId id, CancellationToken cancellationToken)
     {
-        if (await repository.ExistAsync(id,cancellationToken))
+        if (await repository.ExistAsync(id, cancellationToken))
         {
             throw new NullReferenceException();
         }

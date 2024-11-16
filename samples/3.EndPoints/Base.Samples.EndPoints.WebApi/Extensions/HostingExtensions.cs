@@ -1,4 +1,6 @@
-﻿namespace Base.Samples.EndPoints.WebApi.Extensions;
+﻿using Base.Infrastructure.SqlContext;
+
+namespace Base.Samples.EndPoints.WebApi.Extensions;
 
 public static class HostingExtensions
 {

@@ -11,12 +11,27 @@ public class BaseEntity<TId> where TId : struct
     public TId Id { get; set; }
 
     /// <summary>
+    /// Entities create data time
+    /// </summary>
+    public DateTime CreationDate { get; set; }
+
+    /// <summary>
+    /// Entities modify date time 
+    /// </summary>
+    public DateTime? ModifyDate { get; set; }
+
+    /// <summary>
+    /// Entities deleted status
+    /// </summary>
+    public bool IsDeleted { get; set; }
+
+    /// <summary>
     /// The default constructor is defined as Protected.
     /// Given that this needs to be created when constructing the basic Entity properties, no object should be created without filling these properties.
     /// To prevent this, all Entities must have constructors defined that have an input value.
     /// In order to be able to use these entities for the process of storing and retrieving from the database with the help of ORMs, it is necessary to create a default constructor with a high access level such as Protected or Private.
     /// </summary>
-    protected BaseEntity() { }  
+    protected BaseEntity() { }
 
 
     #region Equality Check

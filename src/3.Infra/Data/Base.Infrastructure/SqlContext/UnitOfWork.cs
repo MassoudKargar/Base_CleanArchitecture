@@ -1,4 +1,4 @@
-﻿namespace Base.Infrastructure;
+﻿namespace Base.Infrastructure.SqlContext;
 public abstract class UnitOfWork<TDbContext>(TDbContext dbContext) : IUnitOfWork, ITransientLifetime
     where TDbContext : BaseDbContext
 {

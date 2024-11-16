@@ -1,4 +1,6 @@
-﻿namespace Base.Samples.Infrastructure.Common;
+﻿using Base.Infrastructure.SqlContext;
+
+namespace Base.Samples.Infrastructure.Common;
 
 public class SampleDbContext : BaseDbContext
 {
