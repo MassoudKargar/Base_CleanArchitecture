@@ -18,7 +18,7 @@ public class BaseEntity<TId> where TId : struct
     /// <summary>
     /// Entities modify date time 
     /// </summary>
-    public DateTime? ModifyDate { get; set; }
+    public DateTime? ModificationDate { get; set; }
 
     /// <summary>
     /// Entities deleted status

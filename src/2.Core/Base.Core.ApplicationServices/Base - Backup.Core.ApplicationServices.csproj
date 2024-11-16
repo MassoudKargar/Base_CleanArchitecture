@@ -8,7 +8,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.2" />
 	</ItemGroup>
@@ -17,6 +16,10 @@
 		<ProjectReference Include="..\..\1.Utilities\Base.Utility\Base.Utility.csproj" />
 		<ProjectReference Include="..\Base.Core.Contracts\Base.Core.Contracts.csproj" />
 		<ProjectReference Include="..\Base.Core.Domains\Base.Core.Domains.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="AppEvents\" />
 	</ItemGroup>
 
 </Project>

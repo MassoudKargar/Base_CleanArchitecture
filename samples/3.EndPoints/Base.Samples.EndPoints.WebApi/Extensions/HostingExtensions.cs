@@ -13,6 +13,11 @@ public static class HostingExtensions
         builder.Services.AddBaseWebUserInfoService(configuration, "WebUserInfo", true);
         builder.Services.AddNonValidatingValidator();
         builder.Services.AddBaseMicrosoftSerializer();
+        builder.Services.AddBaseRedisDistributedCache(option =>
+        {
+            option.Configuration = "localhost:6379,password=N<01!rt9Ptry-1";
+            option.InstanceName = "Base.Sample.";
+        });
         builder.Services.AddBaseAutoMapperProfiles(option =>
         {
             option.AssemblyNamesForLoadProfiles = "Base";
