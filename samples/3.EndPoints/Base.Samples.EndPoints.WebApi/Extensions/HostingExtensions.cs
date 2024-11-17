@@ -1,7 +1,5 @@
 ﻿using Base.Infrastructure.SqlContext;
 
-using Microsoft.Extensions.Diagnostics.HealthChecks;
-
 using System.Threading.RateLimiting;
 
 namespace Base.Samples.EndPoints.WebApi.Extensions;
@@ -14,15 +12,8 @@ public static class HostingExtensions
 
         builder.Services.AddBaseApiCore("Base");
         builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddBaseWebUserInfoService(configuration, "WebUserInfo",false);
         builder.Services.AddNonValidatingValidator();
         builder.Services.AddBaseNewtonSoftSerializer();
-        builder.Services.AddBaseRedisDistributedCache(option =>
-        {
-            option.Configuration = builder.Configuration["Redis:Configuration"];
-            option.InstanceName = builder.Configuration["Redis:InstanceName"];
-        });
-
         builder.Services.AddBaseAutoMapperProfiles(option =>
         {
             option.AssemblyNamesForLoadProfiles = "Base";

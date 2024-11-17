@@ -6,8 +6,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>f03e0d26-cea1-4e9e-b1cc-fbf973c26eea</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <DockerfileContext>..\..\..</DockerfileContext>
+    <DockerfileContext>.</DockerfileContext>
 	  <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+	  <DockerComposeProjectPath>..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
 	<ItemGroup>
@@ -18,7 +19,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Base.Extensions.Caching.Distributed.Redis" Version="8.0.0" />
 		<PackageReference Include="Base.Extensions.ObjectMappers.AutoMapper" Version="8.0.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.7" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.7">
@@ -32,11 +32,8 @@
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
 		<PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.6.2" />
-		<PackageReference Include="Base.Extensions.Serializers.Microsoft" Version="8.0.0" />
 		<PackageReference Include="Base.Extensions.Serializers.NewtonSoft" Version="8.0.0" />
-		<PackageReference Include="Base.Extensions.UsersManagement" Version="8.0.0" />
-		<PackageReference Include="Base.Utility.OpenTelemetryRegistration" Version="8.0.0" />
-		<PackageReference Include="Base.Utility.SerilogRegistration" Version="8.0.0" />
+		<PackageReference Include="Base.Utility.SerilogRegistration" Version="8.1.0" />
 	</ItemGroup>
 
 	<ItemGroup>

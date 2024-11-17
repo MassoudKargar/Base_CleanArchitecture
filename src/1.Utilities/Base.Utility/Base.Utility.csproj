@@ -7,7 +7,6 @@
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Base.Extensions.Caching.Abstractions" Version="8.0.0" />
 		<PackageReference Include="FluentValidation" Version="11.10.0" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.2" />
@@ -15,6 +14,5 @@
 		<PackageReference Include="Base.Extensions.Logger.Abstractions" Version="8.0.0" />
 		<PackageReference Include="Base.Extensions.ObjectMappers.Abstractions" Version="8.0.0" />
 		<PackageReference Include="Base.Extensions.Serializers.Abstractions" Version="8.0.0" />
-		<PackageReference Include="Base.Extensions.UsersManagement.Abstractions" Version="8.0.0" />
 	</ItemGroup>
 </Project>

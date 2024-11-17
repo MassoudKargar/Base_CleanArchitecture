@@ -2,8 +2,6 @@
 
 global using Base.Extensions.ObjectMappers.Abstractions;
 global using Base.Extensions.Serializers.Abstractions;
-global using Base.Extensions.UsersManagement.Abstractions;
-global using Base.Extensions.Caching.Abstractions;
 
 global using Microsoft.Extensions.Logging;
 
