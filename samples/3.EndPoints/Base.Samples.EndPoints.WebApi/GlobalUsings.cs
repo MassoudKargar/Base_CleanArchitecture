@@ -22,7 +22,6 @@ global using Microsoft.AspNetCore.Cors.Infrastructure;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.OpenApi.Models;
 
-global using Serilog;
 
 global using Swashbuckle.AspNetCore.SwaggerGen;
 global using Swashbuckle.AspNetCore.SwaggerUI;

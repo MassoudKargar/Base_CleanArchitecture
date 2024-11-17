@@ -45,4 +45,10 @@
     <ProjectReference Include="..\..\2.Infra\Data\Base.Samples.Infrastructure\Base.Samples.Infrastructure.csproj" />
   </ItemGroup>
 
+	<ItemGroup>
+	  <None Include="wwwroot\websurge-allow.txt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
 </Project>

@@ -1,6 +1,7 @@
 ﻿using Base.Infrastructure.SqlContext;
 
 using System.Threading.RateLimiting;
+using Serilog;
 
 namespace Base.Samples.EndPoints.WebApi.Extensions;
 
