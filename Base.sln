@@ -47,7 +47,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.Samples.EndPoints.WebA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.Samples.Infrastructure", "samples\2.Infra\Data\Base.Samples.Infrastructure\Base.Samples.Infrastructure.csproj", "{9EE6CF7E-678D-4D75-9635-FA5A6F358DAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base.Infrastructure", "src\3.Infra\Data\Base.Infrastructure\Base.Infrastructure.csproj", "{641CAA1D-5794-41A3-8800-DA8438815CD7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.Infrastructure", "src\3.Infra\Data\Base.Infrastructure\Base.Infrastructure.csproj", "{641CAA1D-5794-41A3-8800-DA8438815CD7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

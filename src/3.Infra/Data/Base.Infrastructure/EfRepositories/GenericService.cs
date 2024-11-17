@@ -7,7 +7,9 @@ public class GenericService<TEntity, TId>(IGenericRepository<TEntity, TId> repos
 {
     public virtual IQueryable<TEntity> GetAll(bool addAsNoTracking, CancellationToken cancellationToken)
     {
+        
         var baseResult = repository.GetAllAsync(addAsNoTracking, cancellationToken);
+        baseResult = baseResult.Where(w => w.IsDeleted == false).AsQueryable();
         return baseResult;
     }
 

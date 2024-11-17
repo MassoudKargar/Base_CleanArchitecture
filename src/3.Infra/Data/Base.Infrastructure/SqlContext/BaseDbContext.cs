@@ -33,30 +33,24 @@ public class BaseDbContext : DbContext
     public IEnumerable<string> GetIncludePaths(Type clrEntityType)
     {
         var entityType = Model.FindEntityType(clrEntityType);
-        var includedNavigations = new HashSet<INavigation>();
+        var includedNavigation = new HashSet<INavigation>();
         var stack = new Stack<IEnumerator<INavigation>>();
         while (true)
         {
-            var entityNavigations = new List<INavigation>();
-            foreach (var navigation in entityType.GetNavigations())
-            {
-                if (includedNavigations.Add(navigation))
-                    entityNavigations.Add(navigation);
-            }
-            if (entityNavigations.Count == 0)
+            var entityNavigation = entityType.GetNavigations().Where(navigation => includedNavigation.Add(navigation)).ToList();
+            if (entityNavigation.Count == 0)
             {
                 if (stack.Count > 0)
                     yield return string.Join(".", stack.Reverse().Select(e => e.Current.Name));
             }
             else
             {
-                foreach (var navigation in entityNavigations)
+                foreach (var inverseNavigation in entityNavigation.Select(navigation => navigation.Inverse).OfType<INavigation>())
                 {
-                    var inverseNavigation = navigation.Inverse;
-                    if (inverseNavigation != null)
-                        includedNavigations.Add(inverseNavigation);
+                    includedNavigation.Add(inverseNavigation);
                 }
-                stack.Push(entityNavigations.GetEnumerator());
+
+                stack.Push(entityNavigation.GetEnumerator());
             }
             while (stack.Count > 0 && !stack.Peek().MoveNext())
                 stack.Pop();

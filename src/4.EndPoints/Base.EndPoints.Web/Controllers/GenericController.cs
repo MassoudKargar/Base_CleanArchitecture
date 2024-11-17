@@ -17,6 +17,7 @@ public class GenericController<TEntity, TId, TListViewModel, TUpdateViewModel, T
     public Task<IEnumerable<TListViewModel>> GetAllAsync(CancellationToken cancellationToken)
     {
         logger.LogInformation($"GetAll {typeof(TEntity).FullName}");
+        logger.LogInformation(DateTime.Now.ToString());
         var baseResult = service.GetAll(true, cancellationToken);
         var result = BaseServices.MapperFacade.Map<IEnumerable<TEntity>, IEnumerable<TListViewModel>>(baseResult);
         return Task.FromResult(result);
@@ -37,21 +38,23 @@ public class GenericController<TEntity, TId, TListViewModel, TUpdateViewModel, T
         await ValidatedAsync<TInsertValidator, TInsertViewModel>(dto, cancellationToken);
         logger.LogInformation($"Insert {typeof(TEntity).FullName}");
         var result = BaseServices.MapperFacade.Map<TInsertViewModel, TEntity>(dto);
+        result.CreationDate = DateTime.Now;
         await service.InsertAsync(result, cancellationToken);
     }
 
 
-    [HttpPut("{id}")]
+    [HttpPost("{id}")]
     public async Task UpdateAsync(TId id, TUpdateViewModel dto, CancellationToken cancellationToken)
     {
         await ValidatedAsync<TUpdateValidator, TUpdateViewModel>(dto, cancellationToken);
         logger.LogInformation($"Update {typeof(TEntity).FullName} => Id :{id}");
         var result = BaseServices.MapperFacade.Map<TUpdateViewModel, TEntity>(dto);
+        result.ModificationDate = DateTime.Now;
         await service.UpdateAsync(id, result, cancellationToken);
     }
 
 
-    [HttpDelete("{id}")]
+    [HttpPost("{id}")]
     public Task DeleteAsync(TId id, CancellationToken cancellationToken)
     {
         logger.LogInformation($"Delete {typeof(TEntity).FullName} => Id :{id}");

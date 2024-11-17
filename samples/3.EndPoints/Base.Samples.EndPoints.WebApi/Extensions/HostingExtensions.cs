@@ -1,5 +1,9 @@
 ﻿using Base.Infrastructure.SqlContext;
 
+using Microsoft.Extensions.Diagnostics.HealthChecks;
+
+using System.Threading.RateLimiting;
+
 namespace Base.Samples.EndPoints.WebApi.Extensions;
 
 public static class HostingExtensions
@@ -10,24 +14,25 @@ public static class HostingExtensions
 
         builder.Services.AddBaseApiCore("Base");
         builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddBaseWebUserInfoService(configuration, "WebUserInfo", true);
+        builder.Services.AddBaseWebUserInfoService(configuration, "WebUserInfo",false);
         builder.Services.AddNonValidatingValidator();
-        builder.Services.AddBaseMicrosoftSerializer();
+        builder.Services.AddBaseNewtonSoftSerializer();
         builder.Services.AddBaseRedisDistributedCache(option =>
         {
-            option.Configuration = "localhost:6379,password=N<01!rt9Ptry-1";
-            option.InstanceName = "Base.Sample.";
+            option.Configuration = builder.Configuration["Redis:Configuration"];
+            option.InstanceName = builder.Configuration["Redis:InstanceName"];
         });
+
         builder.Services.AddBaseAutoMapperProfiles(option =>
         {
             option.AssemblyNamesForLoadProfiles = "Base";
         });
+
         builder.Services.AddDbContext<BaseDbContext, SampleDbContext>(
             c => c.UseSqlServer(configuration.GetConnectionString("BaseConnectionString"), options =>
             {
                 options.MigrationsAssembly(typeof(SampleDbContext).Assembly.GetName().Name);
             }));
-
 
         builder.Services.AddSwagger(configuration, "Swagger");
 
@@ -51,7 +56,6 @@ public static class HostingExtensions
 
         var useIdentityServer = app.UseIdentityServer("OAuth");
 
-
         if (useIdentityServer)
         {
             app.MapControllers().RequireAuthorization();
@@ -62,4 +66,37 @@ public static class HostingExtensions
         }
         return app;
     }
+    public static void AddRateLimitSetting(this IServiceCollection services)
+    {
+        services.AddRateLimiter(options =>
+        {
+            options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(httpContext =>
+            RateLimitPartition.GetSlidingWindowLimiter(
+                partitionKey: httpContext.Connection.RemoteIpAddress?.ToString() ??
+                httpContext.User.Identity?.Name ??
+                httpContext.Request.Headers.Host.ToString(),
+                factory: partition => new SlidingWindowRateLimiterOptions
+                {
+                    AutoReplenishment = true,
+                    PermitLimit = 100,
+                    QueueLimit = 100,
+                    Window = TimeSpan.FromMinutes(1),
+                    SegmentsPerWindow = 40
+                }));
+
+            options.OnRejected = (context, cancellationToken) =>
+            {
+                if (context.Lease.TryGetMetadata(MetadataName.RetryAfter, out var retryAfter))
+                {
+                    context.HttpContext.Response.Headers.RetryAfter = retryAfter.TotalSeconds.ToString();
+                }
+
+                context.HttpContext.Response.StatusCode = StatusCodes.Status429TooManyRequests;
+                context.HttpContext.Response.WriteAsync("Too many requests. Please try again later.");
+
+                return new ValueTask();
+            };
+        });
+    }
 }
+

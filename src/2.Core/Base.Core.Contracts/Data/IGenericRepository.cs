@@ -74,4 +74,6 @@ public interface IGenericRepository<TEntity,in TId> : IUnitOfWork
     /// <param name="isCommit">صدا زده شود یا نه  SaveChange مشخص میکند که آیا متود</param>
     void Delete(TEntity entity, bool isCommit = true);
     #endregion
+
+    IQueryable<TEntity> GetAllIncluding(params Expression<Func<TEntity, object>>[] includeProperties);
 }

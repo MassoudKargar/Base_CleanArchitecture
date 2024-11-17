@@ -8,6 +8,7 @@ public class CacheController(ICacheAdapter cacheAdapter) : BaseController
     [HttpPost]
     public IActionResult Add(string Key, string Value)
     {
+
         cacheAdapter.Add(Key, Value, DateTime.Now.AddDays(1), null);
         return Ok();
     }

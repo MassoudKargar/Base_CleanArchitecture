@@ -1,5 +1,9 @@
 ﻿using Base.Infrastructure.SqlContext;
 
+using Microsoft.EntityFrameworkCore;
+
+using System.Linq;
+
 namespace Base.Infrastructure.EfRepositories;
 
 public class GenericRepository<TEntity, TId>
@@ -73,6 +77,10 @@ public class GenericRepository<TEntity, TId>
             Commit();
         }
     }
+
+    public IQueryable<TEntity> GetAllIncluding(params Expression<Func<TEntity, object>>[] includeProperties) => 
+        includeProperties.Aggregate(GetAllAsync(), (current, includeProperty) =>
+            current.Include<TEntity, object>(includeProperty));
 
     public virtual void DeleteGraph(TId id, bool isCommit = true)
     {
