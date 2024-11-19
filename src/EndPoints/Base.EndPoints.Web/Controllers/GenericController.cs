@@ -5,7 +5,10 @@ interface IBaseHandler
 
 }
 
-public class ACommnad : CustomeRequest<int>;
+public class ACommnad : CustomeRequest<int>
+{
+
+}
 
 public class CustomeRequest<TResopnse> : IRequest<TResopnse>
 {
@@ -17,7 +20,7 @@ public enum Action
     GetAll = 0,
 }
 public interface IGenericHandler<TRequest, TResponse> : IRequestHandler<TRequest, TResponse>
-where TRequest : IRequest<TResponse>, new()
+where TRequest : IRequest<TResponse>
 {
     public Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken);
 }
@@ -68,16 +71,19 @@ public abstract class AbstractGenericHandler<TRequest, TResponse, TModel, TEntit
     }
 
 }
-internal class AHandler : IRequestHandler<ACommnad>
+internal class AHandler : IRequestHandler<ACommnad,int>
 {
-    public Task Handle(ACommnad request, CancellationToken cancellationToken)
+    public Task<int> Handle(ACommnad request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 }
 public class BaseHandler<TRequest> : IRequestHandler<TRequest, int> where TRequest : IRequest, IRequest<int>
 {
-
+    public Task<int> Handle(TRequest request, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
 }
 public class GenericController<TEntity, TId, TListViewModel, TUpdateViewModel, TUpdateValidator, TInsertViewModel, TInsertValidator, TSelectViewModel>(
     IGenericService<TEntity, TId> service, ILogger logger) : BaseController
