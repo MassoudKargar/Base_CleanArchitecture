@@ -1,11 +1,6 @@
 ﻿namespace Base.Utility;
 
-public class BaseServices(
-    ILoggerFactory loggerFactory,
-    IJsonSerializer serializer,
-    IMapperAdapter mapperFacade)
+public class BaseServices(IJsonSerializer serializer)
 {
-    public readonly IMapperAdapter MapperFacade = mapperFacade;
-    public readonly ILoggerFactory LoggerFactory = loggerFactory;
     public readonly IJsonSerializer Serializer = serializer;
 }

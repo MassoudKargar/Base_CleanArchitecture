@@ -19,7 +19,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Base.Extensions.ObjectMappers.AutoMapper" Version="8.0.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.7" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.7">
 		  <PrivateAssets>all</PrivateAssets>

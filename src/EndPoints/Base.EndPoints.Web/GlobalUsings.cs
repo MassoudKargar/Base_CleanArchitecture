@@ -30,6 +30,7 @@ global using System.Reflection;
 global using System.Security.Claims;
 global using System.Text;
 global using System.Text.Json;
+global using Ardalis.Result.AspNetCore;
 global using Base.EndPoints.Web.Attributes;
 global using Base.Utility.Base;
 global using Microsoft.AspNetCore.Hosting;

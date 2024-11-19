@@ -1,10 +1,6 @@
 // Global using directives
 
-global using Base.Extensions.ObjectMappers.Abstractions;
 global using Base.Extensions.Serializers.Abstractions;
-
-global using Microsoft.Extensions.Logging;
-
 global using System.Collections;
 global using System.ComponentModel;
 global using System.Data;

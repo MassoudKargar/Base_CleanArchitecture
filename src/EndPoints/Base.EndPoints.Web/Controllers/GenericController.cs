@@ -1,12 +1,15 @@
-﻿namespace Base.EndPoints.Web.Controllers;
+﻿using AutoMapper;
+using Base.Application.Common;
+
+namespace Base.EndPoints.Web.Controllers;
 
 public class GenericController<TEntity, TId, TListViewModel, TUpdateViewModel, TUpdateValidator, TInsertViewModel, TInsertValidator, TSelectViewModel>(
-    IGenericService<TEntity, TId> service, ILogger logger) : BaseController
+    IGenericService<TEntity, TId> service, ILogger logger,IMapper mapper) : BaseController
     where TEntity : BaseEntity<TId>, new()
-    where TInsertViewModel : new()
-    where TUpdateViewModel : new()
-    where TSelectViewModel : new()
-    where TListViewModel : new()
+    where TInsertViewModel : BaseDto<TInsertViewModel, TEntity, TId>, new()
+    where TUpdateViewModel : BaseDto<TUpdateViewModel, TEntity, TId>, new()
+    where TSelectViewModel : BaseDto<TSelectViewModel, TEntity, TId>, new()
+    where TListViewModel : BaseDto<TListViewModel,TEntity, TId>, new()
     where TInsertValidator : AbstractValidator<TInsertViewModel>, new()
     where TUpdateValidator : AbstractValidator<TUpdateViewModel>, new()
     where TId : struct
@@ -17,7 +20,7 @@ public class GenericController<TEntity, TId, TListViewModel, TUpdateViewModel, T
         logger.LogInformation($"GetAll {typeof(TEntity).FullName}");
         logger.LogInformation(DateTime.Now.ToString());
         var baseResult = service.GetAll(true, cancellationToken);
-        var result = BaseServices.MapperFacade.Map<IEnumerable<TEntity>, IEnumerable<TListViewModel>>(baseResult);
+        var result = mapper.Map<IEnumerable<TEntity>, IEnumerable<TListViewModel>>(baseResult);
         return Task.FromResult(result);
     }
 
@@ -26,7 +29,7 @@ public class GenericController<TEntity, TId, TListViewModel, TUpdateViewModel, T
     {
         logger.LogInformation($"Get {typeof(TEntity).Assembly.GetName().Name} => Id :{id}");
         var baseResult = await service.GetAsync(id, cancellationToken);
-        var result = BaseServices.MapperFacade.Map<TEntity, TSelectViewModel>(baseResult);
+        var result = mapper.Map<TEntity, TSelectViewModel>(baseResult);
         return result;
     }
 
@@ -35,7 +38,7 @@ public class GenericController<TEntity, TId, TListViewModel, TUpdateViewModel, T
     {
         await ValidatedAsync<TInsertValidator, TInsertViewModel>(dto, cancellationToken);
         logger.LogInformation($"Insert {typeof(TEntity).FullName}");
-        var result = BaseServices.MapperFacade.Map<TInsertViewModel, TEntity>(dto);
+        var result = mapper.Map<TInsertViewModel, TEntity>(dto);
         result.CreationDate = DateTime.Now;
         await service.InsertAsync(result, cancellationToken);
     }
@@ -46,7 +49,7 @@ public class GenericController<TEntity, TId, TListViewModel, TUpdateViewModel, T
     {
         await ValidatedAsync<TUpdateValidator, TUpdateViewModel>(dto, cancellationToken);
         logger.LogInformation($"Update {typeof(TEntity).FullName} => Id :{id}");
-        var result = BaseServices.MapperFacade.Map<TUpdateViewModel, TEntity>(dto);
+        var result = mapper.Map<TUpdateViewModel, TEntity>(dto);
         result.ModificationDate = DateTime.Now;
         await service.UpdateAsync(id, result, cancellationToken);
     }
