@@ -4,7 +4,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddBaseNewtonSoftSerializer();
 builder.Services.AddBaseAutoMapperProfiles(option =>
 {
-    option.AssemblyNamesForLoadProfiles = "Base";
+    option.AssemblyNamesForLoadProfiles = builder.Configuration["AutoMapper:AssmblyNamesForLoadProfiles"];
 });
 builder.Services.AddDbContext<BaseDbContext, SampleDbContext>(
     c => c.UseSqlServer(builder.Configuration.GetConnectionString("BaseConnectionString"), options =>
