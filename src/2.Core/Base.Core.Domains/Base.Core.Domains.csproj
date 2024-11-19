@@ -18,11 +18,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Dtos\" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<None Include="README.md" Pack="true" PackagePath=""/>
+		<None Include="README.md" Pack="true" PackagePath="" />
 		<None Include="base.png" Pack="true" PackagePath="" />
 	</ItemGroup>
 </Project>

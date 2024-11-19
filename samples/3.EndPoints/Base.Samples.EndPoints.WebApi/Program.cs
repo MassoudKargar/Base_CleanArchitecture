@@ -13,21 +13,12 @@ builder.Services.AddDbContext<BaseDbContext, SampleDbContext>(
     {
         options.MigrationsAssembly(typeof(SampleDbContext).Assembly.GetName().Name);
     }));
-builder.AddBaseSerilog(o =>
-{
-    o.ApplicationName = builder.Configuration.GetValue<string>("ApplicationName") ?? string.Empty;
-    o.ServiceId = builder.Configuration.GetValue<string>("ServiceId") ?? string.Empty;
-    o.ServiceName = builder.Configuration.GetValue<string>("ServiceName") ?? string.Empty;
-    o.ServiceVersion = builder.Configuration.GetValue<string>("ServiceVersion") ?? string.Empty;
-});
 builder.Services.AddSwagger(builder.Configuration, "Swagger");
 
 var app = builder.Build();
 
 app.UseCustomExceptionHandler();
-#if DEBUG
 app.UseSwaggerUI("Swagger");
-#endif
 app.UseStatusCodePages();
 app.UseStaticFiles();
 app.UseCors(delegate (CorsPolicyBuilder builder)

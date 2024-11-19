@@ -33,7 +33,6 @@
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
 		<PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.6.2" />
 		<PackageReference Include="Base.Extensions.Serializers.NewtonSoft" Version="8.0.0" />
-		<PackageReference Include="Base.Utility.SerilogRegistration" Version="8.1.0" />
 	</ItemGroup>
 
 	<ItemGroup>

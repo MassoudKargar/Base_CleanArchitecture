@@ -1,8 +1,6 @@
 ﻿using Base.Infrastructure.SqlContext;
 
 using System.Threading.RateLimiting;
-using Serilog;
-
 namespace Base.Samples.EndPoints.WebApi.Extensions;
 
 public static class HostingExtensions
@@ -34,7 +32,6 @@ public static class HostingExtensions
     public static WebApplication ConfigurePipeline(this WebApplication app)
     {
         app.UseCustomExceptionHandler();
-        app.UseSerilogRequestLogging();
         app.UseSwaggerUI("Swagger");
         app.UseStatusCodePages();
         app.UseCors(delegate (CorsPolicyBuilder builder)

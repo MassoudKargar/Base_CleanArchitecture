@@ -19,6 +19,7 @@ public class GenericService<TEntity, TId>(IGenericRepository<TEntity, TId> repos
         {
             throw new NullReferenceException();
         }
+
         var baseResult = await repository.GetAsync(id, cancellationToken);
         return baseResult;
     }
@@ -47,3 +48,4 @@ public class GenericService<TEntity, TId>(IGenericRepository<TEntity, TId> repos
         repository.Delete(profile);
     }
 }
+

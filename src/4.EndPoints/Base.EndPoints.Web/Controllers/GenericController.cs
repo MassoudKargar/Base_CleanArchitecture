@@ -1,6 +1,4 @@
-﻿using ValidationException = System.ComponentModel.DataAnnotations.ValidationException;
-
-namespace Base.EndPoints.Web.Controllers;
+﻿namespace Base.EndPoints.Web.Controllers;
 
 public class GenericController<TEntity, TId, TListViewModel, TUpdateViewModel, TUpdateValidator, TInsertViewModel, TInsertValidator, TSelectViewModel>(
     IGenericService<TEntity, TId> service, ILogger logger) : BaseController
