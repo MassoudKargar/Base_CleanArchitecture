@@ -1,20 +1,103 @@
 ﻿namespace Base.EndPoints.Web.Controllers;
 
+interface IBaseHandler
+{
+
+}
+
+public class ACommnad : CustomeRequest<int>;
+
+public class CustomeRequest<TResopnse> : IRequest<TResopnse>
+{
+    public Action action { get; set; }
+}
+
+public enum Action
+{
+    GetAll = 0,
+}
+public interface IGenericHandler<TRequest, TResponse> : IRequestHandler<TRequest, TResponse>
+where TRequest : IRequest<TResponse>, new()
+{
+    public Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken);
+}
+
+public class GetAllUser : BaseEntity<int>
+{
+    public int id { get; set; }
+}
+
+public class GetAllUseriewModl : BaseDto<GetAllUseriewModl, GetAllUser, int>
+{
+
+}
+public class GetAllUsersCommand : CustomeRequest<List<int>>
+{
+    private readonly GetAllUseriewModl _request;
+
+    public GetAllUsersCommand(GetAllUseriewModl request)
+    {
+        _request = request;
+    }
+}
+public class GetAllUsersCommandHandler : AbstractGenericHandler<GetAllUsersCommand, List<int>, GetAllUseriewModl, GetAllUser, int>
+{
+    public GetAllUsersCommandHandler(IGenericService<GetAllUser, int> port, GetAllUseriewModl request) : base(port)
+    {
+
+    }
+}
+
+public abstract class AbstractGenericHandler<TRequest, TResponse, TModel, TEntity, TId> : IGenericHandler<TRequest, TResponse>
+    where TRequest : IRequest<TResponse>
+    where TEntity : BaseEntity<TId>, new()
+    where TModel : BaseDto<TModel, TEntity, TId>, new()
+    where TId : struct
+
+{
+    private readonly IGenericService<TEntity, TId> _service;
+
+    public AbstractGenericHandler(IGenericService<TEntity, TId> service)
+    {
+        _service = service;
+    }
+    public virtual Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken)
+    {
+        var t = typeof(TModel);
+        throw new NotImplementedException();
+    }
+
+}
+internal class AHandler : IRequestHandler<ACommnad>
+{
+    public Task Handle(ACommnad request, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+}
+public class BaseHandler<TRequest> : IRequestHandler<TRequest, int> where TRequest : IRequest, IRequest<int>
+{
+
+}
 public class GenericController<TEntity, TId, TListViewModel, TUpdateViewModel, TUpdateValidator, TInsertViewModel, TInsertValidator, TSelectViewModel>(
     IGenericService<TEntity, TId> service, ILogger logger) : BaseController
     where TEntity : BaseEntity<TId>, new()
     where TInsertViewModel : BaseDto<TInsertViewModel, TEntity, TId>, new()
     where TUpdateViewModel : BaseDto<TUpdateViewModel, TEntity, TId>, new()
     where TSelectViewModel : BaseDto<TSelectViewModel, TEntity, TId>, new()
-    where TListViewModel : BaseDto<TListViewModel,TEntity, TId>, new()
+    where TListViewModel : BaseDto<TListViewModel, TEntity, TId>, new()
     where TInsertValidator : AbstractValidator<TInsertViewModel>, new()
     where TUpdateValidator : AbstractValidator<TUpdateViewModel>, new()
     where TId : struct
 {
     protected IMapper Mapper => HttpContext.MapperDispatcher();
+    protected IMediator Mediator => HttpContext.MediatRDispatcher();
     [HttpGet]
-    public Task<IEnumerable<TListViewModel>> GetAllAsync(CancellationToken cancellationToken)
+    public Task<IEnumerable<TListViewModel>> GetAllAsync( CancellationToken cancellationToken)
     {
+         Mediator.Send(new GetAllUsersCommand(new GetAllUseriewModl()));
+
+
         logger.LogInformation($"GetAll {typeof(TEntity).FullName}");
         logger.LogInformation(DateTime.Now.ToString());
         var baseResult = service.GetAll(true, cancellationToken);

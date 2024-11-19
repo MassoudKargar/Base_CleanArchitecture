@@ -38,6 +38,7 @@ public static class Extensions
 
     public static IServiceCollection AddMediatR(this IServiceCollection services, List<Assembly> assemblies)
     {
+        assemblies.First().ty
         services.AddMediatR(cfg =>
         {
             cfg.RegisterServicesFromAssemblies(assemblies.ToArray());
