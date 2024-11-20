@@ -1,4 +1,6 @@
-﻿namespace Base.EndPoints.Web.Extensions.DependencyInjection;
+﻿using MediatR.Extensions.FluentValidation.AspNetCore;
+
+namespace Base.EndPoints.Web.Extensions.DependencyInjection;
 
 public static class Extensions
 {
@@ -41,6 +43,8 @@ public static class Extensions
         services.AddMediatR(cfg =>
         {
             cfg.RegisterServicesFromAssemblies(assemblies.ToArray());
+
+            cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
         });
 
         services.AddFluentValidationAutoValidation();

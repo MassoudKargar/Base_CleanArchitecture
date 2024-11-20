@@ -1,13 +1,10 @@
 ﻿using Base.Core.Contracts.AppEvents;
 using Base.Core.Domains.AppEvents;
-using Base.Core.Domains.Entities;
-using Base.Extensions.DependencyInjection.Abstractions;
-
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Base.Application.AppEvents;
+namespace Base.Application.Common.AppEvents;
 
 /// <summary>
 /// Represents the event publisher implementation

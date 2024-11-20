@@ -10,7 +10,7 @@ public class LocalAuthorizeAttribute(string? roles = null) : Attribute, IAuthori
 
     public void OnAuthorization(AuthorizationFilterContext context)
     {
-        // skip authorization if action is decorated with [LocalAllowAnonymous] attribute
+        // skip authorization if genericAction is decorated with [LocalAllowAnonymous] attribute
         var allowAnonymous = context.ActionDescriptor.EndpointMetadata.OfType<LocalAllowAnonymousAttribute>().Any();
         if (allowAnonymous)
             return;

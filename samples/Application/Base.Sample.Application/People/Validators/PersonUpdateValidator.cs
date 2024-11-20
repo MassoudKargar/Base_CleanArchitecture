@@ -4,7 +4,7 @@ public class PersonUpdateValidator : AbstractValidator<PersonUpdateViewModel>
 {
     public PersonUpdateValidator()
     {
-        RuleFor(c => c.FirstName).NotEmpty();
-        RuleFor(c => c.LastName).NotEmpty();
+        RuleFor(c => c.FirstName).NotEmpty().NotNull();
+        RuleFor(c => c.LastName).NotEmpty().NotNull();
     }
 }

@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using Base.Core.Domains.Entities;
-using Base.Extensions.ObjectMappers.AutoMapper.Profiles;
+﻿using Base.Extensions.ObjectMappers.AutoMapper.Profiles;
 
 namespace Base.Application.Common;
 public abstract class BaseDto<TDto, TEntity, TKey> : IHaveCustomMapping
@@ -8,7 +6,6 @@ public abstract class BaseDto<TDto, TEntity, TKey> : IHaveCustomMapping
         where TEntity : BaseEntity<TKey>, new()
         where TKey : struct
 {
-    public TKey Id { get; set; }
 
     public TEntity ToEntity(IMapper mapper)
     {

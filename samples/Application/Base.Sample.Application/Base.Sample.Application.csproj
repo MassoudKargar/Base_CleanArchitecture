@@ -12,4 +12,8 @@
     <ProjectReference Include="..\Base.Sample.Application.RequestResponse\Base.Sample.Application.RequestResponse.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="People\Commands\" />
+  </ItemGroup>
+
 </Project>
