@@ -1,27 +1,27 @@
 ﻿namespace Base.Utility.DateTimes;
 /// <summary>
-/// DateTimeOffset Part
-/// The source of this section was originally taken from the works of Mr. Vahid Nasiri. After completion and final corrections, addressing etc. will be corrected
+/// جزء DateTimeOffset
+/// اصل این بخش از کارهای آقا Vahid Nasiri به طور اصلی برداشته شده است. پس از تمام‌کردن و اصلاحات نهایی، مراجعه و غیره را اصلاح خواهد کرد
 /// </summary>
 public enum DateTimeOffsetPart
 {
     /// <summary>
-    /// The time field returns the value regardless of the offset and will not be converted to the server's local time
+    /// مقدار زمان با توجه به اختلاف زمانی، برمی‌گردد و به زمان محلی سرور نمایش داده نخواهد شد
     /// </summary>
     DateTime,
 
     /// <summary>
-    /// Returns the time field according to the time zone of the server on which the application is running
+    /// زمان مورد نظر بر اساس زمان منطقه سروری که برنامه در آن قابل اجرا است، برمی‌گرداند
     /// </summary>
     LocalDateTime,
 
     /// <summary>
-    /// The Coordinated Universal Time (UTC) date and time of the current System.DateTimeOffset
+    /// زمان UTC فعلی System.DateTimeOffset
     /// </summary>
     UtcDateTime,
 
     /// <summary>
-    /// Converts this location to Iran's time zone and returns the value
+    /// این موقعیت را به منطقه زمان ایران تبدیل می‌کند و مقدار آن را برمی‌گرداند
     /// </summary>
     IranLocalDateTime
 }

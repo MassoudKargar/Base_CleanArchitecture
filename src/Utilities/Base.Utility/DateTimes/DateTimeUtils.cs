@@ -5,12 +5,12 @@
 public static class DateTimeUtils
 {
     /// <summary>
-    /// Iran Standard Time
+    /// زمان استاندارد ایران
     /// </summary>
     public static readonly TimeZoneInfo? IranStandardTime;
 
     /// <summary>
-    /// Epoch represented as DateTime
+    /// عصر میلادی به صورت DateTime نمایش داده شده است
     /// </summary>
     public static readonly DateTime Epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
@@ -24,42 +24,46 @@ public static class DateTimeUtils
         if (IranStandardTime == null)
         {
 #if NET40 || NET45 || NET46
-                throw new PlatformNotSupportedException($"This OS[{Environment.OSVersion.Platform}, {Environment.OSVersion.Version}] doesn't support IranStandardTime.");
+            throw new PlatformNotSupportedException($"این OS[{Environment.OSVersion.Platform}, {Environment.OSVersion.Version}] دستیار استاندارد زمان ایران را پشتporte نمی‌کند.");
 #else
-            throw new PlatformNotSupportedException($"This OS[{System.Runtime.InteropServices.RuntimeInformation.OSDescription}] doesn't support IranStandardTime.");
+            throw new PlatformNotSupportedException($"این OS[{System.Runtime.InteropServices.RuntimeInformation.OSDescription}] دستیار استاندارد زمان ایران را پشتporte نمی‌کند.");
 #endif
         }
     }
+
+
+
     /// <summary>
-    /// age calculation
+    /// محاسبه سن
     /// </summary>
-    /// <param name="birthday">birthday</param>
-    /// <param name="comparisonBase">Comparison base as of now</param>
-    /// <param name="dateTimeOffsetPart">Which part to use this time?</param>
-    /// <returns>Age</returns>
+    /// <param name="birthday">تاریخ تولد</param>
+    /// <param name="comparisonBase">بنتهای مقایسه بر اساس حال حاضر</param>
+    /// <param name="dateTimeOffsetPart">جزء که در این زمان استفاده شود؟</param>
+    /// <returns>سن</returns>
     public static int GetAge(this DateTimeOffset birthday, DateTime comparisonBase, DateTimeOffsetPart dateTimeOffsetPart = DateTimeOffsetPart.IranLocalDateTime)
     {
         return birthday.GetDateTimeOffsetPart(dateTimeOffsetPart).GetAge(comparisonBase);
     }
 
     /// <summary>
-    /// age calculation
-    /// Basis for calculation now
+    /// محاسبه سن
+    /// پایه برای محاسبه حال حاضر
     /// </summary>
-    /// <param name="birthday">birthday</param>
-    /// <returns>Age</returns>
+    /// <param name="birthday">تاریخ تولد</param>
+    /// <returns>سن</returns>
     public static int GetAge(this DateTimeOffset birthday)
     {
         var birthdayDateTime = birthday.UtcDateTime;
         var now = DateTime.UtcNow;
         return birthdayDateTime.GetAge(now);
     }
+
     /// <summary>
-    /// age calculation
+    /// محاسبه سن
     /// </summary>
-    /// <param name="birthday">birthday</param>
-    /// <param name="comparisonBase">Comparison base as of now</param>
-    /// <returns>Age</returns>
+    /// <param name="birthday">تاریخ تولد</param>
+    /// <param name="comparisonBase">بنتهای مقایسه بر اساس حال حاضر</param>
+    /// <returns>سن</returns>
     public static int GetAge(this DateTime birthday, DateTime comparisonBase)
     {
         var now = comparisonBase;
@@ -69,19 +73,22 @@ public static class DateTimeUtils
         return age;
     }
 
+
+
     /// <summary>
-    /// age calculation
-    /// Basis for calculation now
+    /// محاسبه سن
+    /// پایه برای محاسبه حال حاضر
     /// </summary>
-    /// <param name="birthday">birthday</param>
-    /// <returns>Age</returns>
+    /// <param name="birthday">تاریخ تولد</param>
+    /// <returns>سن</returns>
     public static int GetAge(this DateTime birthday)
     {
         var now = birthday.Kind.GetNow();
         return birthday.GetAge(now);
     }
+
     /// <summary>
-    /// Get the special time component of this place
+    /// بخش زمانی خاص این مکان را دریافت کن
     /// </summary>
     public static DateTime GetDateTimeOffsetPart(
         this DateTimeOffset dateTimeOffset,
@@ -107,10 +114,10 @@ public static class DateTimeUtils
     }
 
     /// <summary>
-    /// Returns the current time according to the time type
+    /// زمان فعلی بر اساس نوع زمان برگرداند
     /// </summary>
-    /// <param name="dataDateTimeKind">Input time type</param>
-    /// <returns>Now</returns>
+    /// <param name="dataDateTimeKind">نوع زمان ورودی</param>
+    /// <returns>الآن</returns>
     public static DateTime GetNow(this DateTimeKind dataDateTimeKind)
     {
         switch (dataDateTimeKind)
@@ -121,8 +128,9 @@ public static class DateTimeUtils
                 return DateTime.Now;
         }
     }
+
     /// <summary>
-    /// Conversion of the time zone of this place to the time zone of Iran
+    /// تبدیل زمان منطقه محلی به زمان منطقه ایران
     /// </summary>
     public static DateTimeOffset ToIranTimeZoneDateTimeOffset(this DateTimeOffset dateTimeOffset)
     {
@@ -130,7 +138,7 @@ public static class DateTimeUtils
     }
 
     /// <summary>
-    /// Conversion of the time zone of this place to the time zone of Iran
+    /// تبدیل زمان منطقه محلی به زمان منطقه ایران
     /// </summary>
     public static DateTime ToIranTimeZoneDateTime(this DateTime dateTime)
     {
@@ -139,27 +147,29 @@ public static class DateTimeUtils
     }
 
     /// <summary>
-    /// Converts a given <see cref="DateTime"/> to milliseconds from Epoch.
+    /// یک <see cref="DateTime"/> مورد نظر را به میلی ثانیه‌ها از زمان شروع (Epoch) تبدیل می‌کند.
     /// </summary>
-    /// <param name="dateTime">A given <see cref="DateTime"/></param>
-    /// <returns>Milliseconds since Epoch</returns>
+    /// <param name="dateTime">یک <see cref="DateTime"/> مورد نظر</param>
+    /// <returns>میلی ثانیه‌ها از زمان شروع (Epoch)</returns>
     public static long ToEpochMilliseconds(this DateTime dateTime)
     {
         return (long)dateTime.ToUniversalTime().Subtract(Epoch).TotalMilliseconds;
     }
 
+
     /// <summary>
-    /// Converts a given <see cref="DateTime"/> to seconds from Epoch.
+    /// یک <see cref="DateTime"/> مورد نظر را به ثانیه‌ها از زمان شروع (Epoch) تبدیل می‌کند.
     /// </summary>
-    /// <param name="dateTime">A given <see cref="DateTime"/></param>
-    /// <returns>The Unix time stamp</returns>
+    /// <param name="dateTime">یک <see cref="DateTime"/> مورد نظر</param>
+    /// <returns>تایم‌stamp سرور خنک‌مدت (Unix)</returns>
     public static long ToEpochSeconds(this DateTime dateTime)
     {
         return dateTime.ToEpochMilliseconds() / 1000;
     }
 
+
     /// <summary>
-    /// Checks the given date is between the two provided dates
+    /// بررسی می‌کند آیا تاریخ مورد نظر بین دو تاریخ ارائه شده قرار دارد
     /// </summary>
     public static bool IsBetween(this DateTime date, DateTime startDate, DateTime endDate, bool compareTime = false)
     {
@@ -167,15 +177,16 @@ public static class DateTimeUtils
     }
 
     /// <summary>
-    /// Returns whether the given date is the last day of the month
+    /// بررسی می‌کند آیا تاریخ مورد نظر آخر روز ماه است
     /// </summary>
     public static bool IsLastDayOfTheMonth(this DateTime dateTime)
     {
         return dateTime == new DateTime(dateTime.Year, dateTime.Month, 1).AddMonths(1).AddDays(-1);
     }
 
+
     /// <summary>
-    /// Returns whether the given date falls in a weekend
+    /// بررسی می‌کند آیا تاریخ مورد نظر هفته‌ای است (شنبه یا جمعه)
     /// </summary>
     public static bool IsWeekend(this DateTime value)
     {
@@ -183,7 +194,7 @@ public static class DateTimeUtils
     }
 
     /// <summary>
-    /// Determines if a given year is a LeapYear or not.
+    /// تعیین می‌کند سال مورد نظر یک سال قابل دستشدن (لپ‌عام) است یا خیر.
     /// </summary>
     public static bool IsLeapYear(this DateTime value)
     {
@@ -191,10 +202,10 @@ public static class DateTimeUtils
     }
 
     /// <summary>
-    /// Converts a DateTime to a DateTimeOffset
+    /// تبدیل یک DateTime به DateTimeOffset
     /// </summary>
-    /// <param name="dt">Source DateTime.</param>
-    /// <param name="offset">Offset</param>
+    /// <param name="dt">منبع DateTime.</param>
+    /// <param name="offset">اختلاف زمانی</param>
     public static DateTimeOffset ToDateTimeOffset(this DateTime dt, TimeSpan offset)
     {
         if (dt == DateTime.MinValue)
@@ -204,12 +215,12 @@ public static class DateTimeUtils
     }
 
     /// <summary>
-    /// Converts a DateTime to a DateTimeOffset
+    /// تبدیل یک DateTime به DateTimeOffset
     /// </summary>
-    /// <param name="dt">Source DateTime.</param>
-    /// <param name="offsetInHours">Offset</param>
+    /// <param name="dt">مقدار DateTime مبدأ.</param>
+    /// <param name="offsetInHours">اختلاف زمانی به ساعت (به صورت عددی)</param>
+    /// <returns>DateTimeOffset با اعمال اختلاف زمانی</returns>
     public static DateTimeOffset ToDateTimeOffset(this DateTime dt, double offsetInHours = 0)
         => dt.ToDateTimeOffset(offsetInHours == 0 ? TimeSpan.Zero : TimeSpan.FromHours(offsetInHours));
 
-    //MonthToDayCount(
 }

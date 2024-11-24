@@ -1,6 +1,4 @@
-﻿using MediatR.Extensions.FluentValidation.AspNetCore;
-
-namespace Base.EndPoints.Web.Extensions.DependencyInjection;
+﻿namespace Base.EndPoints.Web.Extensions.DependencyInjection;
 
 public static class Extensions
 {
@@ -15,6 +13,10 @@ public static class Extensions
             .AddCustomDependencies(assemblies)
             .AddArdalis()
             .AddMediatR(assemblies);
+        services.AddBaseAutoMapperProfiles(option =>
+        {
+            option.AssemblyNamesForLoadProfiles = "Base";
+        });
         return services;
     }
 

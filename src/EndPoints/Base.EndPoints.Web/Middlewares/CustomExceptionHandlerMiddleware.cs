@@ -1,4 +1,6 @@
-﻿namespace Base.EndPoints.Web.Middlewares;
+﻿using Base.Utility.Extensions;
+
+namespace Base.EndPoints.Web.Middlewares;
 
 public static class CustomExceptionHandlerMiddlewareExtensions
 {
@@ -47,11 +49,6 @@ public class CustomExceptionHandlerMiddleware(
             SetResponse(exception, HttpStatusCode.NotFound, ApiResultStatusCode.NotFound);
             await WriteToResponseAsync();
         }
-        catch (LogicException exception)
-        {
-            SetResponse(exception, HttpStatusCode.Conflict, ApiResultStatusCode.Conflict);
-            await WriteToResponseAsync();
-        }
         catch (DatabaseExceptions exception)
         {
             SetResponse(exception, exception.HttpStatusCode, exception.ApiStatusCode);
@@ -75,21 +72,6 @@ public class CustomExceptionHandlerMiddleware(
         catch (UnauthorizedAccessException exception)
         {
             SetResponse(exception, HttpStatusCode.Unused, ApiResultStatusCode.Unused);
-            await WriteToResponseAsync();
-        }
-        catch (NullSampleException exception)
-        {
-            SetResponse(exception, HttpStatusCode.NotModified, ApiResultStatusCode.NullSampleException);
-            await WriteToResponseAsync();
-        }
-        catch (AccessException exception)
-        {
-            SetResponse(exception, HttpStatusCode.NotAcceptable, ApiResultStatusCode.NotAcceptable);
-            await WriteToResponseAsync();
-        }
-        catch (ProjectException exception)
-        {
-            SetResponse(exception, exception.HttpStatusCode, exception.ApiStatusCode);
             await WriteToResponseAsync();
         }
         catch (SecurityTokenException exception)
@@ -142,7 +124,7 @@ public class CustomExceptionHandlerMiddleware(
             context.Response.ContentType = "application/json";
             if (string.IsNullOrWhiteSpace(message))
             {
-                message = apiStatusCode.ToDisplay();
+                message = apiStatusCode.GetEnumDescription();
             }
             var data = message;
             await context.Response.WriteAsync(JsonSerializer.Serialize(data));

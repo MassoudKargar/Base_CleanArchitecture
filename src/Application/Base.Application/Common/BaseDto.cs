@@ -1,4 +1,4 @@
-﻿using Base.Extensions.ObjectMappers.AutoMapper.Profiles;
+﻿using Base.Extensions.ObjectMappers.AutoMapper.Services;
 
 namespace Base.Application.Common;
 public abstract class BaseDto<TDto, TEntity, TKey> : IHaveCustomMapping

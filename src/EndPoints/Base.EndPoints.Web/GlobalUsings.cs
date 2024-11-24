@@ -35,6 +35,8 @@ global using Ardalis.Result.AspNetCore;
 global using AutoMapper;
 global using Base.Application.Common;
 global using Base.EndPoints.Web.Attributes;
+global using Base.Extensions.DependencyInjection;
 global using Base.Utility.Base;
 global using MediatR;
+global using MediatR.Extensions.FluentValidation.AspNetCore;
 global using Microsoft.AspNetCore.Hosting;

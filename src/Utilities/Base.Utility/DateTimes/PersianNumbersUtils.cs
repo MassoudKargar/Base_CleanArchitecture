@@ -1,11 +1,12 @@
 ﻿namespace Base.Utility.DateTimes;
 /// <summary>
-/// Converts English digits of a given number to their equivalent Persian digits.
+/// ارقام انگلیسی یک عدد داده شده را به معادل آن‌ها در تعداد فارسی تبدیل می‌کند.
 /// </summary>
 public static class PersianNumbersUtils
 {
+
     /// <summary>
-    /// Converts English digits of a given number to their equivalent Persian digits.
+    /// ارقام انگلیسی یک عدد داده شده را به معادل آن‌ها در تعداد فارسی تبدیل می‌کند.
     /// </summary>
     public static string ToPersianNumbers(this int number, string format = "")
     {
@@ -14,16 +15,15 @@ public static class PersianNumbersUtils
     }
 
     /// <summary>
-    /// Converts English digits of a given number to their equivalent Persian digits.
+    /// ارقام انگلیسی یک عدد داده شده را به معادل آن‌ها در تعداد فارسی تبدیل می‌کند.
     /// </summary>
     public static string ToPersianNumbers(this long number, string format = "")
     {
         return (!string.IsNullOrEmpty(format) ?
                 number.ToString(format) : number.ToString(CultureInfo.InvariantCulture)).ToPersianNumbers();
     }
-
     /// <summary>
-    /// Converts English digits of a given number to their equivalent Persian digits.
+    /// ارقام انگلیسی یک عدد داده شده را به معادل آن‌ها در تعداد فارسی تبدیل می‌کند.
     /// </summary>
     public static string ToPersianNumbers(this int? number, string format = "")
     {
@@ -33,7 +33,7 @@ public static class PersianNumbersUtils
     }
 
     /// <summary>
-    /// Converts English digits of a given number to their equivalent Persian digits.
+    /// ارقام انگلیسی یک عدد داده شده را به معادل آن‌ها در تعداد فارسی تبدیل می‌کند.
     /// </summary>
     public static string ToPersianNumbers(this long? number, string format = "")
     {
@@ -43,9 +43,9 @@ public static class PersianNumbersUtils
     }
 
     /// <summary>
-    /// Converts English digits of a given string to their equivalent Persian digits.
+    /// ارقام انگلیسی یک رشته داده شده را به معادل آن‌ها در تعداد فارسی تبدیل می‌کند.
     /// </summary>
-    /// <param name="data">English number</param>
+    /// <param name="data">عدد انگلیسی</param>
     /// <returns></returns>
     public static string ToPersianNumbers(this string data)
     {
@@ -66,10 +66,11 @@ public static class PersianNumbersUtils
             .Replace(".", ",");
     }
 
+
     /// <summary>
-    /// Converts Persian and Arabic digits of a given string to their equivalent English digits.
+    /// ارقام فارسی و عربی یک رشته داده شده را به معادل آن‌ها در تعداد انگلیسی تبدیل می‌کند.
     /// </summary>
-    /// <param name="data">Persian number</param>
+    /// <param name="data">عدد فارسی</param>
     /// <returns></returns>
     public static string ToEnglishNumbers(this string data)
     {
@@ -98,4 +99,3 @@ public static class PersianNumbersUtils
                ;
     }
 }
-

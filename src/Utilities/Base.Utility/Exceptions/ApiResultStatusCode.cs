@@ -1,4 +1,4 @@
-﻿namespace Base.Utility.Base;
+﻿namespace Base.Utility.Exceptions;
 
 public enum ApiResultStatusCode
 {

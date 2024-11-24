@@ -77,7 +77,7 @@ public static class PersianCulture
 
 
     private static readonly Lazy<CultureInfo> _cultureInfoBuilder =
-                new Lazy<CultureInfo>(getPersianCulture, LazyThreadSafetyMode.ExecutionAndPublication);
+                new Lazy<CultureInfo>(GetPersianCulture, LazyThreadSafetyMode.ExecutionAndPublication);
 
     /// <summary>
     /// وهله‌ی یکتای فرهنگ فارسی سفارشی سازی شده
@@ -85,24 +85,25 @@ public static class PersianCulture
     public static CultureInfo Instance { get; } = _cultureInfoBuilder.Value;
 
     /// <summary>
-    /// Returns the day-of-month part of this <see cref="DateTime"/> localized in Persian calendar.
+    /// بخش روز از ماه را از این <see cref="DateTime"/> در تقویم فارسی برمی‌گرداند.
     /// </summary>
-    /// <param name="dateTime">The <see cref="DateTime"/> to extend.</param>
-    /// <returns>An integer between 1 and 31 representing the day-of-month part of this <see cref="DateTime"/>.</returns>
+    /// <param name="dateTime">این <see cref="DateTime"/> را توسعه دارد.</param>
+    /// <returns>عددی بین ۱ و ۳۱ که مقدار بخش روز از ماه این <see cref="DateTime"/> را نشان می‌دهد.</returns>
     public static int GetPersianDayOfMonth(this DateTime dateTime)
     {
         return Instance.DateTimeFormat.Calendar.GetDayOfMonth(dateTime);
     }
 
     /// <summary>
-    /// Returns the month part of this <see cref="DateTime"/> localized in Persian calendar.
+    /// بخش ماه از این <see cref="DateTime"/> در تقویم فارسی برمی‌گرداند.
     /// </summary>
-    /// <param name="dateTime">The <see cref="DateTime"/> to extend.</param>
-    /// <returns>An integer between 1 and 12 representing the month part of this <see cref="DateTime"/>.</returns>
+    /// <param name="dateTime">این <see cref="DateTime"/> را توسعه دارد.</param>
+    /// <returns>عددی بین ۱ و ۱۲ که مقدار بخش ماه این <see cref="DateTime"/> را نشان می‌دهد.</returns>
     public static int GetPersianMonth(this DateTime dateTime)
     {
         return Instance.DateTimeFormat.Calendar.GetMonth(dateTime);
     }
+
 
     /// <summary>
     /// عدد به حروف روزهای شمسی
@@ -290,7 +291,7 @@ public static class PersianCulture
     /// <summary>
     /// اصلاح تقویم فرهنگ فارسی
     /// </summary>
-    private static CultureInfo getPersianCulture()
+    private static CultureInfo GetPersianCulture()
     {
         var persianCulture = new CultureInfo("fa-IR")
         {

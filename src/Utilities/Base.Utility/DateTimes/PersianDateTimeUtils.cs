@@ -95,19 +95,19 @@ public static class PersianDateTimeUtils
             return null;
         }
 
-        var day = getDay(splitedDate[2]);
+        var day = GetDay(splitedDate[2]);
         if (!day.HasValue)
         {
             return null;
         }
 
-        var month = getMonth(splitedDate[1]);
+        var month = GetMonth(splitedDate[1]);
         if (!month.HasValue)
         {
             return null;
         }
 
-        var year = getYear(splitedDate[0]);
+        var year = GetYear(splitedDate[0]);
         if (!year.HasValue)
         {
             return null;
@@ -394,34 +394,34 @@ public static class PersianDateTimeUtils
         return dt.GetDateTimeOffsetPart(dateTimeOffsetPart).ToShortPersianDateTimeString();
     }
 
-    private static int? getDay(string part)
+    private static int? GetDay(string part)
     {
-        var day = part.toNumber();
+        var day = part.ToNumber();
         if (!day.Item1) return null;
         var pDay = day.Item2;
         if (pDay == 0 || pDay > 31) return null;
         return pDay;
     }
 
-    private static int? getMonth(string part)
+    private static int? GetMonth(string part)
     {
-        var month = part.toNumber();
+        var month = part.ToNumber();
         if (!month.Item1) return null;
         var pMonth = month.Item2;
         if (pMonth == 0 || pMonth > 12) return null;
         return pMonth;
     }
 
-    private static int? getYear(string part)
+    private static int? GetYear(string part)
     {
-        var year = part.toNumber();
+        var year = part.ToNumber();
         if (!year.Item1) return null;
         var pYear = year.Item2;
         if (part.Length == 2) pYear += 1300;
         return pYear;
     }
 
-    private static Tuple<bool, int> toNumber(this string data)
+    private static Tuple<bool, int> ToNumber(this string data)
     {
         int number;
         bool result = int.TryParse(data, out number);
