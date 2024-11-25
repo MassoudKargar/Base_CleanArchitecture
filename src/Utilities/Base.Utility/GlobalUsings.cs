@@ -9,4 +9,3 @@ global using System.Linq.Expressions;
 global using System.Net;
 global using System.Reflection;
 global using System.Text.RegularExpressions;
-global using Base.Utility.Base;

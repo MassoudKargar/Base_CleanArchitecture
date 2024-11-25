@@ -1,4 +1,6 @@
-﻿namespace Base.EndPoints.Web.Controllers;
+﻿using Microsoft.AspNetCore.OData.Query;
+
+namespace Base.EndPoints.Web.Controllers;
 
 public class GenericController<TEntity, TId, TListViewModel, TUpdateViewModel, TInsertViewModel, TSelectViewModel>(ILogger logger) : BaseController
     where TEntity : BaseEntity<TId>, new()
@@ -11,10 +13,12 @@ public class GenericController<TEntity, TId, TListViewModel, TUpdateViewModel, T
     protected IMediator Mediator => HttpContext.MediatRDispatcher();
 
     [HttpGet]
-    public Task<IEnumerable<TListViewModel>> GetAllAsync(CancellationToken cancellationToken)
+    [EnableQuery]
+    public Task<IEnumerable<TListViewModel>> GetAllAsync(ODataQueryOptions<TEntity> queryOptions, CancellationToken cancellationToken)
     {
         logger.LogInformation($"GetAll {typeof(TEntity).FullName}");
-        var result = Mediator.Send(new GenericQuery<TId, IEnumerable<TListViewModel>>(default, GenericAction.GetAll), cancellationToken);
+        var result = Mediator.Send(new GenericQuery<TId, TEntity, IEnumerable<TListViewModel>>
+            (default, queryOptions, GenericAction.GetAll), cancellationToken);
         return result;
     }
 
@@ -23,7 +27,7 @@ public class GenericController<TEntity, TId, TListViewModel, TUpdateViewModel, T
     {
 
         logger.LogInformation($"GetById {typeof(TEntity).FullName}");
-        var result = Mediator.Send(new GenericQuery<TId, TSelectViewModel>(id, GenericAction.GetById), cancellationToken);
+        var result = Mediator.Send(new GenericQuery<TId, TSelectViewModel, TSelectViewModel>(id,null, GenericAction.GetById), cancellationToken);
         return result;
     }
 

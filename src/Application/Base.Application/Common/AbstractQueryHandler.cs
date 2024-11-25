@@ -1,10 +1,17 @@
-﻿namespace Base.Application.Common;
+﻿using System.Linq.Expressions;
 
-public abstract class AbstractQueryHandler<TId, TRequest, TResponse, TEntity>(IGenericRepository<TEntity, TId> service, IMapper mapper) :
-    IGenericQueryHandler<TId,TRequest, TResponse>
+using Ardalis.Result;
+
+using Microsoft.AspNetCore.OData.Query;
+
+namespace Base.Application.Common;
+
+public abstract class AbstractQueryHandler<TId, TQuery, TRequest, TResponse, TEntity>(IGenericRepository<TEntity, TId> service, IMapper mapper) :
+    IGenericQueryHandler<TId, TQuery, TRequest, TResponse>
     where TId : struct
-    where TRequest : GenericQuery<TId, TResponse>
+    where TRequest : GenericQuery<TId, TQuery, TResponse>
     where TEntity : BaseEntity<TId>, new()
+    where TResponse : class
 {
     private IGenericRepository<TEntity, TId> Service { get; } = service;
     private IMapper Mapper { get; } = mapper;
@@ -14,17 +21,36 @@ public abstract class AbstractQueryHandler<TId, TRequest, TResponse, TEntity>(IG
         switch (request.GenericActionData)
         {
             case GenericAction.GetAll:
-            {
-                var getAllData = Service.GetAllAsync(true, cancellationToken);
-                var getAllResult = Mapper.Map<IQueryable<TEntity>, TResponse>(getAllData);
-                return getAllResult;
-            }
+                {
+                    var tDataQuerySettings = new ODataQuerySettings()
+                    {
+                        
+                    };
+                    var getAllData = Service.GetAllAsync(true, cancellationToken);
+                    if (request.QueryOptions?.OrderBy != null)
+                    {
+                        getAllData = request.QueryOptions.OrderBy.ApplyTo(getAllData);
+                    }
+                    if (request.QueryOptions?.Skip != null)
+                    {
+                        getAllData = request.QueryOptions.Skip.ApplyTo(getAllData, tDataQuerySettings);
+                    }
+
+                    if (request.QueryOptions?.Top != null)
+                    {
+                        getAllData = request.QueryOptions.Top.ApplyTo(getAllData, tDataQuerySettings);
+                    }
+
+                    var getAllResult = Mapper.Map<IQueryable<TEntity>, TResponse>(getAllData);
+                    return getAllResult;
+
+                }
             case GenericAction.GetById:
-            {
-                var baseResult = await Service.GetAsync(request.Id, cancellationToken);
-                var result = Mapper.Map<TEntity, TResponse>(baseResult);
-                return result;
-            }
+                {
+                    var baseResult = await Service.GetAsync(request.Id, cancellationToken);
+                    var result = Mapper.Map<TEntity, TResponse>(baseResult);
+                    return result;
+                }
             default:
                 return default;
         }

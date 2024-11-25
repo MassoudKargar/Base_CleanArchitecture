@@ -2,7 +2,6 @@
 
 public static class TypeExtensions
 {
-
     public static bool IsSubclassOfRawGeneric(this Type toCheck, Type generic)
     {
         while (toCheck != null && toCheck != typeof(object))

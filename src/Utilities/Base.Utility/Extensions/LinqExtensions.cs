@@ -2,6 +2,14 @@
 
 public static class LinqExtensions
 {
+    /// <summary>
+    /// مرتب‌سازی نتایج استعلام بر اساس یک فیلد مشخص.
+    /// </summary>
+    /// <typeparam name="T">نوع اлемент‌های استعلام</typeparam>
+    /// <param name="q">استعلام جمع‌آوری شده</param>
+    /// <param name="SortField">فیلد براساس که مرتب‌سازی می‌شود</param>
+    /// <param name="Ascending">اگر برابر با true، مرتب‌سازی صعودی خواهد بود؛ در غیر این صورت نزولی</param>
+    /// <returns>استعلام مرتب شده</returns>
     public static IQueryable<T> OrderByField<T>(this IQueryable<T> q, string SortField, bool Ascending)
     {
         var param = Expression.Parameter(typeof(T), "p");
@@ -13,9 +21,14 @@ public static class LinqExtensions
         return q.Provider.CreateQuery<T>(mce);
     }
 
+    /// <summary>
+    /// یک لیست از обiect‌ها را به یک DataTable تبدیل می‌کند.
+    /// </summary>
+    /// <typeparam name="T">نوع آیتم‌های لیست</typeparam>
+    /// <param name="list">لیست آیتم‌های</param>
+    /// <returns>DataTable حاوی داده‌های از لیست</returns>
     public static DataTable ToDataTable<T>(this List<T> list)
     {
-
         DataTable dataTable = new(typeof(T).Name);
 
         PropertyInfo[] Props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
@@ -38,11 +51,24 @@ public static class LinqExtensions
         return dataTable;
     }
 
+    /// <summary>
+    /// یک DataTable را به یک لیست از обiect‌ها تبدیل می‌کند.
+    /// </summary>
+    /// <typeparam name="T">نوع آیتم‌های لیست</typeparam>
+    /// <param name="dt">DataTable</param>
+    /// <returns>لیست حاوی داده‌های از DataTable</returns>
     public static List<T> ToList<T>(this DataTable dt)
     {
         return (from DataRow row in dt.Rows select GetItem<T>(row)).ToList();
     }
-    private static T GetItem<T>(DataRow dr)
+
+    /// <summary>
+    /// یک سطر داده (DataRow) را به یک ابجکت از نوع T تبدیل می‌کند.
+    /// </summary>
+    /// <typeparam name="T">نوع ابجکت</typeparam>
+    /// <param name="dr">DataRow</param>
+    /// <returns>ابجکت از نوع T حاوی داده‌های از سطر داده</returns>
+    public static T GetItem<T>(this DataRow dr)
     {
         Type genericType = typeof(T);
         T obj = Activator.CreateInstance<T>();
@@ -50,36 +76,39 @@ public static class LinqExtensions
         {
             PropertyInfo? property = genericType.GetProperties().FirstOrDefault(p => p.Name == column.ColumnName);
             if (property is not null)
-                property.SetValue(obj, Convert.ChangeType(dr[column.ColumnName], property.PropertyType), null);
+                property.SetValue(obj, Convert.ChangeType(dr[column], property.PropertyType), null);
         }
         return obj;
     }
 
+
     /// <summary>
-    /// Filters a <see cref="IQueryable{T}"/> by given predicate if given condition is true.
+    /// اگر شرط داده شده صحیح باشد، یک IQueryable<T> را با استفاده از پیش‌فرضیت مورد نظر فیلتر می‌کند.
     /// </summary>
-    /// <param name="query">Queryable to apply filtering</param>
-    /// <param name="condition">A boolean value</param>
-    /// <param name="predicate">Predicate to filter the query</param>
-    /// <returns>Filtered or not filtered query based on <paramref name="condition"/></returns>
+    /// <param name="query">IQueryable<T> که بر روی آن فیلتر اعمال می‌شود</param>
+    /// <param name="condition">مقدار بولینی</param>
+    /// <param name="predicate">پیش‌فرضیت برای فیلتر کردن</param>
+    /// <returns>IQueryable<T> فیلتر شده یا نفی از حالت فیلتر شده با توجه به مقدار شرط</returns>
     public static IQueryable<T> WhereIf<T>(this IQueryable<T> query, bool condition, Expression<Func<T, bool>> predicate)
     {
         return condition
-        ? query.Where(predicate)
-        : query;
+            ? query.Where(predicate)
+            : query;
     }
 
+
     /// <summary>
-    /// Filters a <see cref="IQueryable{T}"/> by given predicate if given condition is true.
+    /// اگر شرط داده شده صحیح باشد، یک IQueryable<T> را با استفاده از پیش‌فرضیت مورد نظر فیلتر می‌کند.
     /// </summary>
-    /// <param name="query">Queryable to apply filtering</param>
-    /// <param name="condition">A boolean value</param>
-    /// <param name="predicate">Predicate to filter the query</param>
-    /// <returns>Filtered or not filtered query based on <paramref name="condition"/></returns>
+    /// <param name="query">IQueryable<T> که بر روی آن فیلتر اعمال می‌شود</param>
+    /// <param name="condition">مقدار بولینی</param>
+    /// <param name="predicate">پیش‌فرضیت با پارامتر دوم به شکل (item, index) برای فیلتر کردن</param>
+    /// <returns>IQueryable<T> فیلتر شده یا نفی از حالت فیلتر شده با توجه به مقدار شرط</returns>
     public static IQueryable<T> WhereIf<T>(this IQueryable<T> query, bool condition, Expression<Func<T, int, bool>> predicate)
     {
         return condition
-        ? query.Where(predicate)
-        : query;
+            ? query.Where(predicate)
+            : query;
     }
+
 }

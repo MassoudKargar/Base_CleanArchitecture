@@ -1,8 +1,10 @@
 ﻿using MediatR;
 
+using Microsoft.AspNetCore.OData.Query;
+
 namespace Base.Application.Common;
 
-public class GenericCommand<TId,TViewModel, TResponse>(TId id,TViewModel model,GenericAction genericAction) : IRequest<TResponse>
+public class GenericCommand<TId, TViewModel, TResponse>(TId id, TViewModel model, GenericAction genericAction) : IRequest<TResponse>
     where TId : struct
 {
     public TId Id { get; } = id;
@@ -11,10 +13,11 @@ public class GenericCommand<TId,TViewModel, TResponse>(TId id,TViewModel model,G
 }
 
 
-public class GenericQuery<TId, TResponse>(TId id, GenericAction genericAction) : IRequest<TResponse>
+public class GenericQuery<TId, TQuery, TResponse>(TId id, ODataQueryOptions<TQuery>? queryOptions, GenericAction genericAction) : IRequest<TResponse>
     where TId : struct
 {
     public TId Id { get; } = id;
+    public ODataQueryOptions<TQuery>? QueryOptions { get; } = queryOptions;
     public GenericAction GenericActionData { get; } = genericAction;
 }
 public enum GenericAction : byte

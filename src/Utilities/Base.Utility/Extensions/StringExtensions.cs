@@ -8,9 +8,6 @@ public static class StringExtensions
     public const char ArabicKeChar = (char)1603;
     public const char PersianKeChar = (char)1705;
 
-
-
-
     public static string ApplyCorrectYeKe(this object data)
     {
         return data == null ? null : data.ToString().ApplyCorrectYeKe();
