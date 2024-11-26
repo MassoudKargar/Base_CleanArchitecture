@@ -18,6 +18,7 @@ var app = builder.Build();
 app.UseCustomExceptionHandler();
 app.UseSwaggerUI("Swagger");
 app.UseStatusCodePages();
+app.UseRateLimiter();
 app.UseStaticFiles();
 app.UseCors(delegate (CorsPolicyBuilder builder)
 {

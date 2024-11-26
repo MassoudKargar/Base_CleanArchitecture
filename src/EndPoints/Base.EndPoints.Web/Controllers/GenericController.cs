@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.OData.Query;
-
-namespace Base.EndPoints.Web.Controllers;
+﻿namespace Base.EndPoints.Web.Controllers;
 
 public class GenericController<TEntity, TId, TListViewModel, TUpdateViewModel, TInsertViewModel, TSelectViewModel>(ILogger logger) : BaseController
     where TEntity : BaseEntity<TId>, new()
@@ -13,11 +11,10 @@ public class GenericController<TEntity, TId, TListViewModel, TUpdateViewModel, T
     protected IMediator Mediator => HttpContext.MediatRDispatcher();
 
     [HttpGet]
-    [EnableQuery]
-    public Task<IEnumerable<TListViewModel>> GetAllAsync(ODataQueryOptions<TEntity> queryOptions, CancellationToken cancellationToken)
+    public async Task<IEnumerable<TListViewModel>> GetAllAsync(ODataQueryOptions<TEntity> queryOptions, CancellationToken cancellationToken)
     {
         logger.LogInformation($"GetAll {typeof(TEntity).FullName}");
-        var result = Mediator.Send(new GenericQuery<TId, TEntity, IEnumerable<TListViewModel>>
+        var result = await Mediator.Send(new GenericQuery<TId, TEntity, IEnumerable<TListViewModel>>
             (default, queryOptions, GenericAction.GetAll), cancellationToken);
         return result;
     }

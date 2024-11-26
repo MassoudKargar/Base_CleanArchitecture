@@ -1,10 +1,4 @@
-﻿using System.Linq.Expressions;
-
-using Ardalis.Result;
-
-using Microsoft.AspNetCore.OData.Query;
-
-namespace Base.Application.Common;
+﻿namespace Base.Application.BaseMediatR;
 
 public abstract class AbstractQueryHandler<TId, TQuery, TRequest, TResponse, TEntity>(IGenericRepository<TEntity, TId> service, IMapper mapper) :
     IGenericQueryHandler<TId, TQuery, TRequest, TResponse>
@@ -22,10 +16,8 @@ public abstract class AbstractQueryHandler<TId, TQuery, TRequest, TResponse, TEn
         {
             case GenericAction.GetAll:
                 {
-                    var tDataQuerySettings = new ODataQuerySettings()
-                    {
-                        
-                    };
+                    var tDataQuerySettings = new ODataQuerySettings();
+
                     var getAllData = Service.GetAllAsync(true, cancellationToken);
                     if (request.QueryOptions?.OrderBy != null)
                     {
@@ -39,6 +31,10 @@ public abstract class AbstractQueryHandler<TId, TQuery, TRequest, TResponse, TEn
                     if (request.QueryOptions?.Top != null)
                     {
                         getAllData = request.QueryOptions.Top.ApplyTo(getAllData, tDataQuerySettings);
+                    }
+                    if (request.QueryOptions?.Filter != null)
+                    {
+                        getAllData = request.QueryOptions.Filter.ApplyTo(getAllData, tDataQuerySettings) as IQueryable<TEntity>;
                     }
 
                     var getAllResult = Mapper.Map<IQueryable<TEntity>, TResponse>(getAllData);

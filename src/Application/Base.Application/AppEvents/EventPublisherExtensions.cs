@@ -1,7 +1,4 @@
-﻿using Base.Core.Contracts.AppEvents;
-using Base.Core.Domains.AppEvents;
-
-namespace Base.Application.Common.AppEvents;
+﻿namespace Base.Application.AppEvents;
 
 /// <summary>
 /// Event publisher extensions

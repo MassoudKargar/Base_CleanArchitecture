@@ -1,6 +1,4 @@
-﻿using Base.Utility.Extensions;
-
-namespace Base.EndPoints.Web.Middlewares;
+﻿namespace Base.EndPoints.Web.Middlewares;
 
 public static class CustomExceptionHandlerMiddlewareExtensions
 {

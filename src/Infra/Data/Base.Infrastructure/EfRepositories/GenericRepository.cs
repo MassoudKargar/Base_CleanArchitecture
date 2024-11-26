@@ -1,10 +1,4 @@
-﻿using Base.Infrastructure.SqlContext;
-
-using Microsoft.EntityFrameworkCore;
-
-using System.Linq;
-
-namespace Base.Infrastructure.EfRepositories;
+﻿namespace Base.Infrastructure.EfRepositories;
 
 public class GenericRepository<TEntity, TId>
     : IGenericRepository<TEntity, TId>, IUnitOfWork, ITransientLifetime
