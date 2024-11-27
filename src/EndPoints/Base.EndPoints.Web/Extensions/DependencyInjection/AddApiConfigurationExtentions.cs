@@ -6,8 +6,7 @@ public static class AddApiConfigurationExtensions
 {
     public static IServiceCollection AddBaseApiCore(this IServiceCollection services, params string[] assemblyNamesForLoad)
     {
-        services.AddControllers().AddOData(
-            options => options.EnableQueryFeatures());
+        services.AddControllers().AddOData(options => options.EnableQueryFeatures());
         services.AddBaseDependencies(assemblyNamesForLoad);
         return services;
     }

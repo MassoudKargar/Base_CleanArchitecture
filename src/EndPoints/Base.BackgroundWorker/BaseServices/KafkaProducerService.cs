@@ -1,41 +1,35 @@
-﻿using System.Text;
-using System.Threading;
+﻿namespace Base.BackgroundWorker.BaseServices;
 
-namespace Base.BackgroundWorker.BaseServices;
-
-internal abstract class KafkaProducerService<TValue> : BackgroundService
-{ 
-    private IProducer<string, TValue> _producer;
-    private readonly ILogger<KafkaProducerService<TValue>> _logger;
+public abstract class KafkaProducerService<TKey, TValue>
+{
+    private IProducer<TKey, TValue> _producer;
     private readonly KafkaConfiguration _kafkaConfiguration;
-    protected KafkaProducerService(ILogger<KafkaProducerService<TValue>> logger, IOptions<KafkaConfiguration> kafkaConfigurationOptions)
+    private ProducerConfig config;
+    protected KafkaProducerService(IOptions<KafkaConfiguration> kafkaConfigurationOptions)
     {
-        _logger = logger ?? throw new ArgumentException(nameof(logger));
-        _kafkaConfiguration = kafkaConfigurationOptions?.Value ?? throw new ArgumentException(nameof(kafkaConfigurationOptions));
-
-        Init();
+        _kafkaConfiguration = kafkaConfigurationOptions.Value;
+        config = new ProducerConfig()
+        {
+            BootstrapServers = _kafkaConfiguration.Brokers
+        };
+        _producer = new ProducerBuilder<TKey, TValue>(config).Build();
     }
-    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    public async Task ExecuteAsync(TKey key, TValue value, CancellationToken stoppingToken)
     {
         if (!stoppingToken.IsCancellationRequested)
         {
             try
             {
-                _logger.LogInformation("Kafka Producer Service has started.");
-                var value = await Produce(stoppingToken);
-                var msg = new Message<string, TValue>
+                var msg = new Message<TKey, TValue>
                 {
-                    Key = _kafkaConfiguration.Key,
+                    Key = key,
                     Value = value
                 };
-                await _producer.ProduceAsync(_kafkaConfiguration.Topic, msg, stoppingToken);
+                await _producer.ProduceAsync(_kafkaConfiguration.OutputTopic, msg, stoppingToken);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, ex.Message);
             }
         }
     }
-    protected abstract Task<TValue> Produce(CancellationToken cancellationToken);
-    protected abstract void Init();
 }

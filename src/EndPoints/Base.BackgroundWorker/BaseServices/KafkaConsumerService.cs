@@ -1,6 +1,6 @@
 ﻿namespace Base.BackgroundWorker.BaseServices;
 
-internal abstract class KafkaConsumerService<TKey,TValue> : BackgroundService
+public abstract class KafkaConsumerService<TKey,TValue> : BackgroundService
 {
     private readonly ILogger<KafkaConsumerService<TKey, TValue>> _logger;
     private readonly KafkaConfiguration _kafkaConfiguration;
@@ -10,12 +10,20 @@ internal abstract class KafkaConsumerService<TKey,TValue> : BackgroundService
     {
         _logger = logger ?? throw new ArgumentException(nameof(logger));
         _kafkaConfiguration = kafkaConfigurationOptions?.Value ?? throw new ArgumentException(nameof(kafkaConfigurationOptions));
+        var consumerConfig = new ConsumerConfig
+        {
+            BootstrapServers = _kafkaConfiguration.Brokers, // Replace with your Kafka broker address
+            GroupId = _kafkaConfiguration.ConsumerGroup,
+            AutoOffsetReset = AutoOffsetReset.Earliest,
+            
+        };
+        _consumer = new ConsumerBuilder<TKey, TValue>(consumerConfig).Build();
         Init();
     }
 
     public override Task StartAsync(CancellationToken cancellationToken)
     {
-        _consumer.Subscribe(_kafkaConfiguration.Topic);
+        _consumer.Subscribe(_kafkaConfiguration.InputTopic);
         return base.StartAsync(cancellationToken);
     }
 
@@ -26,10 +34,10 @@ internal abstract class KafkaConsumerService<TKey,TValue> : BackgroundService
             try
             {
                 _logger.LogInformation("Kafka Consumer Service has started.");
-                _consumer.Subscribe(_kafkaConfiguration.Topic);
+                _consumer.Subscribe(_kafkaConfiguration.InputTopic);
                 var consumeResult = _consumer.Consume(stoppingToken);
                 if (consumeResult?.Message == null) continue;
-                if (consumeResult.Topic.Equals(_kafkaConfiguration.Topic))
+                if (consumeResult.Topic.Equals(_kafkaConfiguration.InputTopic))
                 {
                     await Consume(consumeResult.Message.Value, stoppingToken);
                 }

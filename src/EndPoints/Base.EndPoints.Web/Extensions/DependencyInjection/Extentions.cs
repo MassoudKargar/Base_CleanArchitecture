@@ -1,6 +1,4 @@
-﻿using System.Threading.RateLimiting;
-
-namespace Base.EndPoints.Web.Extensions.DependencyInjection;
+﻿namespace Base.EndPoints.Web.Extensions.DependencyInjection;
 
 public static class Extensions
 {
@@ -11,14 +9,13 @@ public static class Extensions
 
         services.AddBaseDataAccess(assemblies)
             .AddBaseUtilityServices()
-            .AddCustomDependencies(assemblies)
             .AddArdalis()
+            .AddCustomDependencies(assemblies)
             .AddMediatR(assemblies);
         services.AddBaseAutoMapperProfiles(option =>
         {
             option.AssemblyNamesForLoadProfiles = "Base";
         });
-        services.AddRateLimitSetting();
         return services;
     }
 
@@ -116,49 +113,5 @@ public static class Extensions
     {
         return assemblyName.Any(d => compilationLibrary.Name.Contains(d))
             || compilationLibrary.Dependencies.Any(d => assemblyName.Any(c => d.Name.Contains(c)));
-    }
-    public static void AddRateLimitSetting(this IServiceCollection services)
-    {
-        services.AddRateLimiter(options =>
-        {
-            //options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(httpContext =>
-            //    RateLimitPartition.GetFixedWindowLimiter(
-            //        partitionKey: httpContext.User.Identity?.Name ?? httpContext.Request.Headers.Host.ToString(),
-            //        factory: partition => new FixedWindowRateLimiterOptions
-            //        {
-            //            AutoReplenishment = true,
-            //            PermitLimit = 100,
-            //            QueueLimit = 0,
-            //            Window = TimeSpan.FromMinutes(1)
-            //        }));
-
-            //options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(httpContext =>
-            //    RateLimitPartition.GetSlidingWindowLimiter(
-            //        partitionKey: httpContext.Connection.RemoteIpAddress?.ToString() ??
-            //                      httpContext.User.Identity?.Name ??
-            //                      httpContext.Request.Headers.Host.ToString(),
-            //        factory: partition => new SlidingWindowRateLimiterOptions
-            //        {
-            //            AutoReplenishment = true,
-            //            PermitLimit = 1_000_000,
-            //            QueueLimit = 1_000_000,
-            //            Window = TimeSpan.FromMinutes(1),
-            //            SegmentsPerWindow = 4,
-            //            QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-            //        }));
-
-            options.OnRejected = (context, cancellationToken) =>
-            {
-                if (context.Lease.TryGetMetadata(MetadataName.RetryAfter, out var retryAfter))
-                {
-                    context.HttpContext.Response.Headers.RetryAfter = retryAfter.TotalSeconds.ToString();
-                }
-
-                context.HttpContext.Response.StatusCode = StatusCodes.Status429TooManyRequests;
-                context.HttpContext.Response.WriteAsync("Too many requests. Please try again later.");
-
-                return new ValueTask();
-            };
-        });
     }
 }
