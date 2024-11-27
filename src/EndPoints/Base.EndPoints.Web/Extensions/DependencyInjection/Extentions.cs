@@ -1,4 +1,6 @@
-﻿namespace Base.EndPoints.Web.Extensions.DependencyInjection;
+﻿using Base.Sample.BackgroundWorker.DependencyInjection;
+
+namespace Base.EndPoints.Web.Extensions.DependencyInjection;
 
 public static class Extensions
 {
@@ -10,6 +12,7 @@ public static class Extensions
         services.AddBaseDataAccess(assemblies)
             .AddBaseUtilityServices()
             .AddArdalis()
+            .AddBackgroundWorkerDependencies()
             .AddCustomDependencies(assemblies)
             .AddMediatR(assemblies);
         services.AddBaseAutoMapperProfiles(option =>

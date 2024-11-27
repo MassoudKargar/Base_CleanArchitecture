@@ -1,4 +1,4 @@
-﻿namespace Base.Application.Configurations;
+﻿namespace Base.BackgroundWorker.Configurations;
 
 public class KafkaConfiguration
 {
