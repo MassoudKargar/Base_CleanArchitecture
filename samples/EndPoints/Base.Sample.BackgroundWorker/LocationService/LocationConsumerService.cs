@@ -15,7 +15,7 @@ public class LocationConsumerService : AbstractBackgroundWorker
             BootstrapServers = _kafkaConfiguration.Brokers, // Replace with your Kafka broker address
             GroupId = _kafkaConfiguration.ConsumerGroup,
             AutoOffsetReset = AutoOffsetReset.Earliest,
-
+            
         };
         _consumer = new ConsumerBuilder<string, int>(consumerConfig).Build();
     }
