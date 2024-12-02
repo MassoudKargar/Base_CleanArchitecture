@@ -24,6 +24,7 @@
 		<PackageReference Include="Microsoft.AspNetCore.OData" Version="9.1.1" />
 	</ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\samples\Core\Base.Samples.Core.Contracts\Base.Samples.Core.Contracts.csproj" />
     <ProjectReference Include="..\..\Core\Base.Core.Contracts\Base.Core.Contracts.csproj" />
     <ProjectReference Include="..\..\Utilities\Base.Utility\Base.Utility.csproj" />
     <ProjectReference Include="..\Base.Application.RequestResponse\Base.Application.RequestResponse.csproj" />

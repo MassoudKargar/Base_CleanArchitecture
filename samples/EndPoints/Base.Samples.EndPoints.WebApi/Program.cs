@@ -1,5 +1,3 @@
-using Base.BackgroundWorker.Configurations;
-
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddBaseApiCore("Base");
 builder.Services.AddEndpointsApiExplorer();
@@ -9,7 +7,6 @@ builder.Services.AddBaseAutoMapperProfiles(option =>
     option.AssemblyNamesForLoadProfiles = builder.Configuration["AutoMapper:AssmblyNamesForLoadProfiles"];
 });
 
-builder.Services.Configure<KafkaConfiguration>(builder.Configuration.GetSection(nameof(KafkaConfiguration)));
 builder.Services.AddDbContext<BaseDbContext, SampleDbContext>(
     c => c.UseSqlServer(builder.Configuration.GetConnectionString("BaseConnectionString"), options =>
     {
