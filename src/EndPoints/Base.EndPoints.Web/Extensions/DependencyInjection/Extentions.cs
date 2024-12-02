@@ -1,12 +1,4 @@
-﻿using Base.Extensions.BackgroundWorker.Abstractions;
-using Base.Extensions.BackgroundWorker.KafkaConsumer;
-using Base.Extensions.DependencyInjection;
-using Base.Sample.BackgroundWorker.LocationService;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Newtonsoft.Json.Linq;
-
-namespace Base.EndPoints.Web.Extensions.DependencyInjection;
+﻿namespace Base.EndPoints.Web.Extensions.DependencyInjection;
 
 public static class Extensions
 {
