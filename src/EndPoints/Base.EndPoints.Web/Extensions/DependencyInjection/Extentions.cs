@@ -19,7 +19,6 @@ public static class Extensions
             .AddBaseUtilityServices()
             .AddArdalis()
             .AddCustomDependencies(assemblies)
-            .AddBaseKafkaConsumer2()
             .AddMediatR(assemblies);
         services.AddBaseAutoMapperProfiles(option =>
         {
@@ -27,11 +26,6 @@ public static class Extensions
         });
         return services;
 
-    }
-    public static IServiceCollection AddBaseKafkaConsumer2(this IServiceCollection services)
-    {
-        services.AddHostedService<LocationConsumerService>();
-        return services;
     }
 
 
