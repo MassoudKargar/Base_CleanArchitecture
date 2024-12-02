@@ -18,7 +18,7 @@ public abstract class AbstractQueryHandler<TId, TQuery, TRequest, TResponse, TEn
                 {
                     var tDataQuerySettings = new ODataQuerySettings();
 
-                    var getAllData = Service.GetAllAsync(true, cancellationToken);
+                    var getAllData = Service.GetAllAsync(cancellationToken: cancellationToken);
                     if (request.QueryOptions?.OrderBy != null)
                     {
                         getAllData = request.QueryOptions.OrderBy.ApplyTo(getAllData);
