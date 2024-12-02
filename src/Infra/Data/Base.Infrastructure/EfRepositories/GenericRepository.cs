@@ -1,4 +1,6 @@
-﻿namespace Base.Infrastructure.EfRepositories;
+﻿using Ardalis.Result;
+
+namespace Base.Infrastructure.EfRepositories;
 
 public class GenericRepository<TEntity, TId>
     : IGenericRepository<TEntity, TId>, IUnitOfWork, ITransientLifetime
@@ -31,6 +33,8 @@ public class GenericRepository<TEntity, TId>
     public virtual async Task InsertAsync(TEntity entity, bool isCommit = true, CancellationToken cancellationToken = default)
     {
         await Entities.AddAsync(entity, cancellationToken);
+        entity.CreationDate = DateTime.Now;
+        entity.IsDeleted = false;
         if (isCommit)
         {
             await CommitAsync();
@@ -43,6 +47,17 @@ public class GenericRepository<TEntity, TId>
     public virtual void Update(TEntity entity, bool isCommit = true)
     {
         Context.Entry(entity).State = EntityState.Modified;
+        entity.ModificationDate = DateTime.Now;
+        if (isCommit)
+        {
+            Commit();
+        }
+    }
+    public virtual void UpdateToDeleted(TEntity entity, bool isCommit = true)
+    {
+        Context.Entry(entity).State = EntityState.Modified;
+        entity.ModificationDate = DateTime.Now;
+        entity.IsDeleted = true;
         if (isCommit)
         {
             Commit();
@@ -92,15 +107,15 @@ public class GenericRepository<TEntity, TId>
 
     #region Get Item
 
-    public virtual IQueryable<TEntity> GetAllAsync(bool addAsNoTracking = true, CancellationToken cancellationToken = default)
+    public virtual IQueryable<TEntity> GetAllAsync(bool addAsNoTracking = true, bool isDeleted = true, CancellationToken cancellationToken = default)
     {
         if (addAsNoTracking)
         {
-            return Entities.AsNoTracking().AsQueryable();
+            return isDeleted ? Entities.AsNoTracking().Where(e => e.IsDeleted == false).AsQueryable() : Entities.AsNoTracking().AsQueryable();
         }
         else
         {
-            return Entities.AsQueryable();
+            return isDeleted ? Entities.Where(e => e.IsDeleted == false).AsQueryable() : Entities.AsQueryable();
         }
     }
     public virtual TEntity Get(TId id)

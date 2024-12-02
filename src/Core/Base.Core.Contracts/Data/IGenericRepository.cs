@@ -23,7 +23,7 @@ public interface IGenericRepository<TEntity,in TId> : IUnitOfWork
     Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken);
     #endregion
 
-    IQueryable<TEntity> GetAllAsync(bool addAsNoTracking = true, CancellationToken cancellationToken = default);
+    IQueryable<TEntity> GetAllAsync(bool addAsNoTracking = true, bool isDeleted = true, CancellationToken cancellationToken = default);
     #region Insert
 
     /// <summary>
@@ -49,6 +49,14 @@ public interface IGenericRepository<TEntity,in TId> : IUnitOfWork
     /// <param name="entity">نمونه داده‌ای که باید در دیتابیس تغیر کند.</param>
     /// <param name="isCommit">صدا زده شود یا نه  SaveChange مشخص میکند که آیا متود</param>
     void Update(TEntity entity, bool isCommit = true);
+
+
+    /// <summary>
+    /// داده‌ را در دیتابیس به وضعیت خذف شده تغیر میدهد 
+    /// </summary>
+    /// <param name="entity">نمونه داده‌ای که باید در دیتابیس تغیر کند.</param>
+    /// <param name="isCommit">صدا زده شود یا نه  SaveChange مشخص میکند که آیا متود</param>
+    void UpdateToDeleted(TEntity entity, bool isCommit = true);
 
     #endregion
 

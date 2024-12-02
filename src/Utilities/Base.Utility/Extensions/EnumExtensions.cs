@@ -9,8 +9,10 @@ public static class EnumExtensions
     public static string GetEnumDescription(this Enum enumValue)
     {
         var memberInfo = enumValue.GetType().GetField(enumValue.ToString());
+        if (memberInfo is null ) return string.Empty;
         var attributes = memberInfo.GetCustomAttributes(typeof(DescriptionAttribute), false);
-        var description = attributes != null ? ((DescriptionAttribute)attributes.FirstOrDefault()).Description : enumValue.ToString();
+        if (attributes.Length is 0) return enumValue.ToString();
+        var description = ((DescriptionAttribute)attributes.First(f => f.GetType() == typeof(DescriptionAttribute))).Description;
         return description;
     }
 }
