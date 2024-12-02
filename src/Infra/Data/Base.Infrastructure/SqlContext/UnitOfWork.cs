@@ -1,6 +1,7 @@
-﻿namespace Base.Infrastructure.SqlContext;
-public abstract class UnitOfWork<TDbContext>(TDbContext dbContext) : IUnitOfWork, ITransientLifetime
-    where TDbContext : BaseDbContext
+﻿using System.Security.Cryptography;
+
+namespace Base.Infrastructure.SqlContext;
+public abstract class UnitOfWork(BaseDbContext dbContext) : IUnitOfWork, ITransientLifetime
 {
     public void BeginTransaction()
     {

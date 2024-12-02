@@ -1,6 +1,6 @@
 ﻿namespace Base.Core.Contracts.Data;
 
-public interface IGenericRepository<TEntity,in TId> : IUnitOfWork
+public interface IGenericRepository<TEntity,in TId>
     where TEntity : BaseEntity<TId>
     where TId : struct
 {

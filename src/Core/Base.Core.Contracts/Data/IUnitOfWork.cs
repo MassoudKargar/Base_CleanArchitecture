@@ -6,6 +6,7 @@
 /// </summary>
 public interface IUnitOfWork
 {
+    
     /// <summary>
     /// در صورت نیاز به کنترل تراکنش‌ها از این متد جهت شروع تراکنش استفاده می‌شود.
     /// </summary>

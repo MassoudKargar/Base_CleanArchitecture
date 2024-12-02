@@ -3,7 +3,7 @@
 namespace Base.Infrastructure.EfRepositories;
 
 public class GenericRepository<TEntity, TId>
-    : IGenericRepository<TEntity, TId>, IUnitOfWork, ITransientLifetime
+    : IGenericRepository<TEntity, TId>, ITransientLifetime
     where TEntity : BaseEntity<TId>
     where TId : struct
 {
@@ -198,7 +198,7 @@ public class GenericRepository<TEntity, TId>
     }
     #endregion
 
-    #region Transaction management
+    //#region Transaction management
     public int Commit()
     {
         return Context.SaveChanges();
@@ -208,21 +208,21 @@ public class GenericRepository<TEntity, TId>
     {
         return Context.SaveChangesAsync();
     }
-    public void BeginTransaction()
-    {
-        Context.BeginTransaction();
-    }
+    //public void BeginTransaction()
+    //{
+    //    Context.BeginTransaction();
+    //}
 
-    public void CommitTransaction()
-    {
-        Context.CommitTransaction();
-    }
-    public void RollbackTransaction()
-    {
-        Context.RollbackTransaction();
-    }
+    //public void CommitTransaction()
+    //{
+    //    Context.CommitTransaction();
+    //}
+    //public void RollbackTransaction()
+    //{
+    //    Context.RollbackTransaction();
+    //}
 
-    #endregion
+    //#endregion
 
 
 }

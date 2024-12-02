@@ -1,23 +1,22 @@
 ﻿using Base.Extensions.BackgroundWorker.KafkaConsumer;
+using Base.Extensions.DependencyInjection.Abstractions;
 using Confluent.Kafka;
+namespace Base.Sample.Application.KafkaServices;
 
-namespace Base.Sample.Application.KafkaServices
+public class KafkaConsumerConfigurationService : IKafkaConsumerConfiguration, ISingletonLifetime
 {
-    internal class KafkaConsumerConfigurationService : IKafkaConsumerConfiguration
-    {
-        public string InputTopic { get; set; }
-        public ConsumerConfig ConsumerConfig { get; set; }
+    public string InputTopic { get; set; }
+    public ConsumerConfig ConsumerConfig { get; set; }
 
-        public Task GetConfiguration()
+    public virtual Task GetConfiguration()
+    {
+        InputTopic = "Location";
+        ConsumerConfig = new ConsumerConfig()
         {
-            InputTopic = "Location";
-            ConsumerConfig = new ConsumerConfig()
-            {
-                BootstrapServers = "localhost:9092", // Replace with your Kafka broker address
-                GroupId = "state-detector-consumer-group",
-                AutoOffsetReset = AutoOffsetReset.Earliest,
-            };
-            throw new NotImplementedException();
-        }
+            BootstrapServers = "localhost:9092", // Replace with your Kafka broker address
+            GroupId = "state-detector-consumer-group",
+            AutoOffsetReset = AutoOffsetReset.Earliest,
+        };
+        throw new NotImplementedException();
     }
 }
