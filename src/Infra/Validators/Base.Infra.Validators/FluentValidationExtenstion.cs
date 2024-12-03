@@ -13,10 +13,10 @@ namespace Base.Infra.Validator
         public static void InitializeValidator(this IServiceCollection services)
                                                => services.AddFluentValidationAutoValidation();
 
-        public static void InitializeValidator(this IServiceCollection services, Assembly targetAssembly, string vmNameSpace)
+        public static void InitializeValidator(this IServiceCollection services, Assembly targetAssembly, Assembly vmAssembly)
         {
             InitializeValidator(services);
-            RegisterValidatorsByAssembly(services, targetAssembly, vmNameSpace);
+            RegisterValidatorsByAssembly(services, targetAssembly, vmAssembly);
         }
 
         public static void RegisterValidator<TModel, TValidator>(this IServiceCollection services) where TValidator : AbstractValidator<TModel>
@@ -25,18 +25,18 @@ namespace Base.Infra.Validator
 
         }
 
-        public static void RegisterValidatorsByAssembly(this IServiceCollection services, Assembly targetAssembly, string vmNameSpace)
+        public static void RegisterValidatorsByAssembly(this IServiceCollection services, Assembly ValidatorAssembly, Assembly vmAssembly)
         {
-            var viewModelList = targetAssembly.GetTypes()
+            var viewModelList = vmAssembly.GetTypes()
                                      .Where(x => x.IsClass)
-                                     .Where(x => x.Namespace.Contains(vmNameSpace))
+                                     .Where(x => x.Assembly == vmAssembly)
                                      .ToList();
 
             foreach (var viewModel in viewModelList)
             {
                 var type = viewModel.GetType();
 
-                var validator = targetAssembly.GetTypes().Where(x => x.IsSubclassOf(typeof(AbstractValidator<>).MakeGenericType(viewModel))).FirstOrDefault();
+                var validator = ValidatorAssembly.GetTypes().Where(x => x.IsSubclassOf(typeof(AbstractValidator<>).MakeGenericType(viewModel))).FirstOrDefault();
 
                 if (validator != null)
                     services.AddScoped(typeof(IValidator<>).MakeGenericType(viewModel), validator);

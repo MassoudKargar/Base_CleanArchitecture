@@ -7,7 +7,7 @@ using Base.Sample.BackgroundWorker.LocationService;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddBaseApiCore("Base");
-builder.Services.AddValidators(typeof(PersonInsertViewModelValidator).Assembly, typeof(PersonInsertViewModel)?.Namespace ?? "");
+builder.Services.AddValidators(typeof(PersonInsertViewModelValidator).Assembly, typeof(PersonInsertViewModel).Assembly);
 builder.Services.AddEndpointsApiExplorer();
 
 //builder.Services.AddHostedService<LocationConsumerService>();
