@@ -17,6 +17,7 @@ public class KafkaConsumerConfigurationService : IKafkaConsumerConfiguration, IS
             GroupId = "state-detector-consumer-group",
             AutoOffsetReset = AutoOffsetReset.Earliest,
         };
-        throw new NotImplementedException();
+        return Task.CompletedTask;
+        //throw new NotImplementedException();
     }
 }

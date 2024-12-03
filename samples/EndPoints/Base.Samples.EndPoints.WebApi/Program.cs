@@ -1,13 +1,15 @@
 using Base.Extensions.BackgroundWorker.Abstractions;
 using Base.Extensions.BackgroundWorker.KafkaConsumer;
 using Base.Sample.Application.KafkaServices;
+using Base.Sample.Application.People.Validators;
 using Base.Sample.BackgroundWorker.LocationService;
+using Base.Samples.EndPoints.WebApi.Validator;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddBaseApiCore("Base");
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddHostedService<LocationConsumerService>();
+//builder.Services.AddHostedService<LocationConsumerService>();
 
 builder.Services.AddBaseNewtonSoftSerializer();
 builder.Services.AddBaseAutoMapperProfiles(option =>
@@ -20,6 +22,12 @@ builder.Services.AddDbContext<BaseDbContext, SampleDbContext>(
     {
         options.MigrationsAssembly(typeof(SampleDbContext).Assembly.GetName().Name);
     }));
+
+builder.Services.InitializeValidators(typeof(PersonInsertValidator));
+
+builder.Services.RegisterValidator<PersonInsertViewModel, PersonInsertValidator>();
+
+
 builder.Services.AddSwagger(builder.Configuration, "Swagger");
 var app = builder.Build();
 app.UseCustomExceptionHandler();
