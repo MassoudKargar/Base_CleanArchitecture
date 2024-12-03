@@ -45,17 +45,6 @@ public static class FriendlyPersianDateUtils
     /// </summary>
     /// <param name="dt">تاریخ و زمان</param>
     /// <param name="dateTimeOffsetPart">کدام جزء این وهله مورد استفاده قرار گیرد؟</param>
-    public static string ToPersianDateTextify(this DateTimeOffset dt, DateTimeOffsetPart dateTimeOffsetPart = DateTimeOffsetPart.IranLocalDateTime)
-    {
-        return dt.GetDateTimeOffsetPart(dateTimeOffsetPart).ToPersianDateTextify();
-    }
-
-    /// <summary>
-    /// نمایش فارسی روز دریافتی
-    /// مانند سه شنبه ۲۱ دی ۱۳۹۵
-    /// </summary>
-    /// <param name="dt">تاریخ و زمان</param>
-    /// <param name="dateTimeOffsetPart">کدام جزء این وهله مورد استفاده قرار گیرد؟</param>
     public static string ToPersianDateTextify(this DateTimeOffset? dt, DateTimeOffsetPart dateTimeOffsetPart = DateTimeOffsetPart.IranLocalDateTime)
     {
         return dt == null ? string.Empty : dt.Value.GetDateTimeOffsetPart(dateTimeOffsetPart).ToPersianDateTextify();

@@ -1,45 +1,59 @@
 ﻿namespace Base.Core.Domains.Entities;
+
 /// <summary>
-/// Base class for all entities in the system
+/// کلاس پایه برای تمام موجودیت‌ها در سیستم که ویژگی‌ها و متدهای مشترک برای مدیریت موجودیت‌ها 
+/// شامل شناسه، تاریخ ایجاد/ویرایش و وضعیت حذف را فراهم می‌کند.
 /// </summary>
+/// <typeparam name="TId">نوع شناسه منحصر به فرد موجودیت.</typeparam>
 public class BaseEntity<TId> where TId : struct
 {
     /// <summary>
-    /// Entities numerical ID
-    /// Be used only for saving in the database and simplicity of work.
+    /// شناسه منحصر به فرد موجودیت را می‌گیرد یا تنظیم می‌کند.
+    /// این شناسه برای ذخیره‌سازی در پایگاه داده و ساده‌سازی عملیات استفاده می‌شود.
     /// </summary>
     public TId Id { get; set; }
 
     /// <summary>
-    /// Entities create data time
+    /// تاریخ و زمان ایجاد موجودیت را می‌گیرد یا تنظیم می‌کند.
     /// </summary>
     public DateTime CreationDate { get; set; }
 
     /// <summary>
-    /// Entities modify date time 
+    /// تاریخ و زمان آخرین ویرایش موجودیت را می‌گیرد یا تنظیم می‌کند.
+    /// این فیلد اختیاری است و در صورتی که موجودیت هیچ‌گاه ویرایش نشده باشد، می‌تواند مقدار null داشته باشد.
     /// </summary>
     public DateTime? ModificationDate { get; set; }
 
     /// <summary>
-    /// Entities deleted status
+    /// وضعیت حذف موجودیت را می‌گیرد یا تنظیم می‌کند.
+    /// اگر موجودیت حذف شده باشد، مقدار true وگرنه false خواهد بود.
     /// </summary>
     public bool IsDeleted { get; set; }
 
     /// <summary>
-    /// The default constructor is defined as Protected.
-    /// Given that this needs to be created when constructing the basic Entity properties, no object should be created without filling these properties.
-    /// To prevent this, all Entities must have constructors defined that have an input value.
-    /// In order to be able to use these entities for the process of storing and retrieving from the database with the help of ORMs, it is necessary to create a default constructor with a high access level such as Protected or Private.
+    /// سازنده محافظت‌شده برای اطمینان از این که موجودیت‌ها با ویژگی‌های اولیه‌سازی شده ساخته شوند.
     /// </summary>
     protected BaseEntity() { }
 
-
-    #region Equality Check
+    /// <summary>
+    /// مقایسه می‌کند که آیا دو موجودیت برابر هستند یا خیر.
+    /// </summary>
     public bool Equals(BaseEntity<TId>? other) => this == other;
+
+    /// <summary>
+    /// مقایسه می‌کند که آیا موجودیت جاری با موجودیت دیگر برابر است یا خیر.
+    /// </summary>
     public override bool Equals(object? obj) =>
          obj is BaseEntity<TId> otherObject && Id.Equals(otherObject.Id);
 
+    /// <summary>
+    /// دریافت کد هش موجودیت.
+    /// </summary>
     public override int GetHashCode() => Id.GetHashCode();
+
+    /// <summary>
+    /// عملگر مقایسه برابری برای موجودیت‌ها.
+    /// </summary>
     public static bool operator ==(BaseEntity<TId>? left, BaseEntity<TId>? right)
     {
         if (left is null && right is null)
@@ -50,8 +64,10 @@ public class BaseEntity<TId> where TId : struct
         return left.Equals(right);
     }
 
+    /// <summary>
+    /// عملگر مقایسه نابرابری برای موجودیت‌ها.
+    /// </summary>
     public static bool operator !=(BaseEntity<TId> left, BaseEntity<TId> right)
         => !(right == left);
 
-    #endregion
 }

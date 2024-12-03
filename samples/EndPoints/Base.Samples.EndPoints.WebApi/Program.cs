@@ -1,13 +1,8 @@
-using Base.Extensions.BackgroundWorker.Abstractions;
-using Base.Extensions.BackgroundWorker.KafkaConsumer;
-using Base.Sample.Application.KafkaServices;
-using Base.Sample.BackgroundWorker.LocationService;
-
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddBaseApiCore("Base");
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddHostedService<LocationConsumerService>();
+//builder.Services.AddHostedService<LocationConsumerService>();
 
 builder.Services.AddBaseNewtonSoftSerializer();
 builder.Services.AddBaseAutoMapperProfiles(option =>
@@ -20,8 +15,17 @@ builder.Services.AddDbContext<BaseDbContext, SampleDbContext>(
     {
         options.MigrationsAssembly(typeof(SampleDbContext).Assembly.GetName().Name);
     }));
+
 builder.Services.AddSwagger(builder.Configuration, "Swagger");
 var app = builder.Build();
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<BaseDbContext>();
+    if (!await context.Database.CanConnectAsync())
+    {
+        await context.Database.MigrateAsync();
+    }
+}
 app.UseCustomExceptionHandler();
 app.UseSwaggerUI("Swagger");
 app.UseStatusCodePages();

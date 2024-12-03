@@ -1,9 +1,15 @@
 ﻿namespace Base.EndPoints.Web.Middlewares;
-
 public static class CustomExceptionHandlerMiddlewareExtensions
 {
+    /// <summary>
+    /// اضافه کردن میان‌افزار (Middleware) برای هندل کردن استثناها (Exceptions).
+    /// این متد به شما امکان می‌دهد که میان‌افزار `CustomExceptionHandlerMiddleware` را به پایپ‌لاین درخواست‌ها اضافه کنید.
+    /// </summary>
+    /// <param name="builder">شیء `IApplicationBuilder` که مسئول تنظیم و پیکربندی پایپ‌لاین درخواست‌ها است.</param>
+    /// <returns>شیء `IApplicationBuilder` برای ادامه روند تنظیمات پایپ‌لاین درخواست‌ها.</returns>
     public static IApplicationBuilder UseCustomExceptionHandler(this IApplicationBuilder builder)
     {
+        // اضافه کردن میان‌افزار سفارشی برای هندل کردن استثناها
         return builder.UseMiddleware<CustomExceptionHandlerMiddleware>();
     }
 }

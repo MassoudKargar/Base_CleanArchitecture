@@ -1,12 +1,8 @@
 ﻿namespace Base.Core.Domains.Exceptions;
-public class InvalidEntityStateException : DomainStateException
-{
-    /// <summary>
-    /// Errors related to incorrect status in Entities are sent by this class
-    /// </summary>
-    /// <param name="message">Error message or pattern</param>
-    /// <param name="parameters">Parameters to be placed in the message template, if any</param>
-    public InvalidEntityStateException(string message, params string[] parameters) : base(message, parameters)
-    {
-    }
-}
+/// <summary>
+/// خطاهای مربوط به وضعیت نادرست در موجودیت‌ها توسط این کلاس ارسال می‌شود.
+/// </summary>
+/// <param name="message">پیام خطا یا الگو</param>
+/// <param name="parameters">پارامترهایی که در صورت وجود در الگوی پیام قرار می‌گیرند</param>
+public class InvalidEntityStateException(string message, params string[] parameters)
+    : DomainStateException(message, parameters);

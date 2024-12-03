@@ -1,4 +1,5 @@
 ﻿namespace Base.EndPoints.Web.Extensions.DependencyInjection;
+
 /// <summary>
 /// توابع کمکی جهت ثبت نیازمندی‌های لایه داده
 /// </summary>

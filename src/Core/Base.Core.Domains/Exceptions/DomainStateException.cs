@@ -1,14 +1,14 @@
 ﻿namespace Base.Core.Domains.Exceptions;
 /// <summary>
-/// Domain layer errors related to Entities and ValueObjects are sent to higher layers with the help of Extension
-/// Considering that both Entity and ValueObject send the error in the same way, an Exception class has been designed and implemented.
-/// In order to be able to recognize the difference between the error and its place of occurrence in the higher layers, the MicroType template is used.
+/// خطاهای لایه دامنه مرتبط با موجودیت‌ها (Entities) و اشیاء مقادیر (ValueObjects) به لایه‌های بالاتر از طریق یک Extension ارسال می‌شوند.
+/// از آنجایی که هم موجودیت‌ها و هم اشیاء مقادیر خطا را به یک روش مشابه ارسال می‌کنند، یک کلاس Exception طراحی و پیاده‌سازی شده است.
+/// برای تشخیص تفاوت بین خطا و محل وقوع آن در لایه‌های بالاتر، الگوی MicroType استفاده شده است.
 /// </summary>
 public abstract class DomainStateException(string message, params string[] parameters) : Exception(message)
 {
     /// <summary>
-    /// List of error parameters
-    /// If there is a parameter, send the message as a template and the values of the parameters are placed in a special place in the template.
+    /// لیست پارامترهای خطا
+    /// در صورتی که پارامتری وجود داشته باشد، پیام به عنوان یک الگو ارسال می‌شود و مقادیر پارامترها در جایگاه‌های خاصی در الگو قرار می‌گیرند.
     /// </summary>
     public string[] Parameters { get; } = parameters;
 

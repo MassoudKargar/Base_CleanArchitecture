@@ -1,8 +1,5 @@
-﻿namespace Base.Utility.Extensions;
-
-public static class StringValidatorExtensions
+﻿public static class StringValidatorExtensions
 {
-
     /// <summary>
     /// صحت سنجی کد ملی
     /// </summary>
@@ -108,6 +105,11 @@ public static class StringValidatorExtensions
         }
     }
 
+    /// <summary>
+    /// بررسی اینکه آیا رشته عددی است یا خیر
+    /// </summary>
+    /// <param name="nationalCode">رشته ورودی برای بررسی عدد بودن</param>
+    /// <returns>اگر رشته عددی باشد، مقدار true باز می‌گرداند، در غیر این صورت false</returns>
     public static bool IsNumeric(this string nationalCode)
     {
         var regex = new Regex(@"\d+");
@@ -116,6 +118,13 @@ public static class StringValidatorExtensions
         return false;
     }
 
+    /// <summary>
+    /// بررسی طول رشته بین دو مقدار حداقل و حداکثر
+    /// </summary>
+    /// <param name="input">رشته ورودی برای بررسی طول</param>
+    /// <param name="minLength">طول حداقل مجاز</param>
+    /// <param name="maxLength">طول حداکثر مجاز</param>
+    /// <returns>اگر طول رشته در محدوده حداقل و حداکثر باشد، مقدار true باز می‌گرداند</returns>
     public static bool IsLengthBetween(this string input, int minLength, int maxLength)
     {
         if (input.Length <= maxLength && input.Length >= minLength)
@@ -123,30 +132,58 @@ public static class StringValidatorExtensions
         return false;
     }
 
+    /// <summary>
+    /// بررسی اینکه طول رشته کمتر از مقدار داده‌شده است یا خیر
+    /// </summary>
+    /// <param name="input">رشته ورودی برای بررسی طول</param>
+    /// <param name="length">مقدار طول</param>
+    /// <returns>اگر طول رشته کمتر از مقدار داده‌شده باشد، مقدار true باز می‌گرداند</returns>
     public static bool IsLengthLessThan(this string input, int length)
     {
         return input.Length < length;
     }
 
+    /// <summary>
+    /// بررسی اینکه طول رشته کمتر یا مساوی مقدار داده‌شده است یا خیر
+    /// </summary>
+    /// <param name="input">رشته ورودی برای بررسی طول</param>
+    /// <param name="length">مقدار طول</param>
+    /// <returns>اگر طول رشته کمتر یا مساوی مقدار داده‌شده باشد، مقدار true باز می‌گرداند</returns>
     public static bool IsLengthLessThanOrEqual(this string input, int length)
     {
         return input.Length <= length;
     }
 
+    /// <summary>
+    /// بررسی اینکه طول رشته بزرگتر از مقدار داده‌شده است یا خیر
+    /// </summary>
+    /// <param name="input">رشته ورودی برای بررسی طول</param>
+    /// <param name="length">مقدار طول</param>
+    /// <returns>اگر طول رشته بزرگتر از مقدار داده‌شده باشد، مقدار true باز می‌گرداند</returns>
     public static bool IsLengthGreaterThan(this string input, int length)
     {
         return input.Length > length;
     }
 
+    /// <summary>
+    /// بررسی اینکه طول رشته بزرگتر یا مساوی مقدار داده‌شده است یا خیر
+    /// </summary>
+    /// <param name="input">رشته ورودی برای بررسی طول</param>
+    /// <param name="length">مقدار طول</param>
+    /// <returns>اگر طول رشته بزرگتر یا مساوی مقدار داده‌شده باشد، مقدار true باز می‌گرداند</returns>
     public static bool IsLengthGreaterThanOrEqual(this string input, int length)
     {
         return input.Length >= length;
     }
 
+    /// <summary>
+    /// بررسی اینکه طول رشته دقیقا برابر با مقدار داده‌شده است یا خیر
+    /// </summary>
+    /// <param name="input">رشته ورودی برای بررسی طول</param>
+    /// <param name="length">مقدار طول</param>
+    /// <returns>اگر طول رشته برابر با مقدار داده‌شده باشد، مقدار true باز می‌گرداند</returns>
     public static bool IsLengthEqual(this string input, int length)
     {
         return input.Length == length;
     }
-
-
 }

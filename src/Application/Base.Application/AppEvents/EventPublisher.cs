@@ -1,42 +1,46 @@
 ﻿namespace Base.Application.AppEvents;
-
 /// <summary>
-/// Represents the event publisher implementation
+/// نماینده پیاده‌سازی ناشر رویداد
 /// </summary>
 public partial class EventPublisher(ILogger<EventPublisher> logger, IServiceProvider serviceProvider) : IEventPublisher, ITransientLifetime
 {
     private ILogger<EventPublisher> Logger { get; } = logger;
     private IServiceProvider ServiceProvider { get; } = serviceProvider;
-    #region Methods
 
     /// <summary>
-    /// Publish event to consumers
+    /// رویداد را به مصرف‌کنندگان ارسال می‌کند
     /// </summary>
-    /// <typeparam name="TEvent">Type of event</typeparam>
-    /// <typeparam name="TEntity"></typeparam>
-    /// <typeparam name="TId"></typeparam>
-    /// <param name="event">Event object</param>
+    /// <typeparam name="TEvent">نوع رویداد</typeparam>
+    /// <typeparam name="TEntity">نوع موجودیت</typeparam>
+    /// <typeparam name="TId">نوع شناسه موجودیت</typeparam>
+    /// <param name="event">شیء رویداد</param>
     public virtual async Task PublishAsync<TEvent, TEntity, TId>(TEvent @event)
         where TEvent : BaseEvent<TEntity, TId>
         where TEntity : BaseEntity<TId>
         where TId : struct
     {
-        //get all event consumers
+        // دریافت تمام مصرف‌کنندگان رویداد
         var consumers = ResolveAll<IConsumer<TEvent, TEntity, TId>>().ToList();
         foreach (var consumer in consumers)
         {
-            //try to handle published event
+            // تلاش برای پردازش رویداد منتشرشده
             await consumer.HandleEventAsync(@event);
         }
-
     }
 
+    /// <summary>
+    /// رویداد را به مصرف‌کنندگان ارسال می‌کند (نسخه همزمان)
+    /// </summary>
+    /// <typeparam name="TEvent">نوع رویداد</typeparam>
+    /// <typeparam name="TEntity">نوع موجودیت</typeparam>
+    /// <typeparam name="TId">نوع شناسه موجودیت</typeparam>
+    /// <param name="event">شیء رویداد</param>
     public virtual void Publish<TEvent, TEntity, TId>(TEvent @event)
         where TEvent : BaseEvent<TEntity, TId>
         where TEntity : BaseEntity<TId>
         where TId : struct
     {
-        //get all event consumers
+        // دریافت تمام مصرف‌کنندگان رویداد
         var consumers = ResolveAll<IConsumer<TEvent, TEntity, TId>>().ToList();
         foreach (var consumer in consumers)
         {
@@ -44,23 +48,25 @@ public partial class EventPublisher(ILogger<EventPublisher> logger, IServiceProv
         }
     }
 
-    #endregion
-
+    /// <summary>
+    /// سرویس‌دهی به مصرف‌کنندگان رویداد از طریق دسترسی به خدمات
+    /// </summary>
+    /// <param name="scope">دامنه سرویس</param>
+    /// <returns>سرویس‌دهی به مصرف‌کنندگان</returns>
     protected IServiceProvider GetServiceProvider(IServiceScope scope = null)
     {
-        if (scope == null)
-        {
-            var accessor = ServiceProvider?.GetService<IHttpContextAccessor>();
-            var context = accessor?.HttpContext;
-            return context?.RequestServices ?? ServiceProvider;
-        }
-        return scope.ServiceProvider;
+        var accessor = ServiceProvider?.GetService<IHttpContextAccessor>();
+        var context = accessor?.HttpContext;
+        return context?.RequestServices ?? ServiceProvider;
     }
 
+    /// <summary>
+    /// تمام نمونه‌های یک نوع را از سرویس‌ها دریافت می‌کند
+    /// </summary>
+    /// <typeparam name="T">نوع سرویس</typeparam>
+    /// <returns>تمام نمونه‌ها از نوع مشخص‌شده</returns>
     public virtual IEnumerable<T> ResolveAll<T>()
     {
         return (IEnumerable<T>)GetServiceProvider().GetServices(typeof(T));
     }
-
-
 }

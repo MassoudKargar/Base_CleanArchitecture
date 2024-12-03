@@ -1,18 +1,16 @@
 ﻿namespace Base.Application.AppEvents;
-
 /// <summary>
-/// Event publisher extensions
+/// اکستنشن‌های ناشر رویداد
 /// </summary>
 public static class EventPublisherExtensions
 {
     /// <summary>
-    /// Entity inserted
+    /// زمانی که موجودیت وارد می‌شود
     /// </summary>
-    /// <typeparam name="T">Entity type</typeparam>
-    /// <typeparam name="TEntity"></typeparam>
-    /// <typeparam name="TId"></typeparam>
-    /// <param name="eventPublisher">Event publisher</param>
-    /// <param name="entity">Entity</param>
+    /// <typeparam name="TEntity">نوع موجودیت</typeparam>
+    /// <typeparam name="TId">نوع شناسه موجودیت</typeparam>
+    /// <param name="eventPublisher">ناشر رویداد</param>
+    /// <param name="entity">موجودیت</param>
     public static async Task EntityInsertedAsync<TEntity, TId>(this IEventPublisher eventPublisher, TEntity entity)
         where TEntity : BaseEntity<TId>
         where TId : struct
@@ -20,6 +18,13 @@ public static class EventPublisherExtensions
         await eventPublisher.PublishAsync<EntityInsertedEvent<TEntity, TId>, TEntity, TId>(new EntityInsertedEvent<TEntity, TId>(entity));
     }
 
+    /// <summary>
+    /// زمانی که موجودیت وارد می‌شود (نسخه همزمان)
+    /// </summary>
+    /// <typeparam name="TEntity">نوع موجودیت</typeparam>
+    /// <typeparam name="TId">نوع شناسه موجودیت</typeparam>
+    /// <param name="eventPublisher">ناشر رویداد</param>
+    /// <param name="entity">موجودیت</param>
     public static void EntityInserted<TEntity, TId>(this IEventPublisher eventPublisher, TEntity entity)
         where TEntity : BaseEntity<TId>
         where TId : struct
@@ -27,21 +32,27 @@ public static class EventPublisherExtensions
         eventPublisher.Publish<EntityInsertedEvent<TEntity, TId>, TEntity, TId>(new EntityInsertedEvent<TEntity, TId>(entity));
     }
 
-
     /// <summary>
-    /// Entity updated
+    /// زمانی که موجودیت به‌روزرسانی می‌شود
     /// </summary>
-    /// <typeparam name="T">Entity type</typeparam>
-    /// <typeparam name="TEntity"></typeparam>
-    /// <typeparam name="TId"></typeparam>
-    /// <param name="eventPublisher">Event publisher</param>
-    /// <param name="entity">Entity</param>
+    /// <typeparam name="TEntity">نوع موجودیت</typeparam>
+    /// <typeparam name="TId">نوع شناسه موجودیت</typeparam>
+    /// <param name="eventPublisher">ناشر رویداد</param>
+    /// <param name="entity">موجودیت</param>
     public static async Task EntityUpdatedAsync<TEntity, TId>(this IEventPublisher eventPublisher, TEntity entity)
         where TEntity : BaseEntity<TId>
         where TId : struct
     {
         await eventPublisher.PublishAsync<EntityUpdatedEvent<TEntity, TId>, TEntity, TId>(new EntityUpdatedEvent<TEntity, TId>(entity));
     }
+
+    /// <summary>
+    /// زمانی که موجودیت به‌روزرسانی می‌شود (نسخه همزمان)
+    /// </summary>
+    /// <typeparam name="TEntity">نوع موجودیت</typeparam>
+    /// <typeparam name="TId">نوع شناسه موجودیت</typeparam>
+    /// <param name="eventPublisher">ناشر رویداد</param>
+    /// <param name="entity">موجودیت</param>
     public static void EntityUpdated<TEntity, TId>(this IEventPublisher eventPublisher, TEntity entity)
         where TEntity : BaseEntity<TId>
         where TId : struct
@@ -50,13 +61,12 @@ public static class EventPublisherExtensions
     }
 
     /// <summary>
-    /// Entity deleted
+    /// زمانی که موجودیت حذف می‌شود
     /// </summary>
-    /// <typeparam name="T">Entity type</typeparam>
-    /// <typeparam name="TEntity"></typeparam>
-    /// <typeparam name="TId"></typeparam>
-    /// <param name="eventPublisher">Event publisher</param>
-    /// <param name="entity">Entity</param>
+    /// <typeparam name="TEntity">نوع موجودیت</typeparam>
+    /// <typeparam name="TId">نوع شناسه موجودیت</typeparam>
+    /// <param name="eventPublisher">ناشر رویداد</param>
+    /// <param name="entity">موجودیت</param>
     public static void EntityDeleted<TEntity, TId>(this IEventPublisher eventPublisher, TEntity entity)
         where TEntity : BaseEntity<TId>
         where TId : struct
@@ -65,13 +75,12 @@ public static class EventPublisherExtensions
     }
 
     /// <summary>
-    /// Entity deleted
+    /// زمانی که موجودیت حذف می‌شود (نسخه همزمان)
     /// </summary>
-    /// <typeparam name="T">Entity type</typeparam>
-    /// <typeparam name="TEntity"></typeparam>
-    /// <typeparam name="TId"></typeparam>
-    /// <param name="eventPublisher">Event publisher</param>
-    /// <param name="entity">Entity</param>
+    /// <typeparam name="TEntity">نوع موجودیت</typeparam>
+    /// <typeparam name="TId">نوع شناسه موجودیت</typeparam>
+    /// <param name="eventPublisher">ناشر رویداد</param>
+    /// <param name="entity">موجودیت</param>
     public static async Task EntityDeletedAsync<TEntity, TId>(this IEventPublisher eventPublisher, TEntity entity)
         where TEntity : BaseEntity<TId>
         where TId : struct
