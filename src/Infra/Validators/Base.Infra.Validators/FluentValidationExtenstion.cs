@@ -10,8 +10,8 @@ namespace Base.Infra.Validator
 {
     public static class FluentValidationExtenstion
     {
-        public static void InitializeValidators(this IServiceCollection services)
-                => services.AddFluentValidationAutoValidation();
+        public static void InitializeValidator(this IServiceCollection services)
+                                               => services.AddFluentValidationAutoValidation();
 
 
         public static void RegisterValidator<TModel, TValidator>(this IServiceCollection services) where TValidator : AbstractValidator<TModel>
