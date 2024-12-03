@@ -13,9 +13,13 @@ namespace Base.Infra.Validator
         public static void InitializeValidator(this IServiceCollection services)
                                                => services.AddFluentValidationAutoValidation();
 
-        public static void InitializeValidator(this IServiceCollection services, Assembly targetAssembly, Assembly vmAssembly)
+        public static void InitializeValidator(this IServiceCollection services, Assembly targetAssembly, Assembly vmAssembly, bool stopOnFirstFailure = false)
         {
+            if (stopOnFirstFailure) 
+                ValidatorOptions.Global.DefaultClassLevelCascadeMode = CascadeMode.Stop;
+            
             InitializeValidator(services);
+
             RegisterValidatorsByAssembly(services, targetAssembly, vmAssembly);
         }
 
