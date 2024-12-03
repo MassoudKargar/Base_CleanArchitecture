@@ -1,10 +1,12 @@
-﻿namespace Base.Sample.Application.People.Validators;
+﻿using Base.Infra.Validators.Abstractions.Abstractions;
 
-public class PersonUpdateValidator : AbstractValidator<PersonUpdateViewModel>
+namespace Base.Sample.Application.People.Validators;
+
+public class PersonUpdateValidator : BaseValidator<PersonUpdateViewModel>
 {
     public PersonUpdateValidator()
     {
-        RuleFor(c => c.FirstName).NotEmpty().NotNull();
-        RuleFor(c => c.LastName).NotEmpty().NotNull();
+        RuleForPropHavingValue(c => c.FirstName);
+        RuleForPropHavingValue(c => c.LastName);
     }
 }

@@ -63,6 +63,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Validators", "Validators", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base.Infra.Validators", "src\Infra\Validators\Base.Infra.Validators\Base.Infra.Validators.csproj", "{D5893BFF-EE9B-460B-9465-BE4B08197608}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base.Infra.Validators.Abstractions", "src\Infra\Validators\Base.Infra.Validators.Abstractions\Base.Infra.Validators.Abstractions\Base.Infra.Validators.Abstractions.csproj", "{126AA17D-2825-4188-9276-E7251E77736A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -133,6 +135,10 @@ Global
 		{D5893BFF-EE9B-460B-9465-BE4B08197608}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5893BFF-EE9B-460B-9465-BE4B08197608}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5893BFF-EE9B-460B-9465-BE4B08197608}.Release|Any CPU.Build.0 = Release|Any CPU
+		{126AA17D-2825-4188-9276-E7251E77736A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{126AA17D-2825-4188-9276-E7251E77736A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{126AA17D-2825-4188-9276-E7251E77736A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{126AA17D-2825-4188-9276-E7251E77736A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -166,6 +172,7 @@ Global
 		{12EDEFAE-7126-499F-933D-44C32F627683} = {8E3B2C3D-B619-4466-A1EC-C417A7F35AD7}
 		{484F765B-CC83-40EF-A22C-2F6780B74404} = {07A00EFC-A4BB-4785-9990-9F6F4886E820}
 		{D5893BFF-EE9B-460B-9465-BE4B08197608} = {484F765B-CC83-40EF-A22C-2F6780B74404}
+		{126AA17D-2825-4188-9276-E7251E77736A} = {484F765B-CC83-40EF-A22C-2F6780B74404}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1D5D58CA-317E-4A1C-BD21-D8E928B9B245}

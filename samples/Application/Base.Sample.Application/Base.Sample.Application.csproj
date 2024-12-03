@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\Application\Base.Application\Base.Application.csproj" />
+    <ProjectReference Include="..\..\..\src\Infra\Validators\Base.Infra.Validators.Abstractions\Base.Infra.Validators.Abstractions\Base.Infra.Validators.Abstractions.csproj" />
     <ProjectReference Include="..\..\Core\Base.Samples.Core.Contracts\Base.Samples.Core.Contracts.csproj" />
     <ProjectReference Include="..\Base.Sample.Application.RequestResponse\Base.Sample.Application.RequestResponse.csproj" />
   </ItemGroup>

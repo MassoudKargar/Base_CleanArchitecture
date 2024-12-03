@@ -7,6 +7,7 @@ using Base.Sample.BackgroundWorker.LocationService;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddBaseApiCore("Base");
+builder.Services.AddValidators(typeof(PersonInsertViewModelValidator).Assembly, typeof(PersonInsertViewModel)?.Namespace ?? "");
 builder.Services.AddEndpointsApiExplorer();
 
 //builder.Services.AddHostedService<LocationConsumerService>();
@@ -22,8 +23,6 @@ builder.Services.AddDbContext<BaseDbContext, SampleDbContext>(
     {
         options.MigrationsAssembly(typeof(SampleDbContext).Assembly.GetName().Name);
     }));
-
-builder.Services.InitializeValidator(typeof(PersonInsertViewModelValidator).Assembly, typeof(PersonInsertViewModel)?.Namespace ?? "");
 
 builder.Services.AddSwagger(builder.Configuration, "Swagger");
 var app = builder.Build();
