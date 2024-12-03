@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.OData;
+﻿using Base.Infra.Validator;
+using Microsoft.AspNetCore.OData;
 
 namespace Base.EndPoints.Web.Extensions.DependencyInjection;
 
@@ -24,5 +25,12 @@ public static class AddApiConfigurationExtensions
         services.AddBaseDependencies(assemblyNamesForLoad);
 
         return services;
+    }
+
+    public static IServiceCollection AddValidators(this IServiceCollection services, Assembly ValidatorAssembly, Assembly vmAssembly)
+    {
+        services.InitializeValidator(ValidatorAssembly, vmAssembly);
+        return services;
+        
     }
 }

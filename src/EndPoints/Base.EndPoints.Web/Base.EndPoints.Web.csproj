@@ -28,6 +28,7 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\..\..\samples\EndPoints\Base.Sample.BackgroundWorker\Base.Sample.BackgroundWorker.csproj" />
 	  <ProjectReference Include="..\..\Infra\Data\Base.Infrastructure\Base.Infrastructure.csproj" />
+	  <ProjectReference Include="..\..\Infra\Validators\Base.Infra.Validators\Base.Infra.Validators.csproj" />
 	  <ProjectReference Include="..\Base.BackgroundWorker\Base.BackgroundWorker.csproj" />
 	</ItemGroup>
 	<ItemGroup>

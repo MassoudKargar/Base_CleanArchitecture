@@ -51,13 +51,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.Application", "src\App
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.Application.RequestResponse", "src\Application\Base.Application.RequestResponse\Base.Application.RequestResponse.csproj", "{1C697A9F-7F48-4608-9F78-3D0FBDED4017}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base.Sample.Application.RequestResponse", "samples\Application\Base.Sample.Application.RequestResponse\Base.Sample.Application.RequestResponse.csproj", "{DC5F6A56-D8A8-40E1-98A3-412B76CB71FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.Sample.Application.RequestResponse", "samples\Application\Base.Sample.Application.RequestResponse\Base.Sample.Application.RequestResponse.csproj", "{DC5F6A56-D8A8-40E1-98A3-412B76CB71FB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.Sample.Application", "samples\Application\Base.Sample.Application\Base.Sample.Application.csproj", "{9A164CA4-1359-4C36-B3BA-282D79AE311C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base.Sample.BackgroundWorker", "samples\EndPoints\Base.Sample.BackgroundWorker\Base.Sample.BackgroundWorker.csproj", "{A861538C-3749-46D1-9FEA-1E726DD65BDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.Sample.BackgroundWorker", "samples\EndPoints\Base.Sample.BackgroundWorker\Base.Sample.BackgroundWorker.csproj", "{A861538C-3749-46D1-9FEA-1E726DD65BDB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base.BackgroundWorker", "src\EndPoints\Base.BackgroundWorker\Base.BackgroundWorker.csproj", "{12EDEFAE-7126-499F-933D-44C32F627683}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.BackgroundWorker", "src\EndPoints\Base.BackgroundWorker\Base.BackgroundWorker.csproj", "{12EDEFAE-7126-499F-933D-44C32F627683}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Validators", "Validators", "{484F765B-CC83-40EF-A22C-2F6780B74404}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base.Infra.Validators", "src\Infra\Validators\Base.Infra.Validators\Base.Infra.Validators.csproj", "{D5893BFF-EE9B-460B-9465-BE4B08197608}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base.Infra.Validators.Abstractions", "src\Infra\Validators\Base.Infra.Validators.Abstractions\Base.Infra.Validators.Abstractions\Base.Infra.Validators.Abstractions.csproj", "{126AA17D-2825-4188-9276-E7251E77736A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -125,6 +131,14 @@ Global
 		{12EDEFAE-7126-499F-933D-44C32F627683}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12EDEFAE-7126-499F-933D-44C32F627683}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12EDEFAE-7126-499F-933D-44C32F627683}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5893BFF-EE9B-460B-9465-BE4B08197608}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5893BFF-EE9B-460B-9465-BE4B08197608}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5893BFF-EE9B-460B-9465-BE4B08197608}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5893BFF-EE9B-460B-9465-BE4B08197608}.Release|Any CPU.Build.0 = Release|Any CPU
+		{126AA17D-2825-4188-9276-E7251E77736A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{126AA17D-2825-4188-9276-E7251E77736A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{126AA17D-2825-4188-9276-E7251E77736A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{126AA17D-2825-4188-9276-E7251E77736A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -156,6 +170,9 @@ Global
 		{9A164CA4-1359-4C36-B3BA-282D79AE311C} = {5F5D8E05-2F4C-4939-B842-68C16085D287}
 		{A861538C-3749-46D1-9FEA-1E726DD65BDB} = {685FC6B7-BA0E-42AB-8C8F-B742E3A430EC}
 		{12EDEFAE-7126-499F-933D-44C32F627683} = {8E3B2C3D-B619-4466-A1EC-C417A7F35AD7}
+		{484F765B-CC83-40EF-A22C-2F6780B74404} = {07A00EFC-A4BB-4785-9990-9F6F4886E820}
+		{D5893BFF-EE9B-460B-9465-BE4B08197608} = {484F765B-CC83-40EF-A22C-2F6780B74404}
+		{126AA17D-2825-4188-9276-E7251E77736A} = {484F765B-CC83-40EF-A22C-2F6780B74404}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1D5D58CA-317E-4A1C-BD21-D8E928B9B245}

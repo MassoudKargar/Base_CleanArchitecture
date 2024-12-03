@@ -2,9 +2,9 @@
 
 namespace Base.Sample.Application.People.Validators;
 
-public class PersonUpdateValidator : BaseValidator<PersonUpdateViewModel>
+public class PersonInsertViewModelValidator : BaseValidator<PersonInsertViewModel>
 {
-    public PersonUpdateValidator()
+    public PersonInsertViewModelValidator()
     {
         RuleForPropHavingValue(c => c.FirstName);
         RuleForPropHavingValue(c => c.LastName);
