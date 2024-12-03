@@ -32,7 +32,7 @@ namespace Base.Infra.Validators.Abstractions.Abstractions
             return RuleFor(expression).SetValidator(new MinimumLengthValidator<T>(length)).WithMessage(ErrorMessages.RequiredPropertyMinLength(propName, length));
         }
 
-        public IRuleBuilderOptions<T, string> RuleForPropHavingMinLength(Expression<Func<T, string>> expression, int min,int max)
+        public IRuleBuilderOptions<T, string> RuleForPropHavingRangeLength(Expression<Func<T, string>> expression, int min,int max)
         {
             var propName = expression.Body.ToString().Split(".")[1];
             return RuleFor(expression).SetValidator(new LengthValidator<T>(min,max)).WithMessage(ErrorMessages.RequiredPropertyInRange(propName, min,max));
