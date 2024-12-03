@@ -23,7 +23,7 @@ builder.Services.AddDbContext<BaseDbContext, SampleDbContext>(
         options.MigrationsAssembly(typeof(SampleDbContext).Assembly.GetName().Name);
     }));
 
-
+builder.Services.InitializeValidators();
 builder.Services.RegisterValidatorsByAssembly(typeof(PersonInsertViewModelValidator).Assembly, typeof(PersonInsertViewModel)?.Namespace ?? "");
 
 

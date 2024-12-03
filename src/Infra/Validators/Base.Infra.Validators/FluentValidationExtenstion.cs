@@ -1,5 +1,6 @@
 ﻿using Base.Application.Common;
 using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OData.Edm;
 using System;
@@ -9,10 +10,9 @@ namespace Base.Infra.Validator
 {
     public static class FluentValidationExtenstion
     {
-        public static void InitializeValidators(this IServiceCollection services, Type InitType)
-        {
-            services.AddValidatorsFromAssemblyContaining(InitType);
-        }
+        public static void InitializeValidators(this IServiceCollection services)
+                => services.AddFluentValidationAutoValidation();
+
 
         public static void RegisterValidator<TModel, TValidator>(this IServiceCollection services) where TValidator : AbstractValidator<TModel>
         {
@@ -31,7 +31,7 @@ namespace Base.Infra.Validator
             {
                 var type = viewModel.GetType();
 
-                var validator = targetAssembly.GetTypes().Where(x =>  x.IsSubclassOf(typeof(AbstractValidator<>).MakeGenericType(viewModel))).FirstOrDefault();
+                var validator = targetAssembly.GetTypes().Where(x => x.IsSubclassOf(typeof(AbstractValidator<>).MakeGenericType(viewModel))).FirstOrDefault();
 
                 if (validator != null)
                     services.AddScoped(typeof(IValidator<>).MakeGenericType(viewModel), validator);
