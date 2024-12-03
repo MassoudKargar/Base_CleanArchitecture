@@ -24,10 +24,11 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<BaseDbContext>();
-    if (!await context.Database.CanConnectAsync())
-    {
-        await context.Database.MigrateAsync();
-    }
+    if (!app.Environment.IsDevelopment())
+        if (!await context.Database.CanConnectAsync())
+        {
+            await context.Database.MigrateAsync();
+        }
 }
 app.UseCustomExceptionHandler();
 app.UseSwaggerUI("Swagger");
