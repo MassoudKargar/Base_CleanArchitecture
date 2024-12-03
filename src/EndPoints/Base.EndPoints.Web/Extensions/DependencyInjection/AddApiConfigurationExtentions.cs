@@ -14,9 +14,9 @@ public static class AddApiConfigurationExtensions
         return services;
     }
 
-    public static IServiceCollection AddValidators(this IServiceCollection services, Assembly asm, Assembly vmAssembly)
+    public static IServiceCollection AddValidators(this IServiceCollection services, Assembly ValidatorAssembly, Assembly vmAssembly)
     {
-        services.InitializeValidator(asm, vmAssembly);
+        services.InitializeValidator(ValidatorAssembly, vmAssembly);
         return services;
         
     }
