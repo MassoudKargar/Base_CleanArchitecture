@@ -13,6 +13,11 @@ namespace Base.Infra.Validator
         public static void InitializeValidator(this IServiceCollection services)
                                                => services.AddFluentValidationAutoValidation();
 
+        public static void InitializeValidator(this IServiceCollection services, Assembly targetAssembly, string vmNameSpace)
+        {
+            InitializeValidator(services);
+            RegisterValidatorsByAssembly(services, targetAssembly, vmNameSpace);
+        }
 
         public static void RegisterValidator<TModel, TValidator>(this IServiceCollection services) where TValidator : AbstractValidator<TModel>
         {

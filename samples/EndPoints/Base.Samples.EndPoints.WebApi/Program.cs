@@ -23,9 +23,7 @@ builder.Services.AddDbContext<BaseDbContext, SampleDbContext>(
         options.MigrationsAssembly(typeof(SampleDbContext).Assembly.GetName().Name);
     }));
 
-builder.Services.InitializeValidator();
-builder.Services.RegisterValidatorsByAssembly(typeof(PersonInsertViewModelValidator).Assembly, typeof(PersonInsertViewModel)?.Namespace ?? "");
-
+builder.Services.InitializeValidator(typeof(PersonInsertViewModelValidator).Assembly, typeof(PersonInsertViewModel)?.Namespace ?? "");
 
 builder.Services.AddSwagger(builder.Configuration, "Swagger");
 var app = builder.Build();
