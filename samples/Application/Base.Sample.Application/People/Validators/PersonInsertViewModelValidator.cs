@@ -1,8 +1,8 @@
 ﻿namespace Base.Sample.Application.People.Validators;
 
-public class PersonInsertValidator : AbstractValidator<PersonInsertViewModel>
+public class PersonInsertViewModelValidator : AbstractValidator<PersonInsertViewModel>
 {
-    public PersonInsertValidator()
+    public PersonInsertViewModelValidator()
     {
         RuleFor(c => c.FirstName).NotEmpty().NotNull();
         RuleFor(c => c.LastName).NotEmpty().NotNull();
