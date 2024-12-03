@@ -12,8 +12,6 @@ namespace Base.Infra.Validators.Abstractions.Abstractions
         {
             var propName = expression.Body.ToString().Split(".")[1];
             return RuleFor(expression).NotNull().NotEmpty().WithMessage(ErrorMessages.RequiredProperty(propName));
-
-
         }
 
         public IRuleBuilderOptions<T, string> RuleForPropHavingExactLength(Expression<Func<T, string>> expression, int length)
@@ -25,11 +23,22 @@ namespace Base.Infra.Validators.Abstractions.Abstractions
         public IRuleBuilderOptions<T, string> RuleForPropHavingMaxLength(Expression<Func<T, string>> expression, int length)
         {
             var propName = expression.Body.ToString().Split(".")[1];
-            return RuleFor(expression).SetValidator(new MaximumLengthValidator<T>(length)).WithMessage(ErrorMessages.RequiredMaxPropertyLength(propName, length));
+            return RuleFor(expression).SetValidator(new MaximumLengthValidator<T>(length)).WithMessage(ErrorMessages.RequiredPropertyMaxLength(propName, length));
         }
 
+        public IRuleBuilderOptions<T, string> RuleForPropHavingMinLength(Expression<Func<T, string>> expression, int length)
+        {
+            var propName = expression.Body.ToString().Split(".")[1];
+            return RuleFor(expression).SetValidator(new MinimumLengthValidator<T>(length)).WithMessage(ErrorMessages.RequiredPropertyMinLength(propName, length));
+        }
+
+        public IRuleBuilderOptions<T, string> RuleForPropHavingMinLength(Expression<Func<T, string>> expression, int min,int max)
+        {
+            var propName = expression.Body.ToString().Split(".")[1];
+            return RuleFor(expression).SetValidator(new LengthValidator<T>(min,max)).WithMessage(ErrorMessages.RequiredPropertyInRange(propName, min,max));
+        }
 
     }
 
-
+    
 }

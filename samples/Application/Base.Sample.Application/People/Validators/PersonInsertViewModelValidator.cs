@@ -7,7 +7,6 @@ public class PersonInsertViewModelValidator : BaseValidator<PersonInsertViewMode
 {
     public PersonInsertViewModelValidator()
     {
-        RuleForPropHavingMaxLength(x => x.FirstName, 10);
         RuleForPropHavingValue(c => c.FirstName);
         RuleForPropHavingValue(c => c.LastName);
     }
