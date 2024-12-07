@@ -64,7 +64,7 @@ public class GenericController<TEntity, TId, TListViewModel, TUpdateViewModel, T
     public async Task<Result> AddAsync([FromBody] TInsertViewModel dto, CancellationToken cancellationToken)
     {
         logger.LogInformation($"Insert {typeof(TEntity).FullName}");
-        var result = await Mediator.Send(new GenericCreateCommand<TId, TInsertViewModel, Result>(default, dto, GenericAction.Insert), cancellationToken);
+        var result = await Mediator.Send(new GenericCreateCommand<TId, TInsertViewModel, Result>(default, dto), cancellationToken);
         return result;
     }
 
@@ -76,10 +76,10 @@ public class GenericController<TEntity, TId, TListViewModel, TUpdateViewModel, T
     /// <param name="cancellationToken">توکن لغو</param>
     /// <returns>نتیجه عملیات</returns>
     [HttpPost("{id}")]
-    public Task<Result> UpdateAsync(TId id, [FromBody] TUpdateViewModel dto, CancellationToken cancellationToken)
+    public async Task<Result> UpdateAsync(TId id, [FromBody] TUpdateViewModel dto, CancellationToken cancellationToken)
     {
         logger.LogInformation($"Update {typeof(TEntity).FullName}");
-        var result = Mediator.Send(new GenericCommand<TId, TUpdateViewModel, Result>(id, dto, GenericAction.Update), cancellationToken);
+        var result = await Mediator.Send(new GenericUpdateCommand<TId, TUpdateViewModel, Result>(id, dto), cancellationToken);
         return result;
     }
 
@@ -92,8 +92,9 @@ public class GenericController<TEntity, TId, TListViewModel, TUpdateViewModel, T
     [HttpPost("{id}")]
     public Task<Result> DeleteAsync(TId id, CancellationToken cancellationToken)
     {
-        logger.LogInformation($"Delete {typeof(TEntity).FullName} => Id :{id}");
-        var result = Mediator.Send(new GenericCommand<TId, TDeleteViewModel, Result>(id, default, GenericAction.Delete), cancellationToken);
-        return result;
+        //logger.LogInformation($"Delete {typeof(TEntity).FullName} => Id :{id}");
+        //var result = Mediator.Send(new GenericCommand<TId, TDeleteViewModel, Result>(id, default, GenericAction.Delete), cancellationToken);
+        //return result;
+        return null;
     }
 }

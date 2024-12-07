@@ -22,3 +22,13 @@ public interface IGenericCreateCommandHandler<TId, TViewModel, in TRequest, TRes
     // این اینترفیس هیچ متدی تعریف نمی‌کند و فقط از IRequestHandler استفاده می‌کند
     // به این معنا که هر پیاده‌سازی باید متد Handle را برای پردازش درخواست پیاده‌سازی کند.
 }
+
+
+
+public interface IGenericUpdateCommandHandler<TId, TViewModel, in TRequest, TResponse> : IRequestHandler<TRequest, TResponse>
+    where TRequest : GenericUpdateCommand<TId, TViewModel, TResponse>
+    where TId : struct
+{
+    // این اینترفیس هیچ متدی تعریف نمی‌کند و فقط از IRequestHandler استفاده می‌کند
+    // به این معنا که هر پیاده‌سازی باید متد Handle را برای پردازش درخواست پیاده‌سازی کند.
+}
