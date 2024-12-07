@@ -1,6 +1,12 @@
-﻿using Base.Utility.Exceptions;
+﻿using Base.Core.Contracts.Data;
+using Base.Core.Domains.Entities;
+using Base.Extensions.DependencyInjection.Abstractions;
+using Base.Sample.Infrastructure.Ef.Context;
+using Base.Utility.Exceptions;
+using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
-namespace Base.Infrastructure.EfRepositories;
+namespace Base.Infrastructure.Ef.Repositories;
 /// <summary>
 /// پیاده‌سازی یک مخزن عمومی برای انجام عملیات‌های CRUD بر روی موجودیت‌ها.
 /// این کلاس از Entity Framework برای تعامل با پایگاه داده استفاده می‌کند.

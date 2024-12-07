@@ -1,12 +1,13 @@
 ﻿using System.Security.Cryptography;
+using Base.Infrastructure.Ef.Context;
 
-namespace Base.Infrastructure.SqlContext;
+namespace Base.Infrastructure.Ef.UnitOfWork;
 
 /// <summary>
 /// کلاس واحد کار (Unit of Work) برای مدیریت تراکنش‌ها و عملیات‌های پایگاه داده.
 /// این کلاس از متدهای موجود در BaseDbContext برای آغاز، تأیید و برگشت تراکنش‌ها استفاده می‌کند.
 /// </summary>
-public abstract class UnitOfWork(BaseDbContext dbContext) : IUnitOfWork, ITransientLifetime
+public class UnitOfWork(BaseDbContext dbContext) : IUnitOfWork
 {
     /// <summary>
     /// شروع یک تراکنش جدید.
@@ -41,6 +42,7 @@ public abstract class UnitOfWork(BaseDbContext dbContext) : IUnitOfWork, ITransi
     /// </summary>
     public void CommitTransaction()
     {
+        dbContext.SaveChanges();
         dbContext.CommitTransaction();
     }
 

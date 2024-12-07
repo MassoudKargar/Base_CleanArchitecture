@@ -23,23 +23,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Infrastructure", "2.Infra
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.EndPoint", "4.EndPoint", "{685FC6B7-BA0E-42AB-8C8F-B742E3A430EC}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "data", "data", "{3D904E4F-7419-4B51-BC43-90D250647E5A}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.Utility", "src\Utilities\Base.Utility\Base.Utility.csproj", "{65229E59-ACE1-4E35-A830-D96456B93F32}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.Core.Contracts", "src\Core\Base.Core.Contracts\Base.Core.Contracts.csproj", "{E8B3DE38-9249-4776-8DAF-9E6ED28D3ABC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.Core.Domains", "src\Core\Base.Core.Domains\Base.Core.Domains.csproj", "{9B815A71-9561-423F-BCDD-D24CFEEA429B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.Infrastructure", "src\Infra\Data\Base.Infrastructure\Base.Infrastructure.csproj", "{530D9B46-6B6F-4C3F-9291-089BB804A601}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.Infrastructure.Ef", "src\Infra\Data\Base.Infrastructure\Base.Infrastructure.Ef.csproj", "{530D9B46-6B6F-4C3F-9291-089BB804A601}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.EndPoints.Web", "src\EndPoints\Base.EndPoints.Web\Base.EndPoints.Web.csproj", "{56803FCE-1F7F-44AA-9939-171AF5AB3C31}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.Samples.Core.Contracts", "samples\Core\Base.Samples.Core.Contracts\Base.Samples.Core.Contracts.csproj", "{E8939712-05E3-4365-9395-49DEF59766D1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.Samples.Core.Domain", "samples\Core\Base.Samples.Core.Domain\Base.Samples.Core.Domain.csproj", "{BABB448A-AE68-4CDA-9547-27B2CF8FEACD}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.Samples.Infrastructure", "samples\Infra\Data\Base.Samples.Infrastructure\Base.Samples.Infrastructure.csproj", "{A328A5F9-46D1-47F6-B363-829467786231}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.Samples.EndPoints.WebApi", "samples\EndPoints\Base.Samples.EndPoints.WebApi\Base.Samples.EndPoints.WebApi.csproj", "{3C701C1E-4D88-4F2B-B51D-B853A46A68BD}"
 EndProject
@@ -61,9 +57,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.BackgroundWorker", "sr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Validators", "Validators", "{484F765B-CC83-40EF-A22C-2F6780B74404}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base.Infra.Validators", "src\Infra\Validators\Base.Infra.Validators\Base.Infra.Validators.csproj", "{D5893BFF-EE9B-460B-9465-BE4B08197608}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.Infra.Validators", "src\Infra\Validators\Base.Infra.Validators\Base.Infra.Validators.csproj", "{D5893BFF-EE9B-460B-9465-BE4B08197608}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base.Infra.Validators.Abstractions", "src\Infra\Validators\Base.Infra.Validators.Abstractions\Base.Infra.Validators.Abstractions\Base.Infra.Validators.Abstractions.csproj", "{126AA17D-2825-4188-9276-E7251E77736A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.Infra.Validators.Abstractions", "src\Infra\Validators\Base.Infra.Validators.Abstractions\Base.Infra.Validators.Abstractions\Base.Infra.Validators.Abstractions.csproj", "{126AA17D-2825-4188-9276-E7251E77736A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base.Infrastructure.PostgreSQL", "src\Infra\Data\Base.Infrastructure.PostgreSQL\Base.Infrastructure.PostgreSQL.csproj", "{B4464952-F465-4736-BE52-0DCBA70AE758}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{D029B1CC-12B3-443A-B2F9-9554CE7A7B9B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base.Sample.Infrastructure.Ef", "samples\Infra\Base.Sample.Infrastructure.Ef\Base.Sample.Infrastructure.Ef.csproj", "{B5EAAFC6-479D-4756-A102-149943E41BC6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base.Sample.Infrastructure.Ef.PostgreSQL", "samples\Infra\Base.Infrastructure.Ef.PostgreSQL\Base.Sample.Infrastructure.Ef.PostgreSQL.csproj", "{3DA5F9CE-2390-4056-ADB8-E2E6F1509009}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -99,10 +103,6 @@ Global
 		{BABB448A-AE68-4CDA-9547-27B2CF8FEACD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BABB448A-AE68-4CDA-9547-27B2CF8FEACD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BABB448A-AE68-4CDA-9547-27B2CF8FEACD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A328A5F9-46D1-47F6-B363-829467786231}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A328A5F9-46D1-47F6-B363-829467786231}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A328A5F9-46D1-47F6-B363-829467786231}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A328A5F9-46D1-47F6-B363-829467786231}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3C701C1E-4D88-4F2B-B51D-B853A46A68BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3C701C1E-4D88-4F2B-B51D-B853A46A68BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C701C1E-4D88-4F2B-B51D-B853A46A68BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -139,6 +139,18 @@ Global
 		{126AA17D-2825-4188-9276-E7251E77736A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{126AA17D-2825-4188-9276-E7251E77736A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{126AA17D-2825-4188-9276-E7251E77736A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4464952-F465-4736-BE52-0DCBA70AE758}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4464952-F465-4736-BE52-0DCBA70AE758}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4464952-F465-4736-BE52-0DCBA70AE758}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4464952-F465-4736-BE52-0DCBA70AE758}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5EAAFC6-479D-4756-A102-149943E41BC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5EAAFC6-479D-4756-A102-149943E41BC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5EAAFC6-479D-4756-A102-149943E41BC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5EAAFC6-479D-4756-A102-149943E41BC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DA5F9CE-2390-4056-ADB8-E2E6F1509009}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DA5F9CE-2390-4056-ADB8-E2E6F1509009}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DA5F9CE-2390-4056-ADB8-E2E6F1509009}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DA5F9CE-2390-4056-ADB8-E2E6F1509009}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -152,7 +164,6 @@ Global
 		{5570F724-DB4C-4025-83FC-E389A2358185} = {2E3EFC93-DC6B-46E5-8F9B-B28055E14E3B}
 		{A8098583-BB0D-4C93-BD5F-905E0BFADA69} = {2E3EFC93-DC6B-46E5-8F9B-B28055E14E3B}
 		{685FC6B7-BA0E-42AB-8C8F-B742E3A430EC} = {2E3EFC93-DC6B-46E5-8F9B-B28055E14E3B}
-		{3D904E4F-7419-4B51-BC43-90D250647E5A} = {A8098583-BB0D-4C93-BD5F-905E0BFADA69}
 		{65229E59-ACE1-4E35-A830-D96456B93F32} = {F2BBE9DB-F32D-450E-8C40-42E98C2C68AD}
 		{E8B3DE38-9249-4776-8DAF-9E6ED28D3ABC} = {2FD23B56-8607-496E-8577-56F379A7C381}
 		{9B815A71-9561-423F-BCDD-D24CFEEA429B} = {2FD23B56-8607-496E-8577-56F379A7C381}
@@ -160,7 +171,6 @@ Global
 		{56803FCE-1F7F-44AA-9939-171AF5AB3C31} = {8E3B2C3D-B619-4466-A1EC-C417A7F35AD7}
 		{E8939712-05E3-4365-9395-49DEF59766D1} = {5570F724-DB4C-4025-83FC-E389A2358185}
 		{BABB448A-AE68-4CDA-9547-27B2CF8FEACD} = {5570F724-DB4C-4025-83FC-E389A2358185}
-		{A328A5F9-46D1-47F6-B363-829467786231} = {3D904E4F-7419-4B51-BC43-90D250647E5A}
 		{3C701C1E-4D88-4F2B-B51D-B853A46A68BD} = {685FC6B7-BA0E-42AB-8C8F-B742E3A430EC}
 		{5F5D8E05-2F4C-4939-B842-68C16085D287} = {2E3EFC93-DC6B-46E5-8F9B-B28055E14E3B}
 		{30F7BA35-4E3C-483E-9C6D-AC27EC8851B9} = {FF8E4B3D-39A8-4412-9636-BD14ED8016DF}
@@ -173,6 +183,10 @@ Global
 		{484F765B-CC83-40EF-A22C-2F6780B74404} = {07A00EFC-A4BB-4785-9990-9F6F4886E820}
 		{D5893BFF-EE9B-460B-9465-BE4B08197608} = {484F765B-CC83-40EF-A22C-2F6780B74404}
 		{126AA17D-2825-4188-9276-E7251E77736A} = {484F765B-CC83-40EF-A22C-2F6780B74404}
+		{B4464952-F465-4736-BE52-0DCBA70AE758} = {61C6C818-9EE5-4BC0-8A89-A839F82C378E}
+		{D029B1CC-12B3-443A-B2F9-9554CE7A7B9B} = {A8098583-BB0D-4C93-BD5F-905E0BFADA69}
+		{B5EAAFC6-479D-4756-A102-149943E41BC6} = {D029B1CC-12B3-443A-B2F9-9554CE7A7B9B}
+		{3DA5F9CE-2390-4056-ADB8-E2E6F1509009} = {D029B1CC-12B3-443A-B2F9-9554CE7A7B9B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1D5D58CA-317E-4A1C-BD21-D8E928B9B245}

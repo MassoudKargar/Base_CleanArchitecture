@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Base.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\Core\Base.Core.Contracts\Base.Core.Contracts.csproj" />
+    <ProjectReference Include="..\..\..\src\Core\Base.Core.Domains\Base.Core.Domains.csproj" />
+    <ProjectReference Include="..\..\..\src\Utilities\Base.Utility\Base.Utility.csproj" />
+  </ItemGroup>
+
+</Project>

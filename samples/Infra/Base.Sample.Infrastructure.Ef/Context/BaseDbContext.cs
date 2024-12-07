@@ -1,12 +1,17 @@
-﻿namespace Base.Infrastructure.SqlContext;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Storage;
+
+namespace Base.Sample.Infrastructure.Ef.Context;
 /// <summary>
 /// کلاس کانتکست پایگاه داده پایه برای مدیریت ارتباط با پایگاه داده.
 /// این کلاس از EF Core برای مدیریت تراکنش‌ها و عملیات‌های پایگاه داده استفاده می‌کند.
 /// </summary>
-public class BaseDbContext : DbContext
+public abstract class BaseDbContext : DbContext
 {
     /// <summary>
     /// تراکنش جاری پایگاه داده.
+    /// 
     /// </summary>
     protected IDbContextTransaction _transaction;
 
@@ -17,6 +22,8 @@ public class BaseDbContext : DbContext
     public BaseDbContext(DbContextOptions options) : base(options)
     {
     }
+
+
 
     /// <summary>
     /// شروع یک تراکنش جدید.
