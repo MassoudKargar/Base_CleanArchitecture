@@ -92,9 +92,8 @@ public class GenericController<TEntity, TId, TListViewModel, TUpdateViewModel, T
     [HttpPost("{id}")]
     public Task<Result> DeleteAsync(TId id, CancellationToken cancellationToken)
     {
-        //logger.LogInformation($"Delete {typeof(TEntity).FullName} => Id :{id}");
-        //var result = Mediator.Send(new GenericCommand<TId, TDeleteViewModel, Result>(id, default, GenericAction.Delete), cancellationToken);
-        //return result;
-        return null;
+        logger.LogInformation($"Delete {typeof(TEntity).FullName} => Id :{id}");
+        var result = Mediator.Send(new GenericDeleteCommand<TId, TDeleteViewModel, Result>(id, default), cancellationToken);
+        return result;
     }
 }
