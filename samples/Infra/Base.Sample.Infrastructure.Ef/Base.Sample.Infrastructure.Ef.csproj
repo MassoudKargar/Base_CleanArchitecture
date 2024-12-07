@@ -15,6 +15,7 @@
     <ProjectReference Include="..\..\..\src\Core\Base.Core.Contracts\Base.Core.Contracts.csproj" />
     <ProjectReference Include="..\..\..\src\Core\Base.Core.Domains\Base.Core.Domains.csproj" />
     <ProjectReference Include="..\..\..\src\Utilities\Base.Utility\Base.Utility.csproj" />
+    <ProjectReference Include="..\..\Core\Base.Samples.Core.Domain\Base.Samples.Core.Domain.csproj" />
   </ItemGroup>
 
 </Project>

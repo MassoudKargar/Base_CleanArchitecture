@@ -1,5 +1,6 @@
 ﻿using Base.Core.Contracts.Data;
 using Base.Sample.Infrastructure.Ef.Context;
+using Base.Sample.Infrastructure.Ef.PostgreSQL;
 using Base.Sample.Infrastructure.Ef.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
