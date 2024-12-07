@@ -3,4 +3,4 @@
 namespace Base.Sample.Application.People.Handlers;
 
 public class PersonInsertCommandHandler(IGenericRepository<Person?, long> service, IMapper mapper) :
-    AbstractCommandHandler<long, PersonInsertViewModel, GenericCommand<long, PersonInsertViewModel, Result>, Result, Person>(service, mapper);
+    AbstractCreateCommandHandler<long, PersonInsertViewModel, GenericCreateCommand<long, PersonInsertViewModel, Result>, Result, Person>(service, mapper);

@@ -64,7 +64,7 @@ public class GenericController<TEntity, TId, TListViewModel, TUpdateViewModel, T
     public async Task<Result> AddAsync([FromBody] TInsertViewModel dto, CancellationToken cancellationToken)
     {
         logger.LogInformation($"Insert {typeof(TEntity).FullName}");
-        var result = await Mediator.Send(new GenericCommand<TId, TInsertViewModel, Result>(default, dto, GenericAction.Insert), cancellationToken);
+        var result = await Mediator.Send(new GenericCreateCommand<TId, TInsertViewModel, Result>(default, dto, GenericAction.Insert), cancellationToken);
         return result;
     }
 
