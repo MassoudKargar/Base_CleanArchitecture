@@ -1,6 +1,8 @@
 ﻿using Base.Application.BaseMediatR;
+using Base.Application.Commands.Generics;
+using Base.Application.Commands.Handlers.Contracts;
 
-public abstract class AbstractUpdateCommandHandler<TId, TViewModel, TRequest, TResponse, TEntity>(IGenericRepository<TEntity, TId> service, IMapper mapper) :
+public abstract class GenericUpdateCommandHandler<TId, TViewModel, TRequest, TResponse, TEntity>(IGenericRepository<TEntity, TId> service, IMapper mapper) :
     IGenericUpdateCommandHandler<TId, TViewModel, TRequest, TResponse>
     where TId : struct
     where TViewModel : BaseDto<TViewModel, TEntity, TId>, new()

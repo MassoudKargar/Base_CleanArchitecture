@@ -1,6 +1,14 @@
-﻿using Base.Application.Commands.Generics;
+﻿using Ardalis.Result;
+using Base.Application.BaseMediatR;
+using Base.Application.Common;
+using Base.Core.Domains.Entities;
+using Base.EndPoints.Web.Extensions;
+using Base.Sample.Application.Commands.Generics;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
 
-namespace Base.EndPoints.Web.Controllers;
+namespace Base.Samples.EndPoints.WebApi.Controllers;
 
 
 /// <summary>

@@ -1,11 +1,13 @@
-﻿
-using Base.Application.BaseMediatR;
+﻿using Base.Application.BaseMediatR;
+using Base.Application.Commands.Generics;
+using Base.Application.Commands.Handlers.Contracts;
+using Base.Utility.Exceptions;
 
-public abstract class AbstractCreateCommandHandler<TId, TViewModel, TRequest, TResponse, TEntity>(IGenericRepository<TEntity, TId> service, IMapper mapper) :
-    IGenericCreateCommandHandler<TId, TViewModel, TRequest, TResponse>
+public abstract class GenericDeleteCommandHandler<TId, TViewModel, TRequest, TResponse, TEntity>(IGenericRepository<TEntity, TId> service, IMapper mapper) :
+    IGenericDeleteCommandHandler<TId, TViewModel, TRequest, TResponse>
     where TId : struct
     where TViewModel : BaseDto<TViewModel, TEntity, TId>, new()
-    where TRequest : GenericCreateCommand<TId, TViewModel, TResponse>
+    where TRequest : GenericDeleteCommand<TId, TViewModel, TResponse>
     where TEntity : BaseEntity<TId>, new()
 {
     private IGenericRepository<TEntity, TId> Service { get; } = service;
@@ -19,9 +21,15 @@ public abstract class AbstractCreateCommandHandler<TId, TViewModel, TRequest, TR
     /// <returns>پاسخ فرمان</returns>
     public virtual async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken)
     {
-        // پردازش عملیات درج
-        var result = Mapper.Map<TViewModel, TEntity>(request.Model);
-        await service.InsertAsync(result, cancellationToken: cancellationToken);
+
+        var result = await Service.GetAsync(request.Id, cancellationToken: cancellationToken);
+
+        if (result is null)
+        {
+            throw new NotFoundException();
+        }
+
+        service.UpdateToDeleted(result);
         return default;
     }
 }
