@@ -9,7 +9,7 @@ namespace Base.Infrastructure.Ef.Repositories;
 /// <typeparam name="TEntity">نوع موجودیت که در پایگاه داده ذخیره می‌شود.</typeparam>
 /// <typeparam name="TId">نوع شناسه موجودیت.</typeparam>
 public class GenericRepository<TEntity, TId>
-    : IGenericRepository<TEntity, TId>, ITransientLifetime
+    : IGenericRepository<TEntity, TId>
     where TEntity : BaseEntity<TId>
     where TId : struct
 {

@@ -15,6 +15,7 @@
 
 
 	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.11" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.11" />
 		<PackageReference Include="Base.Extensions.ChangeDataLog.Abstractions" Version="8.0.1" />
 		<PackageReference Include="Pluralize.NET" Version="1.0.2" />

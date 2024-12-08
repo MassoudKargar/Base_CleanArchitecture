@@ -8,8 +8,8 @@ namespace Base.Sample.Infrastructure.Ef.Configs.EntityTypeConfigurations
     {
         public void Configure(EntityTypeBuilder<Person> builder)
         {
-            builder.Property(x=>x.FirstName).HasMaxLength(FieldSizes.Mid_Small);
-            builder.Property(x=>x.LastName).HasMaxLength(FieldSizes.Mid_Small);
+            builder.Property(x=>x.FirstName).HasMaxLength(64);
+            builder.Property(x=>x.LastName).HasMaxLength(64);
         }
     }
 }
