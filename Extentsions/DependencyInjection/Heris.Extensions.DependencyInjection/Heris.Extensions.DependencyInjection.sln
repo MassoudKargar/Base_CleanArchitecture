@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35521.163 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heris.Extensions.DependencyInjection", "Heris.Extensions.DependencyInjection\Heris.Extensions.DependencyInjection.csproj", "{734CB150-AE28-461A-94FA-4EDE39F245A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heris.Extensions.DependencyInjection.Sample", "Heris.Extensions.DependencyInjection.Sample\Heris.Extensions.DependencyInjection.Sample.csproj", "{55734FC7-87E1-4507-9FF0-05C5238FD09D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{734CB150-AE28-461A-94FA-4EDE39F245A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{734CB150-AE28-461A-94FA-4EDE39F245A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{734CB150-AE28-461A-94FA-4EDE39F245A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{734CB150-AE28-461A-94FA-4EDE39F245A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55734FC7-87E1-4507-9FF0-05C5238FD09D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55734FC7-87E1-4507-9FF0-05C5238FD09D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55734FC7-87E1-4507-9FF0-05C5238FD09D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55734FC7-87E1-4507-9FF0-05C5238FD09D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

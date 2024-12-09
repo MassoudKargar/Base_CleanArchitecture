@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  <TargetFramework>net9.0</TargetFramework>
+	  <Nullable>enable</Nullable>
+	  <Version>9.0.0</Version>
+	  <Authors>Masoud kargar</Authors>
+	  <ImplicitUsings>enable</ImplicitUsings>
+	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	  <RepositoryUrl>https://github.com/MassoudKargar/Heris</RepositoryUrl>
+	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Heris.Extensions.Caching.Abstractions" Version="9.0.0" />
+		<PackageReference Include="Heris.Extensions.Serializers.Abstractions" Version="9.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="9.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="9.0.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.0" />
+	</ItemGroup>
+</Project>

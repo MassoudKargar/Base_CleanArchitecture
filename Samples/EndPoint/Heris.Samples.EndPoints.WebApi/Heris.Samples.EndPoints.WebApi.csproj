@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="9.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="7.1.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="7.1.0" />
+		<PackageReference Include="Heris.Extensions.Serializers.NewtonSoft" Version="9.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="wwwroot\websurge-allow.txt">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\..\src\EndPoints\Heris.EndPoints.Web\Heris.EndPoints.Web.csproj" />
+	  <ProjectReference Include="..\..\Infrastructure\Heris.Samples.Infrastructure\Heris.Samples.Infrastructure.csproj" />
+	  <ProjectReference Include="..\Heris.Sample.BackgroundWorker\Heris.Sample.BackgroundWorker.csproj" />
+	</ItemGroup>
+</Project>

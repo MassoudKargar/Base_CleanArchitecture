@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35521.163
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heris.Extensions.BackgroundWorker.Abstractions", "Heris.Extensions.BackgroundWorker.Abstractions\Heris.Extensions.BackgroundWorker.Abstractions.csproj", "{7B0318AD-8CFF-4BAF-9328-CE07F534908E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heris.Extensions.Caching.Abstractions", "Heris.Extensions.Caching.Abstractions\Heris.Extensions.Caching.Abstractions.csproj", "{34D09A29-DDF8-4D61-B674-D99511A30BD7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heris.Extensions.DependencyInjection.Abstractions", "Heris.Extensions.DependencyInjection.Abstractions\Heris.Extensions.DependencyInjection.Abstractions.csproj", "{8FE395F0-E7CB-4031-A30F-6D156B12E386}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heris.Extensions.Logger.Abstractions", "Heris.Extensions.Logger.Abstractions\Heris.Extensions.Logger.Abstractions.csproj", "{65959379-42CA-4AB0-849B-B146D2D2711A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heris.Extensions.ObjectMappers.Abstractions", "Heris.Extensions.ObjectMappers.Abstractions\Heris.Extensions.ObjectMappers.Abstractions.csproj", "{CA9433C8-478C-4375-9E37-4544BBF4224B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heris.Extensions.Serializers.Abstractions", "Heris.Extensions.Serializers.Abstractions\Heris.Extensions.Serializers.Abstractions.csproj", "{39EB109B-24DF-47BB-91EC-17F94B079DE3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7B0318AD-8CFF-4BAF-9328-CE07F534908E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B0318AD-8CFF-4BAF-9328-CE07F534908E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B0318AD-8CFF-4BAF-9328-CE07F534908E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B0318AD-8CFF-4BAF-9328-CE07F534908E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34D09A29-DDF8-4D61-B674-D99511A30BD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34D09A29-DDF8-4D61-B674-D99511A30BD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34D09A29-DDF8-4D61-B674-D99511A30BD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34D09A29-DDF8-4D61-B674-D99511A30BD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FE395F0-E7CB-4031-A30F-6D156B12E386}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FE395F0-E7CB-4031-A30F-6D156B12E386}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FE395F0-E7CB-4031-A30F-6D156B12E386}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FE395F0-E7CB-4031-A30F-6D156B12E386}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65959379-42CA-4AB0-849B-B146D2D2711A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65959379-42CA-4AB0-849B-B146D2D2711A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65959379-42CA-4AB0-849B-B146D2D2711A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65959379-42CA-4AB0-849B-B146D2D2711A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA9433C8-478C-4375-9E37-4544BBF4224B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA9433C8-478C-4375-9E37-4544BBF4224B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA9433C8-478C-4375-9E37-4544BBF4224B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA9433C8-478C-4375-9E37-4544BBF4224B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39EB109B-24DF-47BB-91EC-17F94B079DE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39EB109B-24DF-47BB-91EC-17F94B079DE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39EB109B-24DF-47BB-91EC-17F94B079DE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39EB109B-24DF-47BB-91EC-17F94B079DE3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

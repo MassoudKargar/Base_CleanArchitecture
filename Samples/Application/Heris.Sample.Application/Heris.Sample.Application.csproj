@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\Application\Heris.Application\Heris.Application.csproj" />
+    <ProjectReference Include="..\..\Core\Heris.Samples.Core.Contracts\Heris.Samples.Core.Contracts.csproj" />
+    <ProjectReference Include="..\Heris.Sample.Application.RequestResponse\Heris.Sample.Application.RequestResponse.csproj" />
+  </ItemGroup>
+
+</Project>

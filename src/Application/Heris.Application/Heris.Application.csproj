@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<Version>9.0.0</Version>
+		<Authors>Masoud kargar</Authors>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<RepositoryUrl>https://github.com/MassoudKargar/Heris</RepositoryUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="FluentValidation" Version="11.11.0" />
+		<PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+		<PackageReference Include="Heris.Extensions.ObjectMappers.AutoMapper" Version="9.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.OData" Version="9.1.1" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Core\Heris.Core.Contracts\Heris.Core.Contracts.csproj" />
+	  <ProjectReference Include="..\..\Utility\Heris.Utility\Heris.Utility.csproj" />
+	  <ProjectReference Include="..\Heris.Application.RequestResponse\Heris.Application.RequestResponse.csproj" />
+	</ItemGroup>
+</Project>

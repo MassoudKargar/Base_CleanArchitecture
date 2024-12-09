@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Heris.Extensions.BackgroundWorker.KafkaConsumer" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\EndPoints\Heris.BackgroundWorker\Heris.BackgroundWorker.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Heris.Samples.Infrastructure\Heris.Samples.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

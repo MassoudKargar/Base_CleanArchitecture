@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35521.163 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heris.Extensions.Serializers.NewtonSoft", "Heris.Extensions.Serializers.NewtonSoft\Heris.Extensions.Serializers.NewtonSoft.csproj", "{61A79DF4-BAEB-46CA-93B5-2D549D773BCF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heris.Extensions.Serializers.NewtonSoft.Sample", "Heris.Extensions.Serializers.NewtonSoft.Sample\Heris.Extensions.Serializers.NewtonSoft.Sample.csproj", "{4976CE2E-B5DB-432A-AAED-D60D0004FB34}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{61A79DF4-BAEB-46CA-93B5-2D549D773BCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61A79DF4-BAEB-46CA-93B5-2D549D773BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61A79DF4-BAEB-46CA-93B5-2D549D773BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61A79DF4-BAEB-46CA-93B5-2D549D773BCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4976CE2E-B5DB-432A-AAED-D60D0004FB34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4976CE2E-B5DB-432A-AAED-D60D0004FB34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4976CE2E-B5DB-432A-AAED-D60D0004FB34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4976CE2E-B5DB-432A-AAED-D60D0004FB34}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

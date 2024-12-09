@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  <TargetFramework>net9.0</TargetFramework>
+	  <Nullable>enable</Nullable>
+	  <Version>9.0.0</Version>
+	  <Authors>Masoud kargar</Authors>
+	  <ImplicitUsings>enable</ImplicitUsings>
+	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	  <RepositoryUrl>https://github.com/MassoudKargar/Heris</RepositoryUrl>
+	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
+		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.2" />
+		<PackageReference Include="Pluralize.NET" Version="1.0.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Application\Heris.Application\Heris.Application.csproj" />
+	</ItemGroup>
+
+</Project>
