@@ -37,13 +37,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Core", "1.Core", "{A0C92D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heris.Samples.Core.Contracts", "Samples\Core\Heris.Samples.Core.Contracts\Heris.Samples.Core.Contracts.csproj", "{FE02D4C8-D7AD-4FDB-80B0-B577E374F87D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heris.Samples.Core.Domain", "Samples\Core\Heris.Samples.Core.Domain\Heris.Samples.Core.Domain.csproj", "{E1959DC2-E0D4-46DD-A5D6-E3CE1037B845}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Infrastructure", "2.Infrastructure", "{6D6DB701-93AA-4FD9-AB3B-B8EB727CFABA}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Infrastructure", "3.Infrastructure", "{6D6DB701-93AA-4FD9-AB3B-B8EB727CFABA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heris.Samples.Infrastructure", "Samples\Infrastructure\Heris.Samples.Infrastructure\Heris.Samples.Infrastructure.csproj", "{C82EEB82-B604-4D6B-AE31-A57858FAD9F3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Application", "3.Application", "{43FD9F9A-E43A-4A79-89E3-208744745367}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Application", "2.Application", "{43FD9F9A-E43A-4A79-89E3-208744745367}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heris.Sample.Application", "Samples\Application\Heris.Sample.Application\Heris.Sample.Application.csproj", "{9298A978-0436-423A-92A6-6D99B25F32DE}"
 EndProject
@@ -54,6 +52,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heris.Sample.BackgroundWorker", "Samples\EndPoint\Heris.Sample.BackgroundWorker\Heris.Sample.BackgroundWorker.csproj", "{BD497286-E72E-499F-8D38-6A4501C5C316}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heris.Samples.EndPoints.WebApi", "Samples\EndPoint\Heris.Samples.EndPoints.WebApi\Heris.Samples.EndPoints.WebApi.csproj", "{2AB1CDE4-E0C8-402F-BAC6-B5EC82AC58A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heris.Samples.Core.Domain", "Samples\Core\Heris.Samples.Core.Domain\Heris.Samples.Core.Domain.csproj", "{056792FB-1781-4313-8817-9AF1D2D511DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -97,10 +97,6 @@ Global
 		{FE02D4C8-D7AD-4FDB-80B0-B577E374F87D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE02D4C8-D7AD-4FDB-80B0-B577E374F87D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE02D4C8-D7AD-4FDB-80B0-B577E374F87D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E1959DC2-E0D4-46DD-A5D6-E3CE1037B845}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E1959DC2-E0D4-46DD-A5D6-E3CE1037B845}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E1959DC2-E0D4-46DD-A5D6-E3CE1037B845}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E1959DC2-E0D4-46DD-A5D6-E3CE1037B845}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C82EEB82-B604-4D6B-AE31-A57858FAD9F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C82EEB82-B604-4D6B-AE31-A57858FAD9F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C82EEB82-B604-4D6B-AE31-A57858FAD9F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -121,6 +117,10 @@ Global
 		{2AB1CDE4-E0C8-402F-BAC6-B5EC82AC58A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2AB1CDE4-E0C8-402F-BAC6-B5EC82AC58A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2AB1CDE4-E0C8-402F-BAC6-B5EC82AC58A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{056792FB-1781-4313-8817-9AF1D2D511DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{056792FB-1781-4313-8817-9AF1D2D511DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{056792FB-1781-4313-8817-9AF1D2D511DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{056792FB-1781-4313-8817-9AF1D2D511DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -141,7 +141,6 @@ Global
 		{0DF267F9-9B6F-401C-85DB-497F861895E8} = {226D41E2-BC74-45E9-BCEE-A8EC51AAE636}
 		{A0C92DF3-1FA2-49EB-A766-5540380716F4} = {8FE1A9A1-3F43-4812-852A-C4D7EA09BAD6}
 		{FE02D4C8-D7AD-4FDB-80B0-B577E374F87D} = {A0C92DF3-1FA2-49EB-A766-5540380716F4}
-		{E1959DC2-E0D4-46DD-A5D6-E3CE1037B845} = {A0C92DF3-1FA2-49EB-A766-5540380716F4}
 		{6D6DB701-93AA-4FD9-AB3B-B8EB727CFABA} = {8FE1A9A1-3F43-4812-852A-C4D7EA09BAD6}
 		{C82EEB82-B604-4D6B-AE31-A57858FAD9F3} = {6D6DB701-93AA-4FD9-AB3B-B8EB727CFABA}
 		{43FD9F9A-E43A-4A79-89E3-208744745367} = {8FE1A9A1-3F43-4812-852A-C4D7EA09BAD6}
@@ -150,5 +149,6 @@ Global
 		{CA588FFB-2605-4EA1-B765-E6E6A5D47815} = {8FE1A9A1-3F43-4812-852A-C4D7EA09BAD6}
 		{BD497286-E72E-499F-8D38-6A4501C5C316} = {CA588FFB-2605-4EA1-B765-E6E6A5D47815}
 		{2AB1CDE4-E0C8-402F-BAC6-B5EC82AC58A7} = {CA588FFB-2605-4EA1-B765-E6E6A5D47815}
+		{056792FB-1781-4313-8817-9AF1D2D511DB} = {A0C92DF3-1FA2-49EB-A766-5540380716F4}
 	EndGlobalSection
 EndGlobal
