@@ -17,12 +17,12 @@ namespace Heris.Samples.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.11")
+                .HasAnnotation("ProductVersion", "9.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Base.Samples.Core.Domain.People.Entities.Person", b =>
+            modelBuilder.Entity("Heris.Samples.Core.Domain.People.Entities.Person", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -46,9 +46,6 @@ namespace Heris.Samples.Infrastructure.Migrations
 
                     b.Property<DateTime?>("ModificationDate")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<long>("StoreId")
-                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 

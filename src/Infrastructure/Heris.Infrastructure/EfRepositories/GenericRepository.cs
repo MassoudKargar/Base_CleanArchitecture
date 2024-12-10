@@ -46,7 +46,7 @@ public class GenericRepository<TEntity, TId>
     public virtual async Task InsertAsync(TEntity entity, bool isCommit = true, CancellationToken cancellationToken = default)
     {
         await Entities.AddAsync(entity, cancellationToken);
-        entity.CreationDate = DateTime.Now;
+        entity.CreationDate = DateTime.UtcNow;
         entity.IsDeleted = false;
         if (isCommit)
         {
@@ -62,7 +62,7 @@ public class GenericRepository<TEntity, TId>
     public virtual void Update(TEntity entity, bool isCommit = true)
     {
         Context.Entry(entity).State = EntityState.Modified;
-        entity.ModificationDate = DateTime.Now;
+        entity.ModificationDate = DateTime.UtcNow;
         if (isCommit)
         {
             Commit();
