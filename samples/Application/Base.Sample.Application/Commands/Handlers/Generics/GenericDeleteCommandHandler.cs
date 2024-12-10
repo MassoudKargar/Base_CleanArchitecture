@@ -2,6 +2,7 @@
 using Base.Core.Domains.Entities;
 using Base.Sample.Application.Commands.Generics;
 using Base.Sample.Application.Commands.Handlers.Generics.Contracts;
+using Base.Sample.Application.RequestResponse.Responses;
 using Base.Utility.Exceptions;
 namespace Base.Sample.Application.Commands.Handlers.Generics
 {
@@ -11,6 +12,7 @@ namespace Base.Sample.Application.Commands.Handlers.Generics
         where TViewModel : BaseDto<TViewModel, TEntity, TId>, new()
         where TRequest : GenericDeleteCommand<TId, TViewModel, TResponse>
         where TEntity : BaseEntity<TId>, new()
+        where TResponse : BaseCommandResult, new()
     {
         private IGenericRepository<TEntity, TId> Service { get; } = service;
         private IMapper Mapper { get; } = mapper;
@@ -32,7 +34,8 @@ namespace Base.Sample.Application.Commands.Handlers.Generics
             }
 
             service.UpdateToDeleted(result);
-            return default;
+
+            return new TResponse();
         }
     }
 }

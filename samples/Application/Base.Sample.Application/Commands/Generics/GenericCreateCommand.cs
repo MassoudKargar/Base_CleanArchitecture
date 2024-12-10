@@ -5,7 +5,7 @@ namespace Base.Sample.Application.Commands.Generics
 {
     public class GenericCreateCommand<TId, TViewModel, TResponse> : IRequest<TResponse>
         where TId : struct
-        where TResponse : BaseApiResponse
+        where TResponse : BaseCommandResult
 
     {
         /// <summary>

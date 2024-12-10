@@ -8,7 +8,7 @@ namespace Base.Sample.Application.Commands.Handlers.Generics.Contracts
         : IRequestHandler<TRequest, TResponse>
         where TRequest : GenericCreateCommand<TId, TViewModel, TResponse>
         where TId : struct
-        where TResponse : BaseApiResponse
+        where TResponse : BaseCommandResult
     {
         // این اینترفیس هیچ متدی تعریف نمی‌کند و فقط از IRequestHandler استفاده می‌کند
         // به این معنا که هر پیاده‌سازی باید متد Handle را برای پردازش درخواست پیاده‌سازی کند.

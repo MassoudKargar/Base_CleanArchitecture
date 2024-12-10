@@ -43,12 +43,12 @@ public class GenericController<TEntity, TId, TListViewModel, TUpdateViewModel, T
     /// <param name="cancellationToken">توکن لغو</param>
     /// <returns>لیستی از مدل‌های نمایشی</returns>
     [HttpGet]
-    public async Task<IEnumerable<TListViewModel>> GetAllAsync(ODataQueryOptions<TEntity> queryOptions, CancellationToken cancellationToken)
+    public async Task<dynamic> GetAllAsync(ODataQueryOptions<TEntity> queryOptions, CancellationToken cancellationToken)
     {
         logger.LogInformation($"GetAll {typeof(TEntity).FullName}");
         var result = await Mediator.Send(new GenericQuery<TId, TEntity, IEnumerable<TListViewModel>>
             (default, queryOptions, GenericAction.GetAll), cancellationToken);
-        return result;
+        return Result.Success(result);
     }
 
     /// <summary>
@@ -58,11 +58,11 @@ public class GenericController<TEntity, TId, TListViewModel, TUpdateViewModel, T
     /// <param name="cancellationToken">توکن لغو</param>
     /// <returns>مدل نمایشی موجودیت</returns>
     [HttpGet("{id}")]
-    public async Task<TSelectViewModel> GetByIdAsync(TId id, CancellationToken cancellationToken)
+    public async Task<dynamic> GetByIdAsync(TId id, CancellationToken cancellationToken)
     {
         logger.LogInformation($"GetById {typeof(TEntity).FullName}");
         var result = await Mediator.Send(new GenericQuery<TId, TSelectViewModel, TSelectViewModel>(id, null, GenericAction.GetById), cancellationToken);
-        return result;
+        return Result.Success(result);
     }
 
     /// <summary>
@@ -72,11 +72,11 @@ public class GenericController<TEntity, TId, TListViewModel, TUpdateViewModel, T
     /// <param name="cancellationToken">توکن لغو</param>
     /// <returns>نتیجه عملیات</returns>
     [HttpPost]
-    public async Task<CreatedResult> AddAsync([FromBody] TInsertViewModel dto, CancellationToken cancellationToken)
+    public async Task<dynamic> AddAsync([FromBody] TInsertViewModel dto, CancellationToken cancellationToken)
     {
         logger.LogInformation($"Insert {typeof(TEntity).FullName}");
-        var result = await Mediator.Send(new GenericCreateCommand<TId, TInsertViewModel, BaseApiResponse>(default, dto), cancellationToken);
-        return Created(nameof(this.AddAsync), result);
+        var result = await Mediator.Send(new GenericCreateCommand<TId, TInsertViewModel, BaseCommandResult>(default, dto), cancellationToken);
+        return Result.Created(result);
     }
 
     /// <summary>
@@ -87,11 +87,11 @@ public class GenericController<TEntity, TId, TListViewModel, TUpdateViewModel, T
     /// <param name="cancellationToken">توکن لغو</param>
     /// <returns>نتیجه عملیات</returns>
     [HttpPost("{id}")]
-    public async Task<AcceptedResult> UpdateAsync(TId id, [FromBody] TUpdateViewModel dto, CancellationToken cancellationToken)
+    public async Task<dynamic> UpdateAsync(TId id, [FromBody] TUpdateViewModel dto, CancellationToken cancellationToken)
     {
         logger.LogInformation($"Update {typeof(TEntity).FullName}");
         var result = await Mediator.Send(new GenericUpdateCommand<TId, TUpdateViewModel, Result>(id, dto), cancellationToken);
-        return Accepted(nameof(this.UpdateAsync), result);
+        return Result.Success(result);
     }
 
     /// <summary>
@@ -101,10 +101,10 @@ public class GenericController<TEntity, TId, TListViewModel, TUpdateViewModel, T
     /// <param name="cancellationToken">توکن لغو</param>
     /// <returns>نتیجه عملیات</returns>
     [HttpPost("{id}")]
-    public async Task<OkObjectResult> DeleteAsync(TId id, CancellationToken cancellationToken)
+    public async Task<dynamic> DeleteAsync(TId id, CancellationToken cancellationToken)
     {
         logger.LogInformation($"Delete {typeof(TEntity).FullName} => Id :{id}");
         var result = await Mediator.Send(new GenericDeleteCommand<TId, TDeleteViewModel, Result>(id, default), cancellationToken);
-        return Ok(result);
+        return Result.Success(result);
     }
 }

@@ -13,7 +13,7 @@ namespace Base.Sample.Application.Commands.Handlers.Generics
     where TViewModel : BaseDto<TViewModel, TEntity, TId>, new()
     where TRequest : GenericCreateCommand<TId, TViewModel, TResponse>
     where TEntity : BaseEntity<TId>, new()
-    where TResponse : BaseApiResponse
+    where TResponse : BaseCommandResult, new()
     {
         private IGenericRepository<TEntity, TId> Service { get; } = service;
         private IMapper Mapper { get; } = mapper;
@@ -29,7 +29,7 @@ namespace Base.Sample.Application.Commands.Handlers.Generics
             // پردازش عملیات درج
             var result = Mapper.Map<TViewModel, TEntity>(request.Model);
             await service.InsertAsync(result, cancellationToken: cancellationToken);
-            return (TResponse)new BaseApiResponse(System.Net.HttpStatusCode.Created);
+            return new TResponse();
         }
     }
 
