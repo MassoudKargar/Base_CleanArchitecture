@@ -1,4 +1,4 @@
-﻿namespace Heris.Infrastructure.SqlContext;
+﻿namespace Heris.Infrastructure.EfRepositories;
 
 /// <summary>
 /// کلاس واحد کار (Unit of Work) برای مدیریت تراکنش‌ها و عملیات‌های پایگاه داده.
