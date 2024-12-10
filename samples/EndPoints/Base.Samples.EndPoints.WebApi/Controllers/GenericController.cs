@@ -4,6 +4,7 @@ using Base.Application.Common;
 using Base.Core.Domains.Entities;
 using Base.EndPoints.Web.Extensions;
 using Base.Sample.Application.Commands.Generics;
+using Base.Sample.Application.RequestResponse.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
@@ -71,11 +72,11 @@ public class GenericController<TEntity, TId, TListViewModel, TUpdateViewModel, T
     /// <param name="cancellationToken">توکن لغو</param>
     /// <returns>نتیجه عملیات</returns>
     [HttpPost]
-    public async Task<Result> AddAsync([FromBody] TInsertViewModel dto, CancellationToken cancellationToken)
+    public async Task<CreatedResult> AddAsync([FromBody] TInsertViewModel dto, CancellationToken cancellationToken)
     {
         logger.LogInformation($"Insert {typeof(TEntity).FullName}");
-        var result = await Mediator.Send(new GenericCreateCommand<TId, TInsertViewModel, Result>(default, dto), cancellationToken);
-        return result;
+        var result = await Mediator.Send(new GenericCreateCommand<TId, TInsertViewModel, BaseApiResponse>(default, dto), cancellationToken);
+        return Created(nameof(this.AddAsync), result);
     }
 
     /// <summary>
@@ -86,11 +87,11 @@ public class GenericController<TEntity, TId, TListViewModel, TUpdateViewModel, T
     /// <param name="cancellationToken">توکن لغو</param>
     /// <returns>نتیجه عملیات</returns>
     [HttpPost("{id}")]
-    public async Task<Result> UpdateAsync(TId id, [FromBody] TUpdateViewModel dto, CancellationToken cancellationToken)
+    public async Task<AcceptedResult> UpdateAsync(TId id, [FromBody] TUpdateViewModel dto, CancellationToken cancellationToken)
     {
         logger.LogInformation($"Update {typeof(TEntity).FullName}");
         var result = await Mediator.Send(new GenericUpdateCommand<TId, TUpdateViewModel, Result>(id, dto), cancellationToken);
-        return result;
+        return Accepted(nameof(this.UpdateAsync), result);
     }
 
     /// <summary>
@@ -100,10 +101,10 @@ public class GenericController<TEntity, TId, TListViewModel, TUpdateViewModel, T
     /// <param name="cancellationToken">توکن لغو</param>
     /// <returns>نتیجه عملیات</returns>
     [HttpPost("{id}")]
-    public Task<Result> DeleteAsync(TId id, CancellationToken cancellationToken)
+    public async Task<OkObjectResult> DeleteAsync(TId id, CancellationToken cancellationToken)
     {
         logger.LogInformation($"Delete {typeof(TEntity).FullName} => Id :{id}");
-        var result = Mediator.Send(new GenericDeleteCommand<TId, TDeleteViewModel, Result>(id, default), cancellationToken);
-        return result;
+        var result = await Mediator.Send(new GenericDeleteCommand<TId, TDeleteViewModel, Result>(id, default), cancellationToken);
+        return Ok(result);
     }
 }

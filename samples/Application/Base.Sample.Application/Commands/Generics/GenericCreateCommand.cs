@@ -1,9 +1,12 @@
-﻿using MediatR;
+﻿using Base.Sample.Application.RequestResponse.Responses;
+using MediatR;
 
 namespace Base.Sample.Application.Commands.Generics
 {
     public class GenericCreateCommand<TId, TViewModel, TResponse> : IRequest<TResponse>
         where TId : struct
+        where TResponse : BaseApiResponse
+
     {
         /// <summary>
         /// شناسه موجودیت

@@ -3,6 +3,7 @@ using Base.Application.BaseMediatR;
 using Base.Core.Domains.Entities;
 using Base.Sample.Application.Commands.Generics;
 using Base.Sample.Application.Commands.Handlers.Generics.Contracts;
+using Base.Sample.Application.RequestResponse.Responses;
 
 namespace Base.Sample.Application.Commands.Handlers.Generics
 {
@@ -12,6 +13,7 @@ namespace Base.Sample.Application.Commands.Handlers.Generics
     where TViewModel : BaseDto<TViewModel, TEntity, TId>, new()
     where TRequest : GenericCreateCommand<TId, TViewModel, TResponse>
     where TEntity : BaseEntity<TId>, new()
+    where TResponse : BaseApiResponse
     {
         private IGenericRepository<TEntity, TId> Service { get; } = service;
         private IMapper Mapper { get; } = mapper;
@@ -27,7 +29,7 @@ namespace Base.Sample.Application.Commands.Handlers.Generics
             // پردازش عملیات درج
             var result = Mapper.Map<TViewModel, TEntity>(request.Model);
             await service.InsertAsync(result, cancellationToken: cancellationToken);
-            return default;
+            return (TResponse)new BaseApiResponse(System.Net.HttpStatusCode.Created);
         }
     }
 
