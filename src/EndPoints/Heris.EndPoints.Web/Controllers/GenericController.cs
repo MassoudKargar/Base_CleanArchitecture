@@ -62,10 +62,10 @@ public class GenericController<TEntity, TId, TListViewModel, TUpdateViewModel, T
     /// <param name="cancellationToken">توکن لغو</param>
     /// <returns>نتیجه عملیات</returns>
     [HttpPost]
-    public Task AddAsync([FromBody] TInsertViewModel dto, CancellationToken cancellationToken)
+    public Task<TListViewModel> AddAsync([FromBody] TInsertViewModel dto, CancellationToken cancellationToken)
     {
         logger.LogInformation($"Insert {typeof(TEntity).FullName}");
-        return Mediator.Send(new GenericCommand<TId, TInsertViewModel>(default, dto), cancellationToken);
+        return Mediator.Send(new GenericCommand<TId, TInsertViewModel, TListViewModel>(default, dto), cancellationToken);
     }
 
     /// <summary>
