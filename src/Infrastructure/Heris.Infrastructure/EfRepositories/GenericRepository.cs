@@ -77,7 +77,7 @@ public class GenericRepository<TEntity, TId>
     public virtual void UpdateToDeleted(TEntity entity, bool isCommit = true)
     {
         Context.Entry(entity).State = EntityState.Modified;
-        entity.ModificationDate = DateTime.Now;
+        entity.ModificationDate = DateTime.UtcNow;
         entity.IsDeleted = true;
         if (isCommit)
         {

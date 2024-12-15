@@ -1,19 +1,18 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿namespace Heris.Infrastructure.PgSqlConfigurations;
 
-namespace Heris.Infrastructure.PgSqlConfigurations
+public static class DataLayerInitializer
 {
-    public static class DataLayerInitializer
+    public static void ConfigurePostgreSql<T>(this IServiceCollection services, IConfiguration configuration) where T : BaseDbContext
     {
-        public static void ConfigurePostgreSql(this IServiceCollection services,IConfiguration configuration) 
+        services.AddDbContext<T>(cfg =>
         {
-            services.AddDbContext<AppPgSqlContext>(cfg =>
+            cfg.UseNpgsql(configuration.GetConnectionString("HerisConnectionString"), options =>
             {
-                cfg.UseNpgsql(configuration.GetConnectionString("HerisConnectionString"));
+                options.MigrationsAssembly(typeof(T).Assembly.GetName().Name);
             });
+        });
 
-            services.AddScoped<BaseDbContext, AppPgSqlContext>();
+        services.AddScoped<BaseDbContext, T>();
 
-        }
     }
 }

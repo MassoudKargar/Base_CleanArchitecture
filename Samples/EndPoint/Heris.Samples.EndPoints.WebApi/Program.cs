@@ -1,3 +1,5 @@
+using Heris.Infrastructure.PgSqlConfigurations;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddBaseApiCore("Heris");
 builder.Services.AddEndpointsApiExplorer();
@@ -10,11 +12,7 @@ builder.Services.AddHerisAutoMapperProfiles(option =>
     option.AssemblyNamesForLoadProfiles = builder.Configuration["AutoMapper:AssmblyNamesForLoadProfiles"];
 });
 
-builder.Services.AddDbContext<BaseDbContext, SampleDbContext>(
-    c => c.UseNpgsql(builder.Configuration.GetConnectionString("HerisConnectionString"), options =>
-    {
-        options.MigrationsAssembly(typeof(SampleDbContext).Assembly.GetName().Name);
-    }));
+builder.Services.ConfigurePostgreSql<SampleDbContext>(builder.Configuration);
 
 builder.Services.AddSwagger(builder.Configuration, "Swagger");
 var app = builder.Build();

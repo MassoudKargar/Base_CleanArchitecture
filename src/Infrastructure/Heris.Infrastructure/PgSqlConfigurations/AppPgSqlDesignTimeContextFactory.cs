@@ -1,25 +1,25 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
+﻿//using Microsoft.EntityFrameworkCore;
+//using Microsoft.EntityFrameworkCore.Design;
 
-namespace Heris.Infrastructure.PgSqlConfigurations
-{
-    public class AppPgSqlDesignTimeContextFactory : IDesignTimeDbContextFactory<AppPgSqlContext>
-    {
-        public AppPgSqlContext CreateDbContext(string[] args)
-        {
-            Console.WriteLine("Beginning Migrations");
+//namespace Heris.Infrastructure.PgSqlConfigurations
+//{
+//    public class AppPgSqlDesignTimeContextFactory : IDesignTimeDbContextFactory<BaseDbContext>
+//    {
+//        public BaseDbContext CreateDbContext(string[] args)
+//        {
+//            Console.WriteLine("Beginning Migrations");
 
-            string MigrationConStr = "Server=localhost;Port=5432;Database=sample;User Id=postgres;Password=mysecretpassword;";
+//            string MigrationConStr = "Server=localhost;Port=5432;Database=sample;User Id=postgres;Password=mysecretpassword;";
 
-            Console.WriteLine($"{MigrationConStr}");
+//            Console.WriteLine($"{MigrationConStr}");
 
-            Task.Delay(2000);
+//            Task.Delay(2000);
 
-            var optionsBuilder = new DbContextOptionsBuilder<AppPgSqlContext>();
+//            var optionsBuilder = new DbContextOptionsBuilder<BaseDbContext>();
 
-            optionsBuilder.UseNpgsql(MigrationConStr);
+//            optionsBuilder.UseNpgsql(MigrationConStr);
 
-            return new AppPgSqlContext(optionsBuilder.Options);
-        }
-    }
-}
+//            return new BaseDbContext(optionsBuilder.Options);
+//        }
+//    }
+//}
